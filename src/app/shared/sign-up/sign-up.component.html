@@ -6,14 +6,15 @@
                     alt="img">
             </div>
         </div>
-        <div class="rounded-s-none rounded-e-lg flex-1 bg-violet-300 h-full flex items-start flex-col pt-20">
+        <div class="rounded-s-none rounded-e-lg flex-1 h-full flex items-start flex-col pt-20">
             <div class="top ms-7">
-                <h1 class="text-6xl">NEXUS</h1>
-                <h5 class="text-4xl">Wlecome to shamon.pvt</h5>
-                <p>Aworkspace to over 12 Mdlon influencers around the global world</p>
+                <h1 class="text-violet-500 text-6xl font-bold">NEXUS</h1>
+                <h5 class="text-gray-700 text-2xl font-medium">Welcome to shamon.pvt</h5>
+                <p class="text-gray-600 text-base">A workspace to over 12 Mdlon influencers around the global world</p>
+
             </div>
             <div class="inputs w-10/12 ms-7 h-80 mt-10">
-                <form action=""  #signUpForm="ngForm">
+                <form action="" #signUpForm="ngForm">
                     <!-- Username -->
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -28,11 +29,11 @@
                                 </path>
                             </svg>
                         </div>
-                        <input type="text" placeholder="Username" name="fullname" required  ngModel
+                        <input type="text" placeholder="Username" name="fullname" required ngModel
                             class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 focus:ring-blue-500">
                     </div>
                     <!-- email -->
-                    <div class="relative ">
+                    <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <!-- Updated SVG -->
                             <svg class="h-5 w-5 mb-3 text-gray-400" xmlns="http://www.w3.org/2000/svg"
@@ -91,10 +92,15 @@
                             </button>
                         </label>
                     </div>
-                    <button type="submit" (click)="signUp()" 
-                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 mt-3 px-4 rounded-md shadow-md">
+                    <button type="submit" (click)="signUp()"
+                        class="bg-gradient-to-r ml-[240px] from-indigo-500 mt-3 to-purple-500 text-white font-bold py-3 px-8 rounded-full shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         Sign Up
                     </button>
+
+                    <div class="text-center mt-4">
+                        <a href="login.html" class="text-blue-500 hover:text-blue-700 font-medium">Already have an
+                            account? Login</a>
+                    </div>
                     <!-- [disabled]="signUpForm.invalid" -->
                 </form>
             </div>
