@@ -11,7 +11,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  founderSignup(formValues: NgForm, file: File): Observable<object> {
+  signup(formValues: NgForm, file: File): Observable<object> {
     const signUpValues: FormData = new FormData();
     signUpValues.append('profileimage', file);
     signUpValues.append('fullname', formValues.value.fullname);
