@@ -1,25 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SignUpComponent } from './sign-up/sign-up.component';
 import { FormsModule } from '@angular/forms';
-import { PaymentComponent } from './payment/payment.component';
 import { LoginComponent } from './login/login.component';
+import { PaymentCardsComponent } from './payment-cards/payment-cards.component';
+import { PaymentComponent } from './payment/payment.component';
 
 
 
 @NgModule({
   declarations: [
-    SignUpComponent,
+    LoginComponent,
     PaymentComponent,
-    LoginComponent
+    PaymentCardsComponent
   ],
   imports: [
     CommonModule,
     FormsModule
   ],
   exports: [
-    SignUpComponent,
-    PaymentComponent,
+    PaymentCardsComponent,
     LoginComponent
   ]
 })

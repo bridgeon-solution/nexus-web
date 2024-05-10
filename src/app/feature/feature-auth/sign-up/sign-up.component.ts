@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class SignUpComponent implements OnInit {
   selectedImage: string | null = null;
   file: File = null;
 
-  constructor(private authSrvc: AuthService) { }
+  constructor(private authSrvc: AuthService, private route: Router) { }
 
   ngOnInit(): void {
 
@@ -37,13 +38,14 @@ export class SignUpComponent implements OnInit {
   }
 
   signUp() {
-    this.authSrvc.founderSignup(this.signUpFormValues, this.file).subscribe((res) => {
-      console.log(res);
-      alert('Successfully registered');
-    }, (err) => {
-      console.log(err);
-      alert('An error Occured');
-    })
+    this.route.navigate(['/payment']);
+    // this.authSrvc.founderSignup(this.signUpFormValues, this.file).subscribe((res) => {
+    //   console.log(res);
+    //   alert('Successfully registered');
+    // }, (err) => {
+    //   console.log(err);
+    //   alert('An error Occured');
+    // })
   }
 
 }
