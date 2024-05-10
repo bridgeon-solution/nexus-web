@@ -5,10 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
+import { AdminNavbarComponent } from './feature/feature-admin/admin-navbar/admin-navbar.component';
+import { AdminHomeComponent } from './feature/feature-admin/admin-home/admin-home.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AdminNavbarComponent,
+    AdminHomeComponent
   ],
   imports: [
     BrowserModule,
