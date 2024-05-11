@@ -4,6 +4,8 @@ import { FeatureAuthRoutingModule } from './feature-auth-routing.module';
 import { FormsModule } from '@angular/forms';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { LoginComponent } from './login/login.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 
 
 
@@ -15,7 +17,8 @@ import { LoginComponent } from './login/login.component';
   imports: [
     CommonModule,
     FeatureAuthRoutingModule,
-    FormsModule
+    FormsModule,
+    MatProgressSpinnerModule
   ],
   exports:[
     LoginComponent

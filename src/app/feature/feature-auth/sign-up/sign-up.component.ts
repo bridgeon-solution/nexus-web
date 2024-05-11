@@ -9,11 +9,13 @@ import { AuthService } from 'src/app/core/services/auth.service';
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.css']
 })
-export class SignUpComponent implements OnInit,OnDestroy {
+export class SignUpComponent implements OnInit, OnDestroy {
   @ViewChild('signUpForm') signUpFormValues: NgForm;
 
   selectedImage: string | null = null;
   file: File = null;
+  isLoading: boolean = false;
+  notLoading: boolean = true;
 
   constructor(private authSrvc: AuthService, private route: Router) { }
 
@@ -39,10 +41,16 @@ export class SignUpComponent implements OnInit,OnDestroy {
   }
 
   signUp() {
-    this.authSrvc.signup(this.signUpFormValues, this.file).subscribe((res) => {
-      this.route.navigate(['/payment']);
+    this.isLoading = true;
+    this.notLoading = false;
+    this.authSrvc.signup(this.signUpFormValues, this.file).subscribe((res: { message: string }) => {
       localStorage.setItem('email', this.signUpFormValues.value.email);
+      if (res.message) {
+        this.isLoading = false;
+        this.notLoading = true;
+      }
       alert('Successfully registered');
+      this.route.navigate(['/payment']);
     }, (err) => {
       console.log(err);
       alert('An error Occured');
@@ -50,7 +58,7 @@ export class SignUpComponent implements OnInit,OnDestroy {
   }
 
   ngOnDestroy(): void {
-      localStorage.clear()
+    // localStorage.clear();
   }
 
 }
