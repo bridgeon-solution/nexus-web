@@ -1,5 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+
 import { userLogin } from 'src/app/core/models/userlogin.model';
 import { AuthService } from 'src/app/core/services/auth.service';
 
@@ -10,7 +12,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class LoginComponent {
   @ViewChild('loginForm') form: NgForm
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
 
   openloginForm() {
@@ -21,7 +23,8 @@ export class LoginComponent {
       password: password
     }
     this.authService.login(loginDatas).subscribe((res) => {
-      console.log(res)
+      localStorage.setItem('token', res.token)
+      this.router.navigate(['/adminhome'])
     })
   }
 
