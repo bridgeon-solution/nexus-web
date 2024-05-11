@@ -17,7 +17,11 @@ main {
 }
 
 form {
+    /* background-color: aqua; */
     width: 100%;
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
 }
 
 .inputs input {
@@ -27,4 +31,13 @@ form {
     height: 60px;
     border-radius: 10px;
     background-color: #e1eaef;
+}
+
+@media (max-width: 767px) {
+    .img {
+        display: none;
+    }
+    .signupBtn {
+        margin-left: 130px;
+    }
 }
