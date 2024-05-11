@@ -29,9 +29,13 @@
                                 </path>
                             </svg>
                         </div>
-                        <input type="text" placeholder="Username" name="fullname" required ngModel
+                        <input type="text" placeholder="Username" name="fullname" required ngModel #username="ngModel"
                             class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 focus:ring-blue-500">
+                        <div *ngIf="!username.untouched && !username.valid">
+                            <small class="text-red-800">*Name is required</small>
+                        </div>
                     </div>
+
                     <!-- email -->
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -49,9 +53,11 @@
                                 </path>
                             </svg>
                         </div>
-                        <input type="text" placeholder="Email" required name="email" ngModel
+                        <input type="text" placeholder="Email" required name="email" ngModel #email="ngModel"
                             class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 focus:ring-blue-500">
-                            
+                        <div *ngIf="!email.untouched && !email.valid">
+                            <small class="text-red-800">*Email is required</small>
+                        </div>
                     </div>
                     <!-- company name -->
                     <div class="relative">
@@ -65,7 +71,11 @@
                             </svg>
                         </div>
                         <input type="text" placeholder="Company name" required name="companyname" ngModel
+                            #company="ngModel"
                             class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 focus:ring-blue-500">
+                        <div *ngIf="!company.untouched && !company.valid">
+                            <small class="text-red-800">*Companyname is required</small>
+                        </div>
                     </div>
                     <!-- password -->
                     <div class="relative">
@@ -93,7 +103,7 @@
                             </button>
                         </label>
                     </div>
-                    <button type="submit" (click)="signUp()"
+                    <button [disabled]="signUpForm.invalid" type="submit" (click)="signUp()"
                         class="bg-gradient-to-r ml-[240px] from-indigo-500 mt-3 to-purple-500 text-white font-bold py-3 px-8 rounded-full shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         Sign Up
                     </button>
@@ -102,7 +112,6 @@
                         <a href="login.html" class="text-blue-500 hover:text-blue-700 font-medium">Already have an
                             account? Login</a>
                     </div>
-                    <!-- [disabled]="signUpForm.invalid" -->
                 </form>
             </div>
         </div>

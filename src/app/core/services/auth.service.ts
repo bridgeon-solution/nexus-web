@@ -13,7 +13,7 @@ export class AuthService {
 
   signup(formValues: NgForm, file: File): Observable<object> {
     const signUpValues: FormData = new FormData();
-    signUpValues.append('profileimage', file);
+    signUpValues.append('image', file);
     signUpValues.append('fullname', formValues.value.fullname);
     signUpValues.append('email', formValues.value.email);
     signUpValues.append('companyname', formValues.value.companyname);

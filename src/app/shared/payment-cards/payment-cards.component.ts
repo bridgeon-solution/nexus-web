@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PaymentService } from 'src/app/core/services/payment.service';
 
 @Component({
   selector: 'app-payment-cards',
@@ -7,9 +8,14 @@ import { Component } from '@angular/core';
 })
 export class PaymentCardsComponent {
 
+  constructor(private paymentSrvc: PaymentService) { }
 
-  payment(amount:number) {
-    console.log(amount);
-    
+  payment(amount: string) {
+    this.paymentSrvc.founderPayment(amount).subscribe((res: { message: string, data: string }) => {
+      window.location.href = res.data;
+    }, (err) => {
+      console.log(err);
+      alert('Payment failed')
+    })
   }
 }
