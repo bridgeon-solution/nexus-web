@@ -102,14 +102,17 @@
                             </button>
                         </label>
                     </div>
-                    
+
                     <button [disabled]="signUpForm.invalid" type="submit" (click)="signUp()"
                         class="signupBtn items-center bg-gradient-to-r ml-[240px] from-indigo-500 mt-3 to-purple-500 text-white font-bold py-3 px-8 rounded-full shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        Sign Up
+                        <p class="p-0" *ngIf="notLoading">Sign Up</p>
+                        <div *ngIf="isLoading" class="loading-container">
+                            <div class="spinner"></div>
+                        </div>
                     </button>
 
                     <div class="text-center mt-4">
-                        <a href="login.html" class="text-blue-500 hover:text-blue-700 font-medium">Already have an
+                        <a routerLink="login" class="text-blue-500 hover:text-blue-700 font-medium">Already have an
                             account? Login</a>
                     </div>
                 </form>
@@ -117,7 +120,6 @@
         </div>
     </div>
 </main>
-
-<!-- <div class="my-div">
-    <h1>Hello</h1>
+<!-- <div class="loading-container">
+    <div class="spinner"></div>
 </div> -->
