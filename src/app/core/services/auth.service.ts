@@ -3,6 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { userLogin } from '../models/userlogin.model';
+import { adminLogin } from '../models/api.model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,7 @@ export class AuthService {
 
 
   login(loginDatas: userLogin) {
-    return this.http.post("http://localhost:4000/api/v1/admin/login", loginDatas)
+    return this.http.post<adminLogin>("http://localhost:4000/api/v1/admin/login", loginDatas)
   }
 
 }
