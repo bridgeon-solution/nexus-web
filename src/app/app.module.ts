@@ -8,6 +8,7 @@ import { CoreModule } from './core/core.module';
 import { AdminNavbarComponent } from './feature/feature-admin/admin-navbar/admin-navbar.component';
 import { AdminHomeComponent } from './feature/feature-admin/admin-home/admin-home.component';
 import { AdminUsersComponent } from './feature/feature-admin/admin-users/admin-users.component';
+import { FeatureAuthModule } from './feature/feature-auth/feature-auth.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { AdminUsersComponent } from './feature/feature-admin/admin-users/admin-u
     BrowserModule,
     AppRoutingModule,
     CoreModule,
-    SharedModule
+    SharedModule,
+    FeatureAuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]

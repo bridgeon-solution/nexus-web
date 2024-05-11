@@ -39,14 +39,14 @@ export class SignUpComponent implements OnInit {
   }
 
   signUp() {
-    this.route.navigate(['/payment']);
-    // this.authSrvc.founderSignup(this.signUpFormValues, this.file).subscribe((res) => {
-    //   console.log(res);
-    //   alert('Successfully registered');
-    // }, (err) => {
-    //   console.log(err);
-    //   alert('An error Occured');
-    // })
+    this.authSrvc.signup(this.signUpFormValues, this.file).subscribe((res) => {
+      this.route.navigate(['/payment']);
+      localStorage.setItem('email', this.signUpFormValues.value.email);
+      alert('Successfully registered');
+    }, (err) => {
+      console.log(err);
+      alert('An error Occured');
+    })
   }
 
 }
