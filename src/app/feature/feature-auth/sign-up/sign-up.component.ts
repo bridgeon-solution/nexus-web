@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.css']
 })
-export class SignUpComponent implements OnInit {
+export class SignUpComponent implements OnInit,OnDestroy {
   @ViewChild('signUpForm') signUpFormValues: NgForm;
 
   selectedImage: string | null = null;
@@ -47,6 +47,10 @@ export class SignUpComponent implements OnInit {
       console.log(err);
       alert('An error Occured');
     })
+  }
+
+  ngOnDestroy(): void {
+      localStorage.clear()
   }
 
 }

@@ -1,7 +1,7 @@
 <main>
     <div class="main">
-        <div class="flex-1 flex items-center justify-center h-full">
-            <div class="img w-96 h-96 bg-green-900">
+        <div class="img flex-1 flex items-center justify-center h-full">
+            <div class="img w-96 h-96">
                 <img class="w-full h-full" src="../../../assets/1000_F_303743223_Edbhriyx1ZqXaKvOTxsG08i7m8MhXrqb.jpg"
                     alt="img">
             </div>
@@ -9,7 +9,6 @@
         <div class="rounded-s-none rounded-e-lg flex-1 h-full flex items-start flex-col pt-20">
             <div class="top ms-7">
                 <h1 class="text-violet-500 text-6xl font-bold">NEXUS</h1>
-                <h5 class="text-gray-700 text-2xl font-medium">Welcome to shamon.pvt</h5>
                 <p class="text-gray-600 text-base">A workspace to over 12 Mdlon influencers around the global world</p>
 
             </div>
@@ -30,7 +29,7 @@
                             </svg>
                         </div>
                         <input type="text" placeholder="Username" name="fullname" required ngModel #username="ngModel"
-                            class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 focus:ring-blue-500">
+                            class=" pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 focus:ring-blue-500">
                         <div *ngIf="!username.untouched && !username.valid">
                             <small class="text-red-800">*Name is required</small>
                         </div>
@@ -103,8 +102,9 @@
                             </button>
                         </label>
                     </div>
+                    
                     <button [disabled]="signUpForm.invalid" type="submit" (click)="signUp()"
-                        class="bg-gradient-to-r ml-[240px] from-indigo-500 mt-3 to-purple-500 text-white font-bold py-3 px-8 rounded-full shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        class="signupBtn items-center bg-gradient-to-r ml-[240px] from-indigo-500 mt-3 to-purple-500 text-white font-bold py-3 px-8 rounded-full shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         Sign Up
                     </button>
 
@@ -117,3 +117,7 @@
         </div>
     </div>
 </main>
+
+<!-- <div class="my-div">
+    <h1>Hello</h1>
+</div> -->
