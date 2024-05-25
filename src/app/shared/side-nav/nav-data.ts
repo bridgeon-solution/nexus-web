@@ -1,0 +1,32 @@
+export const navBarData= [
+    {
+        routerLink:'dashboard',
+        icon:'../../../assets/sidenav-icons/hr/dashboard.png',
+        label:'Dashboard',
+    },
+    {
+        routerLink:'employees',
+        icon:'../../../assets/sidenav-icons/hr/group-chat.png',
+        label:'Emplyees',
+    },
+    {
+        routerLink:'leaves',
+        icon:'../../../assets/sidenav-icons/hr/report.png',
+        label:'Leaves',
+    },
+    {
+        routerLink:'projects',
+        icon:'../../../assets/sidenav-icons/hr/project.png',
+        label:'Projects',
+    },
+    {
+        routerLink:'pay-roll',
+        icon:'../../../assets/sidenav-icons/hr/money.png',
+        label:'PayRoll',
+    },
+    {
+        routerLink:'announcements',
+        icon:'../../../assets/sidenav-icons/hr/megaphone.png',
+        label:'Announcements',
+    }
+]

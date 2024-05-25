@@ -43,18 +43,19 @@ export class SignUpComponent implements OnInit, OnDestroy {
   signUp() {
     this.isLoading = true;
     this.notLoading = false;
-    this.authSrvc.signup(this.signUpFormValues, this.file).subscribe((res: { message: string }) => {
-      localStorage.setItem('email', this.signUpFormValues.value.email);
-      if (res.message) {
-        this.isLoading = false;
-        this.notLoading = true;
-      }
-      alert('Successfully registered');
-      this.route.navigate(['/payment']);
-    }, (err) => {
-      console.log(err);
-      alert('An error Occured');
-    })
+    // this.route.navigate(['payment']);
+    this.route.navigate([{ outlets: { auth: ['payment'] } }]);
+    // this.authSrvc.signup(this.signUpFormValues, this.file).subscribe((res: { message: string }) => {
+    //   localStorage.setItem('email', this.signUpFormValues.value.email);
+    //   if (res.message) {
+    //     this.isLoading = false;
+    //     this.notLoading = true;
+    //   }
+    //   alert('Successfully registered');
+    // }, (err) => {
+    //   console.log(err);
+    //   alert('An error Occured');
+    // })
   }
 
   ngOnDestroy(): void {

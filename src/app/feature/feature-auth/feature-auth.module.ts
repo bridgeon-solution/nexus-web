@@ -5,9 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { LoginComponent } from './login/login.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-
-
-
+import { HrRoutingRoutingModule } from '../hr/hr-routing-routing.module';
 
 @NgModule({
   declarations: [
@@ -17,6 +15,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   imports: [
     CommonModule,
     FeatureAuthRoutingModule,
+    HrRoutingRoutingModule,
     FormsModule,
     MatProgressSpinnerModule
   ],

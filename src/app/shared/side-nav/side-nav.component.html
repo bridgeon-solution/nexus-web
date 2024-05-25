@@ -1,0 +1,23 @@
+<main class="flex flex-row">
+    <div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed':'' ">
+        <div class="logo-container">
+            <button class="logo text-white" (click)="toggleCollapse()">N</button>
+            <div class="logo-text" *ngIf="collapsed">NEXUS</div>
+            <!-- <button class="btn-close" (click)="closeNavbar()" *ngIf="collapsed">
+                <i class="fal fa-times kclose-icon"><img src="../../../assets/Business-Management.jpg" alt=""></i>
+            </button> -->
+        </div>
+        <ul class="sidenav-nav">
+            <li class="sidenav-nav-item relative" *ngFor="let item of navData">
+                <a class="sidenav--nav-link" routerLink="{{item.routerLink}}" routerLinkActive="active-link"
+                    [routerLinkActiveOptions]="{ exact: true }">
+                    <i class="sidenav-link-icon"><img src="{{item.icon}}" alt=""></i>
+                    <span class="sidenav-link-text" *ngIf="collapsed">{{item.label}}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="body" [ngClass]="getBodyClass()">
+        <router-outlet></router-outlet>
+    </div>
+</main>
