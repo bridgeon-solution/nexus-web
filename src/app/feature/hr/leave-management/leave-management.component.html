@@ -1,0 +1,109 @@
+<h1 class="text-5xl">Leave Management</h1>
+<div class="main ms-5">
+    <div class="options flex items-center mt-12 max-w-[250px] justify-between">
+        <div class="flex flex-col items-center">
+            <p role="button" (click)="selectLeaveOption()">Manage Leaves</p>
+            <div class="w-[60px] h-[2px] bg-blue-600" *ngIf="employeeLeaveOption"></div>
+        </div>
+        <div class="flex flex-col items-center">
+            <p role="button" (click)="selectLeaveOption()">Leave History</p>
+            <div class="w-[40px] h-[2px] bg-blue-600" *ngIf="!employeeLeaveOption"></div>
+        </div>
+    </div>
+
+</div>
+
+<div class="employee">
+    <div class="flex items-center mt-10">
+        <i class="fas fa-search text-gray-400 ml-3 cursor-pointer mr-6"></i>
+        <input type="text"
+            class="min-w-[550px] rounded-md border border-gray-300 pl-5 py-4 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-transparent"
+            placeholder="Search Employees by Name, Role, ID or any other related keywords ...">
+    </div>
+
+    <div class="relative overflow-x-auto mt-5">
+        <table class="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-gray-900">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-pink-200 dark:text-gray-900">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        Name
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Department
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Leave TYpe
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        From
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        To
+                    </th>
+                    <th scope="col" class="px-6 py-3" *ngIf="!employeeLeaveOption">
+                        Balance
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Description
+                    </th>
+                    <th scope="col" class="px-6 py-3" *ngIf="employeeLeaveOption">
+                        Action
+                    </th>
+                    <th scope="col" class="px-6 py-3" *ngIf="!employeeLeaveOption">
+                        Status
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="bg-white border-b dark:border-gray-200">
+                    <th scope="row"
+                        class=" flex items-center px-3 py-4 font-medium text-gray-600 whitespace-nowrap dark:text-gray-700">
+                        <img class="mr-3 rounded-full h-[50px] w-[50px]"
+                            src="../../../../assets/rainbow-inside-office-showing-corporate-diversity-inclusiveness-business_1061358-17230.avif"
+                            alt="profile">
+                        <div class="flex flex-col text-left">
+                            Abinav
+                        </div>
+                    </th>
+                    <td class="px-6 py-4">
+                        Front-end dev
+                    </td>
+                    <td class="px-6 py-4">
+                        Casual
+                    </td>
+                    <td class="px-6 py-4">
+                        03-02-22
+                    </td>
+                    <td class="px-6 py-4">
+                        10-02-22
+                    </td>
+                    <td class="px-6 py-4 max-w-36" *ngIf="!employeeLeaveOption">
+                        4
+                    </td>
+                    <td class="px-6 py-4 max-w-36">
+                        Im taking a day off , need leave
+                    </td>
+                    <td class="px-6 py-4 max-w-36" *ngIf="employeeLeaveOption">
+                        <div class="btns flex items-center justify-around">
+                            <button
+                                class="buttons bg-green-500 text-white py-2 px-3 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300">
+                                Approve
+                            </button>
+                            <button
+                                class="buttons bg-red-500 text-white py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-700">
+                                Reject
+                            </button>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 max-w-36" *ngIf="!employeeLeaveOption">
+                        <div class="btns flex items-center justify-around">
+                            <p class=" bg-green-500 text-white py-2 px-3 rounded-md focus:outline-none focus:ring-2">
+                                Approved
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

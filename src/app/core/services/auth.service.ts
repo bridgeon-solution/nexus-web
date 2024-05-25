@@ -10,6 +10,8 @@ import { adminLogin } from '../models/api.model';
 })
 export class AuthService {
 
+  isLoggedIn:boolean = false;
+
   constructor(private http: HttpClient) { }
 
   signup(formValues: NgForm, file: File): Observable<object> {
