@@ -10,7 +10,7 @@ import { adminLogin } from '../models/api.model';
 })
 export class AuthService {
 
-  isLoggedIn:boolean = false;
+  isLoggedIn: boolean = false;
 
   constructor(private http: HttpClient) { }
 
@@ -21,6 +21,7 @@ export class AuthService {
     signUpValues.append('email', formValues.value.email);
     signUpValues.append('companyname', formValues.value.companyname);
     signUpValues.append('password', formValues.value.password);
+    
     return this.http.post('http://localhost:4000/api/v1/founders/signup', signUpValues);
   }
 

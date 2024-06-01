@@ -1,0 +1,17 @@
+<h1 class="sm:ms-5-ms-10 text-5xl font-roboto">Announcements</h1>
+<div class="sm:ms-5 relative -ms-10">
+    <div class="options flex items-center mt-12 max-w-[200px] justify-between">
+        <div class="flex flex-col items-center">
+            <p (click)="selectEmpOptions()" role="button">All</p>
+            <div *ngIf="employeeDetailsOption" class="lines w-[20px] h-[2px] bg-blue-600"></div>
+        </div>
+        <div class="flex flex-col items-center">
+            <p (click)="selectEmpOptions()" role="button">Holidays</p>
+            <!-- <div *ngIf="!employeeDetailsOption" class="lines w-[40px] h-[2px] bg-blue-600"></div> -->
+        </div>
+        <div class="flex flex-col items-center">
+            <p (click)="selectEmpOptions()" role="button">Events</p>
+            <!-- <div *ngIf="employeeDetailsOption" class="lines w-[40px] h-[2px] bg-blue-600"></div> -->
+        </div>
+    </div>
+</div>

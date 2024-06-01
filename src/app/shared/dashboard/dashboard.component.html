@@ -1,15 +1,15 @@
 <div class="profile right-12 top-5 fixed flex items-center min-w-52 justify-around">
     <div class="notification">icon</div>
     <div class="role">HR</div>
-    <div class="profile-pic"><img src="" alt="profile"></div>
+    <div class="profile-pic"  routerLink="/profile"><img src="" alt="profile"></div>
 </div>
 
 <div class="main pb-20">
     <div
-        class="main-things flex items-center justify-between min-h-40 min-w-full rounded-xl bg-gray-200 mt-10 p-10 overflow-hidden">
-        <div class="top flex flex-wrap flex-col" *ngFor="let item of data">
-            <div class="employees flex bg-white items-center py-10 pe-28 rounded-lg max-w-80 max-h-36">
-                <div class="icon max-w-14 h-14 me-5 ms-4">
+        class="main-things flex items-center justify-between min-h-40 min-w-full rounded-xl bg-gray-200 mt-10 p-10">
+        <div class="top flex flex-col" *ngFor="let item of data">
+            <div class="employees flex flex-shrink bg-white items-center ps-2 py-10 pe-28 rounded-lg max-w-80 h-36">
+                <div class="icon w-14 h-14 me-5">
                     <img src="{{item.icon}}" alt="">
                 </div>
                 <div class="">

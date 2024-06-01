@@ -104,7 +104,8 @@
                     </div>
 
                     <div>
-                        <button [disabled]="!signUpForm.invalid" type="submit" (click)="signUp()"
+                        
+                        <button  [disabled]="signUpForm.invalid" type="submit" (click)="signUp()"
                             class="signupBtn items-center bg-gradient-to-r from-indigo-500 mt-3 to-purple-500 text-white font-bold py-3 px-8 rounded-full shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                             <p class="p-0" *ngIf="notLoading">Sign Up</p>
                             <div *ngIf="isLoading" class="loading-container">

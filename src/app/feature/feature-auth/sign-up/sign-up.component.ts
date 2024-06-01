@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.css']
 })
-export class SignUpComponent implements OnInit, OnDestroy {
+export class SignUpComponent implements OnInit {
   @ViewChild('signUpForm') signUpFormValues: NgForm;
 
   selectedImage: string | null = null;
@@ -43,23 +43,20 @@ export class SignUpComponent implements OnInit, OnDestroy {
   signUp() {
     this.isLoading = true;
     this.notLoading = false;
-    // this.route.navigate(['payment']);
-    this.route.navigate([{ outlets: { auth: ['payment'] } }]);
-    // this.authSrvc.signup(this.signUpFormValues, this.file).subscribe((res: { message: string }) => {
-    //   localStorage.setItem('email', this.signUpFormValues.value.email);
-    //   if (res.message) {
-    //     this.isLoading = false;
-    //     this.notLoading = true;
-    //   }
-    //   alert('Successfully registered');
-    // }, (err) => {
-    //   console.log(err);
-    //   alert('An error Occured');
-    // })
-  }
-
-  ngOnDestroy(): void {
-    // localStorage.clear();
+    this.authSrvc.signup(this.signUpFormValues, this.file).subscribe((res: { message: string }) => {
+      localStorage.setItem('email', this.signUpFormValues.value.email);
+      if (res.message) {
+        this.isLoading = false;
+        this.notLoading = true;
+      }
+      alert('Successfully registered');
+      this.route.navigate(['payment']);
+    }, (err) => {
+      console.log(err);
+      this.isLoading = false;
+      this.notLoading = true;
+      alert('An error Occured');
+    })
   }
 
 }

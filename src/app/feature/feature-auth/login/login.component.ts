@@ -18,18 +18,14 @@ export class LoginComponent {
   openloginForm() {
     const username = this.form.value.username;
     const password = this.form.value.password;
-    localStorage.setItem('v', 'asas');
-    this.router.navigate(['home']);
-    // this.router.navigate([{ outlets: { main: ['home']} }]);
-    // this.router.navigate([{ outlets: { auth: ['home']} }]);
 
+    this.router.navigate(['home'])
     // const loginDatas: userLogin = {
     //   username: username,
     //   password: password
     // }
     // this.authService.login(loginDatas).subscribe((res) => {
     //   localStorage.setItem('token', res.token)
-    //   this.router.navigate(['/adminhome'])
     // })
   }
 
