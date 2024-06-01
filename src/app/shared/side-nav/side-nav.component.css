@@ -100,7 +100,6 @@
 }
 .sidenav--nav-link:hover {
     color: #ebebeb;
-
 }
 
 
@@ -127,12 +126,6 @@
 .body-md-screen {
     width: calc(100% - 5rem);
     margin-left: 5rem;
-}
-
-.router-link {
-    z-index: 90;
-    width: 300px;
-    height: 300px;
 }
 
 .active-link {

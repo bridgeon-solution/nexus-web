@@ -1,15 +1,15 @@
 <div class="employee" *ngIf="employeeDetailsOption">
     <div class="flex items-center mb-4 mt-10 w-full max-w-3xl px-4">
         <i class="fas fa-search text-gray-400 cursor-pointer mr-4"></i>
-        <input type="text"
+        <input type="text" [(ngModel)]="str" (input)="textEntering()"
             class="w-full sm:min-w-[200px] md:min-w-[300px] lg:min-w-[400px] xl:min-w-[550px] rounded-md border border-gray-300 pl-5 py-4 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-transparent"
-            placeholder="Search Employees by Name, Role, ID or any other related keywords ...">
+            placeholder="Search Employees by Name, Email ...">
     </div>
     <p class="mb-2 font-bold text-gray-500">Department Name</p>
 
     <div class="relative inline-block w-full max-w-sm">
         <button
-            class="w-full rounded-md border border-gray-300 shadow-sm px-3 py-4 text-left focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            class="w-full rounded-md border border-gray-900 shadow-sm px-3 py-4 text-left focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             aria-haspopup="listbox" aria-expanded="true" aria-labelledby="listbox-label" (click)="toggleDropdown()">
             <span class="block truncate text-gray-700">{{ selectedOption }}</span>
             <span class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
@@ -45,9 +45,9 @@
         </ul>
     </div>
 
+    <h1 *ngIf="allEmployees.length === 0" class="mt-32 ml-72 text-8xl text-gray-200">NO EMPLOYEES</h1>
 
-
-    <div class="relative overflow-x-auto mt-10">
+    <div class="relative overflow-x-auto mt-10" *ngIf="allEmployees.length !== 0">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-900">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-pink-200 dark:text-gray-900">
                 <tr>
@@ -61,37 +61,37 @@
                         Role
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Status
+                        Salary
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Action
                     </th>
                 </tr>
             </thead>
-            <tbody>
-                <tr class="bg-white border-b dark:border-gray-200">
+
+            <tbody *ngFor="let item of allEmployees, let i = index">
+                <tr class="bg-white border-b dark:border-gray-200" *ngIf="!searchTable && !departmentTable">
                     <th scope="row"
                         class=" flex items-center px-3 py-4 font-medium text-gray-600 whitespace-nowrap dark:text-gray-700">
-                        <img class="mr-3 rounded-full h-[50px] w-[50px]"
-                            src="../../../../assets/rainbow-inside-office-showing-corporate-diversity-inclusiveness-business_1061358-17230.avif"
-                            alt="profile">
+                        <img class="mr-3 rounded-full h-[50px] w-[50px] object-cover" src="{{item.image}}" alt="profile">
                         <div class="flex flex-col">
-                            Apple MacBook Pro 17"
-                            <span class="text-gray-400">Apple@gmail.com</span>
+                            {{item.fullname}}
+                            <span class="text-gray-400">{{item.email}}</span>
                         </div>
                     </th>
                     <td class="px-6 py-4">
-                        Silver
+                        {{item.department.name}}
                     </td>
                     <td class="px-6 py-4">
-                        Laptop
+                        {{item.role}}
                     </td>
                     <td class="px-6 py-4">
-                        $2999
+                        {{item.salary}}
                     </td>
+
                     <td class="px-6 py-4 relative">
                         <div class="inline-block">
-                            <button (click)="toggleMenu()"
+                            <button (click)="toggleMenu(i)"
                                 class="inline-flex justify-center w-full rounded-md border border-white shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none">
                                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -100,7 +100,53 @@
                                 </svg>
                             </button>
                         </div>
-                        <div *ngIf="menuOpen"
+                        <div *ngIf="menuOpen === i"
+                            class="menu w-20 absolute left-16 bottom-5 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                            <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                                <a href="#"
+                                    class="block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:text-white hover:bg-gray-900"
+                                    role="menuitem">Edit</a>
+                                <a class="block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:text-white hover:bg-gray-900"
+                                    role="menuitem" (click)="deleteEmployee(item.id)">Delete</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+
+            <!-- Search table -->
+            <tbody *ngFor="let item of searchedArr, let i = index">
+                <tr class="bg-white border-b dark:border-gray-200" *ngIf="searchTable && !departmentTable">
+                    <th scope="row"
+                        class=" flex items-center px-3 py-4 font-medium text-gray-600 whitespace-nowrap dark:text-gray-700">
+                        <img class="mr-3 rounded-full h-[50px] w-[50px]" src="{{item.image}}" alt="profile">
+                        <div class="flex flex-col">
+                            {{item.fullname}}
+                            <span class="text-gray-400">{{item.email}}</span>
+                        </div>
+                    </th>
+                    <td class="px-6 py-4">
+                        {{item.department.name}}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{item.role}}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{item.salary}}
+                    </td>
+
+                    <td class="px-6 py-4 relative">
+                        <div class="inline-block">
+                            <button (click)="toggleMenu(i)"
+                                class="inline-flex justify-center w-full rounded-md border border-white shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M10 3a1.5 1.5 0 110 3 1.5 1.5 0 010-3zM10 8a1.5 1.5 0 110 3 1.5 1.5 0 010-3zM10 13a1.5 1.5 0 110 3 1.5 1.5 0 010-3z" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div *ngIf="menuOpen===i"
                             class="menu w-20 absolute right-20 bottom-5 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                             <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                                 <a href="#"
@@ -114,6 +160,52 @@
                     </td>
                 </tr>
             </tbody>
+
+            <!-- Department table -->
+            <tbody *ngFor="let item of departmentArr, let i = index">
+                <tr class="bg-white border-b dark:border-gray-200" *ngIf="departmentTable && !searchTable">
+                    <th scope="row"
+                        class=" flex items-center px-3 py-4 font-medium text-gray-600 whitespace-nowrap dark:text-gray-700">
+                        <img class="mr-3 rounded-full h-[50px] w-[50px]" src="{{item.image}}" alt="profile">
+                        <div class="flex flex-col">
+                            {{item.fullname}}
+                            <span class="text-gray-400">{{item.email}}</span>
+                        </div>
+                    </th>
+                    <td class="px-6 py-4">
+                        {{item.department.name}}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{item.role}}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{item.salary}}
+                    </td>
+
+                    <td class="px-6 py-4 relative">
+                        <div class="inline-block">
+                            <button (click)="toggleMenu(i)"
+                                class="inline-flex justify-center w-full rounded-md border border-white shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M10 3a1.5 1.5 0 110 3 1.5 1.5 0 010-3zM10 8a1.5 1.5 0 110 3 1.5 1.5 0 010-3zM10 13a1.5 1.5 0 110 3 1.5 1.5 0 010-3z" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div *ngIf="menuOpen === i"
+                            class="menu w-20 absolute right-20 bottom-5 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                            <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                                <a class="block px-4 py-2 text-sm text-gray-700 hover:text-white hover:bg-gray-900"
+                                    role="menuitem">Edit</a>
+                                <a class="block px-4 py-2 text-sm text-gray-700 hover:text-white hover:bg-gray-900"
+                                    role="menuitem">Delete</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+
         </table>
     </div>
 </div>

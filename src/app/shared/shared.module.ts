@@ -15,6 +15,8 @@ import { BodyComponent } from './body/body.component';
 import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AnnouncementsComponent } from './announcements/announcements.component';
+import { AddEmployeeComponent } from './add-employee/add-employee.component';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { ProfileComponent } from './profile/profile.component';
     BodyComponent,
     EmployeeDetailsComponent,
     DashboardComponent,
-    ProfileComponent
+    ProfileComponent,
+    AnnouncementsComponent,
+    AddEmployeeComponent
   ],
   imports: [
     CommonModule,
