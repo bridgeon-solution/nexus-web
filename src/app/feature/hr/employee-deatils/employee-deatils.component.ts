@@ -3,6 +3,7 @@ import { Department, Employee } from 'src/app/core/models/api.model';
 import { EmployeeService } from 'src/app/core/services/employee.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddEmployeeComponent } from 'src/app/shared/add-employee/add-employee.component';
+import { HrService } from 'src/app/core/services/hr.service';
 
 
 @Component({
@@ -16,19 +17,19 @@ export class EmployeeDeatilsComponent implements OnInit {
   allEmployees: Employee[] = [];
   allDepartments: Department[] = [];
 
-  constructor(private employeeSrvc: EmployeeService, private matDialog: MatDialog) {
+  constructor(private employeeSrvc: EmployeeService, private hrSrvc: HrService, private matDialog: MatDialog) {
 
   }
 
   ngOnInit(): void {
-    this.fetchEmployess()
-    // this.fetchDepartments()
+    this.fetchEmployess();
   }
 
   fetchEmployess() {
-    this.employeeSrvc.getAllEmployeesSrvc().subscribe((res:{status:string,data:[Employee]}) => {
-      this.allEmployees = res.data;
+    this.employeeSrvc.getAllEmployeesSrvc().subscribe((res: { status: string, data: [Employee] }) => {
+      this.allEmployees = res.data
     })
+
   }
 
   selectEmpOptions() {

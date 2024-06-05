@@ -14,10 +14,6 @@ export class EmployeeService {
     return this.http.get('http://localhost:4000/api/v1/employees/')
   }
 
-  getAllDepartments(): Observable<object> {
-    return this.http.get(`http://localhost:4000/api/v1/departments/`)
-  }
-
   // delete employee
   deleteEmployee(id:number): Observable<object> {
     return this.http.delete(`http://localhost:4000/api/v1/employees/${id}`)

@@ -1,4 +1,4 @@
-interface founderDEtails {
+interface founderDetails {
     id:number;
     fullname:string;
     email:string;
@@ -11,5 +11,5 @@ interface founderDEtails {
 }
 
 export {
-    founderDEtails
+    founderDetails
 }

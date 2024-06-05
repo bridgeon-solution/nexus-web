@@ -3,12 +3,9 @@
         <div class="logo-container">
             <button class="logo text-white" (mouseenter)="toggleCollapse()" (mouseleave)="toggleCollapse()">N</button>
             <div class="logo-text" *ngIf="collapsed">NEXUS</div>
-            <!-- <button class="btn-close" (click)="closeNavbar()" *ngIf="collapsed">
-                <i class="fal fa-times kclose-icon"><img src="../../../assets/Business-Management.jpg" alt=""></i>
-            </button> -->
         </div>
         <ul class="sidenav-nav" (mouseenter)="toggleCollapse()" (mouseleave)="toggleCollapse()">
-            <li class="sidenav-nav-item relative" *ngFor="let item of navData">
+            <li class="sidenav-nav-item relative" *ngFor="let item of filterMenu">
                 <a class="sidenav--nav-link" routerLink="{{item.routerLink}}" routerLinkActive="active-link"
                     [routerLinkActiveOptions]="{ exact: true }">
                     <i class="sidenav-link-icon"><img src="{{item.icon}}" alt=""></i>
@@ -16,6 +13,16 @@
                 </a>
             </li>
         </ul>
+
+        <!-- <ul class="sidenav-nav" (mouseenter)="toggleCollapse()" (mouseleave)="toggleCollapse()">
+            <li class="sidenav-nav-item relative">
+                <a class="sidenav--nav-link" routerLink="login">
+                    <i class="sidenav-link-icon"><img src="../../../assets/sidenav-icons/logout.png" alt=""></i>
+                    <span class="sidenav-link-text" *ngIf="collapsed">Logout</span>
+                </a>
+            </li>
+        </ul> -->
+
     </div>
     <div class="body" [ngClass]="getBodyClass()">
         <router-outlet></router-outlet>
