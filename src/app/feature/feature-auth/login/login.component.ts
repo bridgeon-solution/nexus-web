@@ -1,6 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { founderDetails } from 'src/app/core/models/admin.model';
 
 import { userLogin } from 'src/app/core/models/userlogin.model';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -12,21 +14,22 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class LoginComponent {
   @ViewChild('loginForm') form: NgForm
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private toast: ToastrService) { }
 
 
   openloginForm() {
     const username = this.form.value.username;
     const password = this.form.value.password;
 
-    this.router.navigate(['home'])
-    // const loginDatas: userLogin = {
-    //   username: username,
-    //   password: password
-    // }
-    // this.authService.login(loginDatas).subscribe((res) => {
-    //   localStorage.setItem('token', res.token)
-    // })
+    const loginDatas: userLogin = this.form.value;
+
+    this.authService.login(loginDatas).subscribe((res: { status: string, data: { findFounder: founderDetails, token: string } }) => {
+      localStorage.setItem('token', `Bearer ${res.data.token}`);
+      this.router.navigate(['home']);
+    }, (err) => {
+      console.log(err);
+      alert("Not found")
+    })
   }
 
 

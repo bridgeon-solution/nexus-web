@@ -1,6 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { navBarData } from './nav-data';
 import { Router } from '@angular/router';
+import { NavData } from 'src/app/core/models/navbar.model';
+import { InterceptorService } from 'src/app/core/services/interceptor.service';
+import { jwtDecode } from 'jwt-decode'
 
 interface SideNavToggle {
   screenWidth: number;
@@ -14,18 +17,29 @@ interface SideNavToggle {
 })
 export class SideNavComponent implements OnInit {
 
-  constructor(private router: Router) { }
   @Output() onToggleSideNav: EventEmitter<SideNavToggle> = new EventEmitter();
-  // @Input() collapsed:boolean = false;
-  // @Input() screenWidth:number = 0;
+
+  constructor(private router: Router, private interceptorSrvc: InterceptorService) { }
 
   isSideNavCollapsed: boolean = false;
   collapsed: boolean = false;
   navData = navBarData;
   screenWidth = 0;
+  menu: NavData[] = [];
+  filterMenu: any[] = [];
+  role: string = this.interceptorSrvc.decodedToken;
 
   ngOnInit(): void {
+    const token: { exp: number, iat: number, id: number, role: string } = jwtDecode(localStorage.getItem('token'));
+
     this.screenWidth = window.innerWidth;
+    navBarData.menu.forEach((element: any) => {
+      const isRolePresent = element.role.find((x) => { return x === token.role });
+      if (isRolePresent !== undefined) {
+        this.filterMenu.push(element);
+      }
+    })
+
   }
 
 
@@ -43,13 +57,13 @@ export class SideNavComponent implements OnInit {
     this.collapsed = !this.collapsed;
     this.onToggleSideNav.emit({ collapsed: this.collapsed, screenWidth: this.screenWidth })
   }
-  
+
   closeNavbar() {
     this.collapsed = false;
     this.onToggleSideNav.emit({ collapsed: this.collapsed, screenWidth: this.screenWidth })
   }
 
   link() {
-    this.router.navigate([{ outlets: { contents: ['employees']} }]);
+    this.router.navigate([{ outlets: { contents: ['employees'] } }]);
   }
 }

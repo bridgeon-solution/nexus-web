@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Department, Employee } from 'src/app/core/models/api.model';
 import { EmployeeService } from 'src/app/core/services/employee.service';
 import { HrService } from 'src/app/core/services/hr.service';
+import { Toast, ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-employee-details',
@@ -24,12 +25,15 @@ export class EmployeeDetailsComponent implements OnInit {
   departmentTable: boolean = false;
   selectedOption: string = 'Select an option';
   options: string[] = ['all', 'Frontend Development', 'Back-end', 'UI', 'Testing'];
-  // dropdown1Options = ['Option 1', 'Option 2', 'Option 3'];
 
-  constructor(private hrSrvc: HrService, private employeeSrvc: EmployeeService) { }
+  constructor(private hrSrvc: HrService, private employeeSrvc: EmployeeService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
-
+    // this.hrSrvc.getAllDepartments().subscribe((res)=>{
+    //   console.log(res);
+    // },(err)=>{
+    //   console.log(err);
+    // })
   }
 
   toggleDropdown() {
@@ -38,6 +42,8 @@ export class EmployeeDetailsComponent implements OnInit {
 
   selectOption(option: string) {
     this.selectedOption = option;
+    console.log(option);
+
     if (this.selectedOption.length > 0) {
       this.isDropdownOpen = false;
       this.departmentTable = true
@@ -73,11 +79,12 @@ export class EmployeeDetailsComponent implements OnInit {
     }
   }
 
+  // deleting employee
   deleteEmployee(id: number) {
     console.log(id);
     this.employeeSrvc.deleteEmployee(id).subscribe((res: { status: string, data: [Employee] }) => {
       if (res.status === 'success') {
-        alert('Successfully deletes');
+        // this.toastr.success('Deleted successfully')
       } else {
         alert('Somwthing went wrong');
       }
