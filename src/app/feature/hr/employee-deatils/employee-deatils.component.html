@@ -16,9 +16,8 @@
             <span>Add Employee</span>
         </button>
     </div>
-    <app-employee-details [allEmployees]="allEmployees" [allDepartments]="allDepartments" *ngIf="employeeDetailsOption"></app-employee-details>
+    <app-employee-details [allEmployees]="allEmployees" *ngIf="employeeDetailsOption"></app-employee-details>
     <div class="teams" *ngIf="!employeeDetailsOption">
         <h1>Teams</h1>
     </div>
 </div>
-

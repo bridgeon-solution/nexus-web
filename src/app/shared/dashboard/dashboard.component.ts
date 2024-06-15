@@ -1,36 +1,91 @@
-import { Component } from '@angular/core';
+import { animate, style, transition, trigger } from '@angular/animations';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
+  animations: [
+    trigger('numberCount', [
+      transition(':enter', [
+        style({ opacity: 0 }), // Start from invisible state
+        animate('1.1s ease-in-out') // Animate for 1 second with easing
+      ])
+    ])
+  ]
 })
-export class DashboardComponent {
+
+export class DashboardComponent implements OnInit {
+  filteredData: any[] = [];
   data = [
+    {
+      head: 'Departments',
+      count: 6,
+      subHead: 'More Info',
+      link: 'home/employees',
+      role: ['founder']
+    },
+    {
+      head: 'Projects',
+      count: 3,
+      subHead: 'More Info',
+      link: 'home/employees',
+      role: ['founder']
+    },
+    {
+      head: 'Salary',
+      count: 6,
+      subHead: 'More Info',
+      link: 'home/employees',
+      role: ['founder']
+    },
+    {
+      head: 'Leaves',
+      count: 9,
+      subHead: 'More Info',
+      link: 'home/employees',
+      role: ['founder']
+    },
+    {
+      icon: '../../../assets/icons/businessman_7086777.png',
+      head: 'Team',
+      count: 10,
+      subHead: 'Team members',
+      link: 'home/employees',
+      role: ['Team Leader']
+    },
     {
       icon: '../../../assets/icons/businessman_7086777.png',
       head: 'Employees',
       count: 10,
       subHead: 'Employees',
-      link:'home/employees'
+      link: 'home/employees',
+      role: ['HR']
     }, {
       icon: '../../../assets/icons/notes_9885627.png',
       head: 'Leaves',
       count: 1,
       subHead: 'Pending Leave',
-      link:'home/leaves'
+      link: 'home/leaves',
+      role: ['Team Leader', 'HR']
     }, {
       icon: '../../../assets/icons/project_7754996.png',
       head: 'Projects',
       count: 5,
       subHead: 'Ongoing Projects',
-
+      role: ['HR']
+    }, , {
+      icon: '../../../assets/icons/project_7754996.png',
+      head: 'Tasks',
+      count: 5,
+      subHead: 'Tasks',
+      role: ['Team Leader']
     }, {
       icon: '../../../assets/icons/megaphone_10321186.png',
       head: 'Announcements',
       count: 1,
       subHead: 'Announcement',
-
+      role: ['Team Leader', 'HR']
     }
   ]
 
@@ -84,14 +139,52 @@ export class DashboardComponent {
       status: 'Active'
     },
   ]
+  targetNumber: number = 90;
+  currentNumber: number = 0;
+  role: string = localStorage.getItem('role')
+
+  ngOnInit(): void {
+    this.animateNumber()
+    this.data.forEach((element) => {
+      const isRolePresent = element.role.find((x) => { return x === localStorage.getItem('role') });
+      if (isRolePresent !== undefined) {
+        this.filteredData.push(element)
+      }
+    })
+  }
+
+  animateNumber() {
+    // console.log(this.data.map((x)=>{return x.count}));
+
+    const intervalId = setInterval(() => {
+      this.data.forEach((element) => {
+        if (this.currentNumber >= element.count) {
+          clearInterval(intervalId);
+          return;
+        }
+        this.currentNumber++;
+      })
+      // if (this.currentNumber >= this.targetNumber) {
+      //   clearInterval(intervalId);
+      //   return;
+      // }
+      // this.currentNumber++;
+
+    }, 20);
+  }
+
 
   getColor(head: string) {
     switch (head) {
       case 'Employees':
         return '#4E3DB8';
+      case 'Team':
+        return '#4E3DB8';
       case 'Leaves':
         return '#003E77';
       case 'Projects':
+        return '#F8614D';
+      case 'Tasks':
         return '#F8614D';
       case 'Announcements':
         return '#5FAC66';
@@ -99,4 +192,34 @@ export class DashboardComponent {
         return 'gray'; // Default color for unknown heads
     }
   }
+
+  founderColor(option: string) {
+    switch (option) {
+      case 'Departments':
+        return '#6D81ED';
+      case 'Projects':
+        return '#003E77';
+      case 'Salary':
+        return '#00770C';
+      case 'Leaves':
+        return '#AA3B2C';
+      default:
+        return 'gray'; // Default color for unknown heads
+    }
+  }
+  founderInfoColor(option: string) {
+    switch (option) {
+      case 'Departments':
+        return '#6D81ED';
+      case 'Projects':
+        return '#232B58';
+      case 'Salary':
+        return '#166622';
+      case 'Leaves':
+        return '#84533E';
+      default:
+        return 'gray'; // Default color for unknown heads
+    }
+  }
+
 }

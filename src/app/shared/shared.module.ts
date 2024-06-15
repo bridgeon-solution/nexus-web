@@ -8,15 +8,18 @@ import { SideNavComponent } from './side-nav/side-nav.component';
 import { RouterModule } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatButtonModule  } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
-import { BodyComponent } from './body/body.component';
 import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AnnouncementsComponent } from './announcements/announcements.component';
 import { AddEmployeeComponent } from './add-employee/add-employee.component';
+import { SendLeaveComponent } from './send-leave/send-leave.component';
+import { TopProfileComponent } from './top-profile/top-profile.component';
+import { FounderDashboardComponent } from './founder-dashboard/founder-dashboard.component';
+import { LeaveHistoryComponent } from './leave-history/leave-history.component';
 
 
 @NgModule({
@@ -24,12 +27,15 @@ import { AddEmployeeComponent } from './add-employee/add-employee.component';
     PaymentComponent,
     PaymentCardsComponent,
     SideNavComponent,
-    BodyComponent,
     EmployeeDetailsComponent,
     DashboardComponent,
     ProfileComponent,
     AnnouncementsComponent,
-    AddEmployeeComponent
+    AddEmployeeComponent,
+    SendLeaveComponent,
+    TopProfileComponent,
+    FounderDashboardComponent,
+    LeaveHistoryComponent
   ],
   imports: [
     CommonModule,
@@ -44,9 +50,12 @@ import { AddEmployeeComponent } from './add-employee/add-employee.component';
   exports: [
     PaymentCardsComponent,
     SideNavComponent,
-    BodyComponent,
     EmployeeDetailsComponent,
-    ProfileComponent
+    ProfileComponent,
+    TopProfileComponent,
+    SendLeaveComponent,
+    FounderDashboardComponent,
+    LeaveHistoryComponent
   ]
 })
 export class SharedModule { }

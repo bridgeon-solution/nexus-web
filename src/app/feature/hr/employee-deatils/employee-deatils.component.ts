@@ -2,22 +2,26 @@ import { Component, OnInit } from '@angular/core';
 import { Department, Employee } from 'src/app/core/models/api.model';
 import { EmployeeService } from 'src/app/core/services/employee.service';
 import { MatDialog } from '@angular/material/dialog';
-import { AddEmployeeComponent } from 'src/app/shared/add-employee/add-employee.component';
 import { HrService } from 'src/app/core/services/hr.service';
+import { animate, style, transition, trigger } from '@angular/animations';
+import { ToastrService } from 'ngx-toastr';
+import { AddEmployeeComponent } from 'src/app/shared/add-employee/add-employee.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
   selector: 'app-employee-deatils',
   templateUrl: './employee-deatils.component.html',
-  styleUrls: ['./employee-deatils.component.css']
+  styleUrls: ['./employee-deatils.component.css'],
 })
 export class EmployeeDeatilsComponent implements OnInit {
+
   isDropdownOpen: boolean = false;
   employeeDetailsOption: boolean = true;
   allEmployees: Employee[] = [];
   allDepartments: Department[] = [];
 
-  constructor(private employeeSrvc: EmployeeService, private hrSrvc: HrService, private matDialog: MatDialog) {
+  constructor(private employeeSrvc: EmployeeService, private hrSrvc: HrService, private matDialog: MatDialog,) {
 
   }
 
@@ -27,9 +31,8 @@ export class EmployeeDeatilsComponent implements OnInit {
 
   fetchEmployess() {
     this.employeeSrvc.getAllEmployeesSrvc().subscribe((res: { status: string, data: [Employee] }) => {
-      this.allEmployees = res.data
+      this.allEmployees = res.data;
     })
-
   }
 
   selectEmpOptions() {
@@ -37,6 +40,10 @@ export class EmployeeDeatilsComponent implements OnInit {
   }
 
   addEmployees() {
-    this.matDialog.open(AddEmployeeComponent)
+    this.matDialog.open(AddEmployeeComponent, {
+      data: { option: '' }
+    });
   }
+
+
 }

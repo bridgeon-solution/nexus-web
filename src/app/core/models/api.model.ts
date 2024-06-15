@@ -4,7 +4,7 @@ interface adminLogin {
 }
 
 interface Employee {
-  id:number;
+  id: number;
   fullname: string,
   email: string,
   password: string;
@@ -27,8 +27,17 @@ interface Department {
   name: string;
 }
 
+interface LeaveData {
+  startDate: Date,
+  endDate: Date,
+  reason: string,
+  leaveType: string
+  employeeId: number
+}
+
 export {
   adminLogin,
   Employee,
-  Department
+  Department,
+  LeaveData
 }

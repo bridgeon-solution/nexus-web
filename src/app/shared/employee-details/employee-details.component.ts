@@ -3,19 +3,26 @@ import { Department, Employee } from 'src/app/core/models/api.model';
 import { EmployeeService } from 'src/app/core/services/employee.service';
 import { HrService } from 'src/app/core/services/hr.service';
 import { Toast, ToastrService } from "ngx-toastr";
+import { animate, style, transition, trigger } from '@angular/animations';
+import { DepartmentService } from 'src/app/core/services/department.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AddEmployeeComponent } from '../add-employee/add-employee.component';
 
 @Component({
   selector: 'app-employee-details',
   templateUrl: './employee-details.component.html',
-  styleUrls: ['./employee-details.component.css']
+  styleUrls: ['./employee-details.component.css'],
 })
 export class EmployeeDetailsComponent implements OnInit {
   @Input() allEmployees: Employee[];
-  @Input() allDepartments: Department[];
+  // @Input() allDepartments: Department[];
+
 
   searchedArr: Employee[] = [];
   departmentArr: Employee[] = [];
+  allDepartments: Department[] = [];
 
+  loading: boolean = true;
   str: string;
   isDropdownOpen = false;
   employeeDetailsOption: boolean = true;
@@ -26,14 +33,19 @@ export class EmployeeDetailsComponent implements OnInit {
   selectedOption: string = 'Select an option';
   options: string[] = ['all', 'Frontend Development', 'Back-end', 'UI', 'Testing'];
 
-  constructor(private hrSrvc: HrService, private employeeSrvc: EmployeeService, private toastr: ToastrService) { }
+  constructor(private employeeSrvc: EmployeeService, private departmentService: DepartmentService, private matDialog: MatDialog) {
+  }
 
   ngOnInit(): void {
-    // this.hrSrvc.getAllDepartments().subscribe((res)=>{
-    //   console.log(res);
-    // },(err)=>{
-    //   console.log(err);
-    // })
+    this.fetchDepartment()
+  }
+
+  fetchDepartment() {
+    this.departmentService.getAllDepartments().subscribe((res: { status: string, data: [Department] }) => {
+      this.allDepartments = res.data;
+      this.allDepartments.push({ name: 'All', id: 20 })
+
+    })
   }
 
   toggleDropdown() {
@@ -42,19 +54,20 @@ export class EmployeeDetailsComponent implements OnInit {
 
   selectOption(option: string) {
     this.selectedOption = option;
-    console.log(option);
-
     if (this.selectedOption.length > 0) {
       this.isDropdownOpen = false;
       this.departmentTable = true
     } else {
       this.departmentTable = false;
     }
-    if (option === 'all') {
+    if (option === `All`) {
       this.employeeDetailsOption = true;
       this.departmentTable = false;
     }
     this.departmentArr = this.allEmployees.filter((x) => { return x.department.name.toLowerCase().includes(this.selectedOption.toLowerCase()) });
+    if (this.departmentArr.length === 0) {
+      this.loading = true;
+    }
   }
 
   toggleMenu(i) {
@@ -92,5 +105,12 @@ export class EmployeeDetailsComponent implements OnInit {
       console.log(err);
     })
     return this.allEmployees
+  }
+
+  //Edit employee
+  editEmployee(id: number) {
+    this.matDialog.open(AddEmployeeComponent, {
+      data: { id: id, option: 'edit employee' }
+    })
   }
 }

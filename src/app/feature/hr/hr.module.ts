@@ -19,8 +19,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     CommonModule,
     MatDialogModule,
     HrRoutingRoutingModule,
-    SharedModule
+    SharedModule,
   ],
-  exports:[EmployeeDeatilsComponent]
+  exports: [EmployeeDeatilsComponent]
 })
 export class HRModule { }

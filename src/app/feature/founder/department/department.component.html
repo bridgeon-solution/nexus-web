@@ -1,0 +1,69 @@
+<h1 class="sm:ms-5-ms-10 text-5xl font-roboto ">Departments</h1>
+<div class="sm:ms-5 relative -ms-10">
+    <div class="options flex items-center mt-12 max-w-[300px] justify-between">
+        <div class="flex flex-col items-center">
+            <p role="button" (click)="pageSelection('adding')">Add Departments</p>
+            <div class="lines w-full h-[2px] bg-blue-600" *ngIf="addDepartmentPage"></div>
+        </div>
+        <div class="flex flex-col items-center" (click)="pageSelection('manange')">
+            <p role="button">Manage Department</p>
+            <div class="lines w-full h-[2px] bg-blue-600" *ngIf="manageDepartmentPage"></div>
+        </div>
+    </div>
+    <div class="add-department  mt-10" *ngIf="addDepartmentPage">
+        <h1 class="font-normal text-gray-500 text-3xl">Add Department</h1>
+        <div class="adding ml-9 mt-5 relative">
+            <p class="font-medium">Department Name</p>
+            <form action="" #addDepartmentForm="ngForm">
+                <input type="text" ngModel name="name" #name="ngModel"
+                    class="w-full rounded-md border border-gray-400 px-3 py-3 focus:outline-none focus:ring-1 focus:ring-blue-500">
+            </form>
+            <button type="submit" (click)="addDepartment()"
+                class="absolute right-0 top-28 bg-blue-500 text-white py-2 px-6 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                Submit
+            </button>
+
+        </div>
+    </div>
+
+    <div class="add-department  mt-10" *ngIf="manageDepartmentPage">
+        <h1 class="font-normal text-gray-500 text-3xl">Manage Department</h1>
+        <table class="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-gray-900">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-pink-200 dark:text-gray-900">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        #
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Department name
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="bg-white border-b dark:border-gray-200" *ngFor="let department of departments, let i = index">
+                    <td class="px-6 py-4">
+                        {{i+1}}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{department.name}}
+                    </td>
+                    <td class=" w-1/12">
+                        <div class="flex items-center justify-center">
+                            <button
+                                class="mr-4 buttons bg-blue-600 text-white py-2 px-10 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300">
+                                Edit
+                            </button>
+                            <button (click)="deleteDepartment(department.id)"
+                                class="buttons bg-red-500 text-white py-2 px-10 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-700">
+                                Delete
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

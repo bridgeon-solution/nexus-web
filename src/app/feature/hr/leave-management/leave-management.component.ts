@@ -9,6 +9,8 @@ export class LeaveManagementComponent {
   isDropdownOpen = false;
   employeeLeaveOption: boolean = true;
   menuOpen = false;
+
+  constructor() { }
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
@@ -19,5 +21,8 @@ export class LeaveManagementComponent {
 
   selectLeaveOption() {
     this.employeeLeaveOption = !this.employeeLeaveOption;
+  }
+
+  approved() {
   }
 }
