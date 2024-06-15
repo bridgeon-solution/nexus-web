@@ -4,75 +4,106 @@ export const navBarData = {
             routerLink: 'dashboard',
             icon: '../../../assets/sidenav-icons/hr/dashboard.png',
             label: 'Dashboard',
-            role: ['founder', 'Team leader', 'hr']
+            role: ['founder', 'Team Leader', 'HR', 'Employee'],
+            clickable:false
         },
         {
             routerLink: 'employees',
             icon: '../../../assets/sidenav-icons/hr/group-chat.png',
-            label: 'Emplyees',
-            role: ['founder', 'Team leader', 'hr']
+            label: 'Employees',
+            role: ['founder', 'HR'],
+            clickable:false
+
         },
         {
             routerLink: 'leaves',
             icon: '../../../assets/sidenav-icons/hr/report.png',
             label: 'Leaves',
-            role: ['founder', 'Team leader', 'hr']
+            role: ['founder', 'HR'],
+            clickable:false
+
+        },,
+        {
+            routerLink: 'leave-request',
+            icon: '../../../assets/sidenav-icons/hr/report.png',
+            label: 'Leaves',
+            role: ['Team Leader'],
+            clickable:false
+
         },
         {
             routerLink: 'projects',
             icon: '../../../assets/sidenav-icons/hr/project.png',
             label: 'Projects',
-            role: ['Team leader', 'founder', 'hr']
+            role: ['Team Leader', 'founder', 'HR'],
+            clickable:false
+
 
         },
         {
             routerLink: 'department',
             icon: '../../../assets/sidenav-icons/founder/hiring.png',
             label: 'Department',
-            role: ['founder']
+            role: ['founder'],
+            clickable:false
+
 
         }, {
             routerLink: 'salary',
             icon: '../../../assets/sidenav-icons/founder/salary.png',
             label: 'Salary',
-            role: ['founder']
+            role: ['founder'],
+            clickable:false
+
 
         },
         {
             routerLink: 'pay-roll',
             icon: '../../../assets/sidenav-icons/hr/money.png',
             label: 'PayRoll',
-            role: ['hr']
+            role: ['HR'],
+            clickable:false
+
         },
         {
             routerLink: 'announcements',
             icon: '../../../assets/sidenav-icons/hr/megaphone.png',
             label: 'Announcements',
-            role: ['Team leader', 'founder', 'hr']
+            role: ['Team Leader', 'founder', 'HR'],
+            clickable:false
+
         },
         {
             routerLink: 'task',
-            icon: '../../../assets/sidenav-icons/hr/megaphone.png',
+            icon: '../../../assets/sidenav-icons/to-do-list.png',
             label: 'Tasks',
-            role: ['Team leader']
+            role: ['Team Leader'],
+            clickable:false
+
         },
         {
             routerLink: 'Team',
-            icon: '../../../assets/sidenav-icons/hr/megaphone.png',
-            label: 'Announcements',
-            role: ['Team leader']
+            icon: '../../../assets/sidenav-icons/hr/group-chat.png',
+            label: 'Team',
+            role: ['Team Leader'],
+            clickable:false
+
         },
         {
             routerLink: 'pay-slip',
-            icon: '../../../assets/sidenav-icons/hr/megaphone.png',
+            icon: '../../../assets/sidenav-icons/payslip.png',
             label: 'PaySlip',
-            role: ['Team leader']
+            role: ['Team Leader'],
+            clickable:false
+
         },
         {
-            routerLink: 'login',
-            icon: '../../../assets/sidenav-icons/logout.png',
+            routerLink: '/login',
+            icon: '../../../assets/sidenav-icons/logout copy.png',
             label: 'Logout',
-            role: ['hr', 'founder', 'Team leader']
+            role: ['HR', 'founder', 'Team Leader'],
+            clickable:true
+
         }
     ]
 }

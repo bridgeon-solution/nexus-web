@@ -4,27 +4,22 @@
             <button class="logo text-white" (mouseenter)="toggleCollapse()" (mouseleave)="toggleCollapse()">N</button>
             <div class="logo-text" *ngIf="collapsed">NEXUS</div>
         </div>
+
         <ul class="sidenav-nav" (mouseenter)="toggleCollapse()" (mouseleave)="toggleCollapse()">
-            <li class="sidenav-nav-item relative" *ngFor="let item of filterMenu">
+            <li class="sidenav-nav-item relative" *ngFor="let item of filterMenu"
+                [ngClass]="{'clickable':item.clickable}">
                 <a class="sidenav--nav-link" routerLink="{{item.routerLink}}" routerLinkActive="active-link"
-                    [routerLinkActiveOptions]="{ exact: true }">
+                    (click)="logout(item.clickable)" [routerLinkActiveOptions]="{ exact: true }">
                     <i class="sidenav-link-icon"><img src="{{item.icon}}" alt=""></i>
                     <span class="sidenav-link-text" *ngIf="collapsed">{{item.label}}</span>
                 </a>
             </li>
         </ul>
-
-        <!-- <ul class="sidenav-nav" (mouseenter)="toggleCollapse()" (mouseleave)="toggleCollapse()">
-            <li class="sidenav-nav-item relative">
-                <a class="sidenav--nav-link" routerLink="login">
-                    <i class="sidenav-link-icon"><img src="../../../assets/sidenav-icons/logout.png" alt=""></i>
-                    <span class="sidenav-link-text" *ngIf="collapsed">Logout</span>
-                </a>
-            </li>
-        </ul> -->
-
+        <p>kjkjdfkjjlk</p>
     </div>
     <div class="body" [ngClass]="getBodyClass()">
+        <app-top-profile></app-top-profile>
+
         <router-outlet></router-outlet>
     </div>
 </main>

@@ -13,17 +13,15 @@ export class InterceptorService implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const token = localStorage.getItem('token');
-    
+
     if (token) {
       request = request.clone({
         setHeaders: {
           Authorization: token
         }
       })
-      this.decodedToken = jwtDecode(token);
-      console.log(this.decodedToken);
-      
     }
+
     return next.handle(request);
   }
 }

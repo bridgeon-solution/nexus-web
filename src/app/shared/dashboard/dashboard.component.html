@@ -1,14 +1,9 @@
-<div class="profile right-12 top-5 fixed flex items-center min-w-52 justify-around">
-    <div class="notification">icon</div>
-    <div class="role">HR</div>
-    <div class="profile-pic"  routerLink="/profile"><img src="" alt="profile"></div>
-</div>
 
-<div class="main pb-20">
-    <div
-        class="main-things flex items-center justify-between min-h-40 min-w-full rounded-xl bg-gray-200 mt-10 p-10">
-        <div class="top flex flex-col" *ngFor="let item of data">
-            <div class="employees flex flex-shrink bg-white items-center ps-2 py-10 pe-28 rounded-lg max-w-80 h-36">
+<div class="main pb-20" *ngIf="role!== 'founder'">
+    <div *ngIf="role !== 'founder' "
+        class="main-things flex items-center justify-between min-h-40 min-w-full rounded-xl bg-gray-200 mt-5 p-10">
+        <div class="top flex flex-col" *ngFor="let item of filteredData">
+            <div class="employees flex flex-shrink bg-white items-center ps-2 py-10 pe-28 rounded-lg max-w-full h-36">
                 <div class="icon w-14 h-14 me-5">
                     <img src="{{item.icon}}" alt="">
                 </div>
@@ -20,18 +15,19 @@
 
             <div [style.backgroundColor]="getColor(item.head)"
                 class="text-white min-w-full text-center rounded-lg py-5 px-10 mt-4">
-                <p class="text-5xl font-medium">{{item.count}}</p>
+                <p [@numberCount] class="text-5xl font-medium">{{item.count}}</p>
                 <p>{{item.subHead}}</p>
             </div>
         </div>
     </div>
 
-    <div class="w-full h-full border-2 border-gray-200 rounded-xl p-10 bg-white mt-10">
+    <div *ngIf="role !== 'founder'" class="w-full h-full border-2 border-gray-200 rounded-xl p-10 bg-white mt-10"
+        id="animated-div">
         <h2 class="text-gray-500 text-3xl mb-10">Leave Request</h2>
-        <div class="overflow-y-scroll h-[400px]">
+        <div class="overflow-y-scroll scroll-m-11 custom-scrollbar h-[400px]">
             <table class="min-w-full leading-normal">
                 <thead>
-                    <tr>
+                    <tr class="sticky top-0">
                         <th
                             class="px-5 py-3 bg-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                             Name
@@ -72,4 +68,9 @@
             </table>
         </div>
     </div>
+</div>
+
+<!-- founder -->
+<div *ngIf="role === 'founder'" class="w-full h-full">
+    <app-founder-dashboard [dashboardDatas]="filteredData"></app-founder-dashboard>
 </div>

@@ -8,6 +8,8 @@ const routes: Routes = [
   {
     path: 'home', component: SideNavComponent, children: [
       { path: '', loadChildren: () => import('./feature/hr/hr.module').then(m => m.HRModule) },
+      { path: '', loadChildren: () => import('./feature/founder/founder.module').then(m => m.FounderModule) },
+      { path: '', loadChildren: () => import('./feature/team-leader/team-leader.module').then(m => m.TeamLeaderModule) },
       { path: 'profile', component: ProfileComponent }
 
     ]

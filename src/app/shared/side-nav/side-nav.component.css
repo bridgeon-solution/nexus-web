@@ -116,6 +116,7 @@
     transition: all .5s ease;
     /* background: #ffffff; */
     padding: 3rem;
+    padding-top: 1rem;
 }
 
 .body-trimmed {
@@ -132,4 +133,8 @@
     border-radius: 0.625rem;
     background-color: #dddddd;
     color: #505050;
+}
+
+.logout {
+    margin-top: 5rem;
 }
