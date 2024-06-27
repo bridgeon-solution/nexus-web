@@ -1,4 +1,5 @@
-import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
+import { animate, style, transition, trigger } from '@angular/animations';
+import { Component, EventEmitter, Inject, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -10,15 +11,25 @@ import { HrService } from 'src/app/core/services/hr.service';
 @Component({
   selector: 'app-add-employee',
   templateUrl: './add-employee.component.html',
-  styleUrls: ['./add-employee.component.css']
+  styleUrls: ['./add-employee.component.css'],
+  animations: [
+    trigger('slideInFromLeft', [
+      transition(':enter', [
+        style({ transform: 'translatey(-10%)' }),
+        animate('1s ease-in-out', style({ transform: 'translateX(0)' }))
+      ])
+    ])
+  ]
 })
 export class AddEmployeeComponent implements OnInit {
   @Input() id: string;
   @Input() option: string;
+  @Output() valueShared = new EventEmitter<string>(); // Define output event
+
 
   @ViewChild('addEmployeeForm') addEmployeeForm: NgForm;
 
-  roles = ['Employee', 'Team Leader', 'Employee', 'HR'];
+  roles = ['Employee', 'Team Leader', 'HR'];
   gender = ['Male', 'Female', 'Other'];
   departments: Department[] = [];
 
@@ -120,25 +131,26 @@ export class AddEmployeeComponent implements OnInit {
     }
   }
 
-  addOrEditEmployee() {
+  addEmployee() {
     this.loading = true;
     let employeeValues: Employee = this.addEmployeeForm.value;
     employeeValues.departmentId = this.departmentId.toString();
     employeeValues.role = this.roleOption;
     employeeValues.gender = this.genderOption;
     this.employeeService.addOrEditEmployee(employeeValues, this.file).subscribe((res: { status: string }) => {
-      console.log(res);
       if (res.status === 'success') {
+        this.dialogRef.close('added')
+        this.addEmployeeForm.reset();
+        this.dialogRef.close('added');
         this.loading = false;
-        alert('Employee added');
-        this.dialogRef.close('Closed')
+        this.snackBar.open("Staff Added", "Colse", { duration: 5000 });
       } else {
         this.loading = false;
-        alert('Something wrong');
+        this.snackBar.open("Somwthing went wrong", "Colse", { duration: 5000 });
       }
     }, (err) => {
       this.loading = false;
-      alert('Something wrong');
+      this.snackBar.open("Somwthing went wrong", "Colse", { duration: 5000 });
       console.log(err);
     })
   }
@@ -150,20 +162,18 @@ export class AddEmployeeComponent implements OnInit {
     employeeValues.role = this.roleOption;
     employeeValues.gender = this.genderOption;
 
-    this.employeeService.updateEmployee(employeeValues, this.file, this.data.id).subscribe((res) => {
-      console.log(res);
-      // if (res.status === 'success') {
-      //   this.loading = false;
-      //   alert('Employee Updated');
-      //   this.snackBar.open("Employee Updates", "Close", { duration: 5000 })
-      //   this.dialogRef.close('Closed')
-      // } else {
-      //   this.snackBar.open("Something wrong", "Close", { duration: 5000 })
-      //   this.loading = false;
-      // }
+    this.employeeService.updateEmployee(employeeValues, this.file, this.data.id).subscribe((res: { status: string }) => {
+      if (res.status === 'success') {
+        this.loading = false;
+        this.dialogRef.close('updated')
+        this.snackBar.open("Staff Updated", "Colse", { duration: 5000 });
+      } else {
+        this.snackBar.open("Something wrong", "Close", { duration: 5000 })
+        this.loading = false;
+      }
     }, (err) => {
       this.loading = false;
-      alert('Something wrong');
+      this.snackBar.open("Somwthing went wrong", "Colse", { duration: 5000 });
       console.log(err);
     })
   }

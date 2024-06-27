@@ -16,23 +16,17 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class EmployeeDeatilsComponent implements OnInit {
 
+
   isDropdownOpen: boolean = false;
   employeeDetailsOption: boolean = true;
   allEmployees: Employee[] = [];
   allDepartments: Department[] = [];
 
-  constructor(private employeeSrvc: EmployeeService, private hrSrvc: HrService, private matDialog: MatDialog,) {
+  constructor(private employeeSrvc: EmployeeService, private hrSrvc: HrService, private matDialog: MatDialog) {
 
   }
 
   ngOnInit(): void {
-    this.fetchEmployess();
-  }
-
-  fetchEmployess() {
-    this.employeeSrvc.getAllEmployeesSrvc().subscribe((res: { status: string, data: [Employee] }) => {
-      this.allEmployees = res.data;
-    })
   }
 
   selectEmpOptions() {
@@ -40,8 +34,17 @@ export class EmployeeDeatilsComponent implements OnInit {
   }
 
   addEmployees() {
-    this.matDialog.open(AddEmployeeComponent, {
+    const dialog = this.matDialog.open(AddEmployeeComponent, {
       data: { option: '' }
+    });
+
+    dialog.afterClosed().subscribe(result => {
+      
+      if (result) { // Check if a value was emitted
+        console.log(result);
+        
+        // Use the received value in your parent component logic
+      }
     });
   }
 

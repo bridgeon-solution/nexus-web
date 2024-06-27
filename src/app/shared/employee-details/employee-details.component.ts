@@ -1,27 +1,49 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Department, Employee } from 'src/app/core/models/api.model';
 import { EmployeeService } from 'src/app/core/services/employee.service';
-import { HrService } from 'src/app/core/services/hr.service';
-import { Toast, ToastrService } from "ngx-toastr";
-import { animate, style, transition, trigger } from '@angular/animations';
 import { DepartmentService } from 'src/app/core/services/department.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddEmployeeComponent } from '../add-employee/add-employee.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-employee-details',
   templateUrl: './employee-details.component.html',
   styleUrls: ['./employee-details.component.css'],
+  animations: [
+    trigger('employeeAnim', [
+      //Entry animation
+      transition('void => *', [
+        //Initial state
+        style({
+          height: 0,
+          opacity: 0,
+          transform: 'scale(0.85)',
+          'margin-bottom': 0,
+          paddingTop: 0,
+          paddingBottom: 0,
+          paddingLeft: 0,
+          paddingRight: 0,
+        }),
+        animate('50ms', style({
+          height: '*',
+          marginBottom: '*',
+          paddingTop: '*',
+          paddingBottom: '*',
+          paddingLeft: '*',
+          paddingRight: '*',
+        })),
+        animate(200)
+      ]),
+    ])
+  ]
 })
 export class EmployeeDetailsComponent implements OnInit {
-  @Input() allEmployees: Employee[];
-  // @Input() allDepartments: Department[];
 
-
+  allEmployees: Employee[] = [];
   searchedArr: Employee[] = [];
-  departmentArr: Employee[] = [];
   allDepartments: Department[] = [];
-
   loading: boolean = true;
   str: string;
   isDropdownOpen = false;
@@ -29,22 +51,42 @@ export class EmployeeDetailsComponent implements OnInit {
   underline: boolean = false
   menuOpen: number = null;
   searchTable: boolean = false;
-  departmentTable: boolean = false;
-  selectedOption: string = 'Select an option';
-  options: string[] = ['all', 'Frontend Development', 'Back-end', 'UI', 'Testing'];
+  selectedOption: string = 'All';
+  currentPage: number = 1;
+  itemsPerPage: number = 2;
+  totalItems: number;
+  page: number;
 
-  constructor(private employeeSrvc: EmployeeService, private departmentService: DepartmentService, private matDialog: MatDialog) {
+  constructor(private employeeSrvc: EmployeeService, private departmentService: DepartmentService, private matDialog: MatDialog, private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
-    this.fetchDepartment()
+    this.fetchEmployess()
+    this.fetchDepartment();
+  }
+
+  addEmployees() {
+    const dialog = this.matDialog.open(AddEmployeeComponent, {
+      data: { option: '' }
+    });
+
+    dialog.afterClosed().subscribe(result => {
+      if (result === 'added' || 'updated') {
+        this.fetchEmployess()
+      }
+    });
+  }
+
+  fetchEmployess() {
+    this.employeeSrvc.getAllEmployeesSrvc(this.currentPage, this.itemsPerPage).subscribe((res: { status: string, data: [Employee] }) => {
+      this.allEmployees = res.data
+    })
   }
 
   fetchDepartment() {
     this.departmentService.getAllDepartments().subscribe((res: { status: string, data: [Department] }) => {
       this.allDepartments = res.data;
       this.allDepartments.push({ name: 'All', id: 20 })
-
     })
   }
 
@@ -54,21 +96,18 @@ export class EmployeeDetailsComponent implements OnInit {
 
   selectOption(option: string) {
     this.selectedOption = option;
-    if (this.selectedOption.length > 0) {
+    if (this.selectedOption) {
       this.isDropdownOpen = false;
-      this.departmentTable = true
-    } else {
-      this.departmentTable = false;
-    }
-    if (option === `All`) {
-      this.employeeDetailsOption = true;
-      this.departmentTable = false;
-    }
-    this.departmentArr = this.allEmployees.filter((x) => { return x.department.name.toLowerCase().includes(this.selectedOption.toLowerCase()) });
-    if (this.departmentArr.length === 0) {
-      this.loading = true;
     }
   }
+
+  filterEmployee() {
+    if (this.selectedOption === "All") {
+      return this.allEmployees
+    }
+    return this.allEmployees.filter((x) => { return x.department.name.toLowerCase().includes(this.selectedOption.toLowerCase()) });
+  }
+
 
   toggleMenu(i) {
     this.menuOpen = i;
@@ -87,9 +126,6 @@ export class EmployeeDetailsComponent implements OnInit {
       this.searchTable = false;
     }
     this.searchedArr = this.allEmployees.filter((x) => { return x.fullname.toLowerCase().includes(this.str.toLowerCase()) || x.email.toLowerCase().includes(this.str.toLowerCase()) || x.role.toLowerCase().includes(this.str.toLowerCase()) })
-    if (this.departmentArr.length > 0) {
-      this.searchedArr = this.departmentArr.filter((x) => { return x.fullname.includes(this.str) || x.email.includes(this.str) || x.role.includes(this.str) })
-    }
   }
 
   // deleting employee
@@ -97,20 +133,35 @@ export class EmployeeDetailsComponent implements OnInit {
     console.log(id);
     this.employeeSrvc.deleteEmployee(id).subscribe((res: { status: string, data: [Employee] }) => {
       if (res.status === 'success') {
-        // this.toastr.success('Deleted successfully')
+        this.snackBar.open("Deleted", "Colse", { duration: 5000 });
+        this.fetchEmployess()
       } else {
-        alert('Somwthing went wrong');
+        this.snackBar.open("Somwthing went wrong", "Colse", { duration: 5000 });
       }
     }, (err) => {
-      console.log(err);
+      this.snackBar.open("Somwthing went wrong", "Colse", { duration: 5000 });
     })
     return this.allEmployees
   }
 
   //Edit employee
   editEmployee(id: number) {
-    this.matDialog.open(AddEmployeeComponent, {
+    const dialog = this.matDialog.open(AddEmployeeComponent, {
       data: { id: id, option: 'edit employee' }
     })
+    dialog.afterClosed().subscribe(result => {
+      if (result === 'added' || 'updated') {
+        this.fetchEmployess()
+      }
+    });
   }
+
+  onPageChange(page: number): void {
+    console.log(page);
+
+    this.currentPage = page;
+    this.fetchEmployess();
+  }
+
+
 }

@@ -10,3 +10,6 @@ input:focus {
 .aubmit-btn {
     opacity: 0.7;
 }
+form {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}

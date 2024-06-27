@@ -33,11 +33,19 @@ interface LeaveData {
   reason: string,
   leaveType: string
   employeeId: number
+  days: number
+  createdAt: Date
+  status: string
+}
+interface AllLeave {
+  leaveData: LeaveData,
+  employee: Employee
 }
 
 export {
   adminLogin,
   Employee,
   Department,
-  LeaveData
+  LeaveData,
+  AllLeave
 }

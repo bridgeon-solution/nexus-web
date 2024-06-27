@@ -1,5 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { Department } from 'src/app/core/models/api.model';
+import { DepartmentService } from 'src/app/core/services/department.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,11 +18,12 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class DashboardComponent implements OnInit {
+  departmentCount: number = 0;
   filteredData: any[] = [];
   data = [
     {
       head: 'Departments',
-      count: 6,
+      count: this.departmentCount,
       subHead: 'More Info',
       link: 'home/employees',
       role: ['founder']
@@ -141,7 +144,9 @@ export class DashboardComponent implements OnInit {
   ]
   targetNumber: number = 90;
   currentNumber: number = 0;
-  role: string = localStorage.getItem('role')
+  role: string = localStorage.getItem('role');
+
+  constructor(private departmentService: DepartmentService) { }
 
   ngOnInit(): void {
     this.animateNumber()
@@ -151,10 +156,21 @@ export class DashboardComponent implements OnInit {
         this.filteredData.push(element)
       }
     })
+    this.fetchDepartment();
+    this.animateNumber()
+  }
+
+  fetchDepartment() {
+    this.departmentService.getAllDepartments().subscribe((res: { status: string, data: [Department] }) => {
+      console.log(res.data.length);
+      this.departmentCount = res.data.length
+      let data = this.data.filter((x)=>{return x.head === 'Departments'});
+      data.map((x)=>{return x.count = this.departmentCount})
+    })
   }
 
   animateNumber() {
-    // console.log(this.data.map((x)=>{return x.count}));
+    console.log(this.data.map((x)=>{return x.count}));
 
     const intervalId = setInterval(() => {
       this.data.forEach((element) => {
@@ -164,11 +180,11 @@ export class DashboardComponent implements OnInit {
         }
         this.currentNumber++;
       })
-      // if (this.currentNumber >= this.targetNumber) {
-      //   clearInterval(intervalId);
-      //   return;
-      // }
-      // this.currentNumber++;
+      if (this.currentNumber >= this.targetNumber) {
+        clearInterval(intervalId);
+        return;
+      }
+      this.currentNumber++;
 
     }, 20);
   }

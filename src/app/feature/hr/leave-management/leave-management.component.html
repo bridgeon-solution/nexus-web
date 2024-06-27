@@ -16,9 +16,9 @@
 <div class="employee">
     <div class="flex items-center mt-10">
         <i class="fas fa-search text-gray-400 ml-3 cursor-pointer mr-6"></i>
-        <input type="text"
+        <input type="text" [(ngModel)]="searchQuery" (input)="filterLeave()"
             class="min-w-[550px] rounded-md border border-gray-300 pl-5 py-4 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-transparent"
-            placeholder="Search Employees by Name, Role, ID or any other related keywords ...">
+            placeholder="Search Employees by Name, Department...">
     </div>
 
     <div class="relative overflow-x-auto mt-5">
@@ -44,6 +44,9 @@
                         Balance
                     </th>
                     <th scope="col" class="px-6 py-3">
+                        Days
+                    </th>
+                    <th scope="col" class="px-6 py-3">
                         Description
                     </th>
                     <th scope="col" class="px-6 py-3" *ngIf="employeeLeaveOption">
@@ -54,55 +57,161 @@
                     </th>
                 </tr>
             </thead>
-            <tbody>
-                <tr class="bg-white border-b dark:border-gray-200">
+
+            <tbody *ngIf="allLeaves.length === 0">
+                <tr class="bg-white border-b dark:border-gray-200 animate-pulse">
                     <th scope="row"
-                        class=" flex items-center px-3 py-4 font-medium text-gray-600 whitespace-nowrap dark:text-gray-700">
-                        <img class="mr-3 rounded-full h-[50px] w-[50px]"
-                            src="../../../../assets/rainbow-inside-office-showing-corporate-diversity-inclusiveness-business_1061358-17230.avif"
-                            alt="profile">
+                        class="flex items-center px-3 py-4 font-medium text-gray-600 whitespace-nowrap dark:text-gray-700">
+                        <div class="mr-3 rounded-full bg-gray-200 h-[50px] w-[50px]"></div>
                         <div class="flex flex-col text-left">
-                            Abinav
+                            <div class="w-24 bg-gray-200 h-4 rounded"></div>
                         </div>
                     </th>
                     <td class="px-6 py-4">
-                        Front-end dev
+                        <div class="w-24 bg-gray-200 h-4 rounded"></div>
                     </td>
                     <td class="px-6 py-4">
-                        Casual
+                        <div class="w-24 bg-gray-200 h-4 rounded"></div>
                     </td>
-                    <td class="px-6 py-4">
-                        03-02-22
+                    <td class="px-6 py-4 font-semibold">
+                        <div class="w-20 bg-gray-200 h-4 rounded"></div>
                     </td>
-                    <td class="px-6 py-4">
-                        10-02-22
+                    <td class="px-6 py-4 font-semibold">
+                        <div class="w-20 bg-gray-200 h-4 rounded"></div>
                     </td>
-                    <td class="px-6 py-4 max-w-36" *ngIf="!employeeLeaveOption">
-                        4
+                    <td class="px-6 py-4 max-w-36 font-bold">
+                        <div class="w-10 bg-gray-200 h-4 rounded"></div>
                     </td>
+                    <!-- <td class="px-6 py-4 max-w-36" *ngIf="!employeeLeaveOption">
+                            <div class="w-10 bg-gray-200 h-4 rounded"></div>
+                        </td> -->
                     <td class="px-6 py-4 max-w-36">
-                        Im taking a day off , need leave
+                        <div class="w-32 bg-gray-200 h-4 rounded"></div>
                     </td>
                     <td class="px-6 py-4 max-w-36" *ngIf="employeeLeaveOption">
                         <div class="btns flex items-center justify-around">
-                            <button (click)="approved()"
-                                class="buttons bg-green-500 text-white py-2 px-3 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300">
-                                Approve
-                            </button>
-                            <button
-                                class="buttons bg-red-500 text-white py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-700">
-                                Reject
-                            </button>
+                            <div class="w-20 bg-gray-200 h-8 rounded me-2"></div>
+                            <div class="w-20 bg-gray-200 h-8 rounded"></div>
                         </div>
                     </td>
+                    <!-- <td class="px-6 py-4 max-w-36" *ngIf="!employeeLeaveOption">
+                            <div class="btns flex items-center justify-around">
+                                <div class="w-24 bg-gray-200 h-6 rounded"></div>
+                            </div>
+                        </td> -->
+                </tr>
+            </tbody>
+
+            <tbody>
+                <tr class="bg-white border-b dark:border-gray-200" *ngFor="let item of filterLeave()">
+                    <th scope="row"
+                        class=" flex items-center  px-3 py-4 font-medium text-gray-600 whitespace-nowrap dark:text-gray-700">
+                        <img class="mr-3 rounded-full h-[50px] w-[50px]" [src]="item.employee.image" alt="profile">
+                        <div class="flex flex-col text-left">
+                            {{item.employee.fullname}}
+                        </div>
+                    </th>
+                    <td class="px-6 py-4">
+                        {{item.employee.department.name | uppercase}}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{item.leaveData.leaveType}}
+                    </td>
+                    <td class="px-6 py-4 font-semibold">
+                        {{item.leaveData.startDate | date:'shortDate'}}
+                    </td>
+                    <td class="px-6 py-4 font-semibold">
+                        {{item.leaveData.endDate | date:'shortDate'}}
+                    </td>
+                    <td class="px-6 py-4 max-w-36 font-bold">
+                        {{item.leaveData.days}}
+                    </td>
+                    <td class="px-6 py-4 max-w-36" *ngIf="!employeeLeaveOption">
+                        {{item.leaveData.days}}
+                    </td>
+                    <td class="px-6 py-4 max-w-36">
+                        {{item.leaveData.reason}}
+                    </td>
+                    <td class="px-6 py-4 max-w-36" *ngIf="employeeLeaveOption">
+                        <div class="btns flex items-center justify-around">
+                            <button *ngIf="item.leaveData.status === 'pending' "
+                                (click)="leaveStatusUpdate(item.leaveData.employeeId,'approved')" mat-raised-button
+                                class="me-1" color="primary">Approve</button>
+
+                            <span class="text-green-600 font-bold text-lg"
+                                *ngIf="item.leaveData.status === 'Approved' ">{{item.leaveData.status}}</span>
+                            <span class="text-red-600 font-bold text-lg"
+                                *ngIf="item.leaveData.status === 'Rejected' ">{{item.leaveData.status}}</span>
+
+                            <button mat-raised-button color="warn" *ngIf="item.leaveData.status === 'pending'"
+                                (click)=" leaveStatusUpdate(item.leaveData.employeeId,'reject')">Reject</button>
+                        </div>
+                    </td>
+
                     <td class="px-6 py-4 max-w-36" *ngIf="!employeeLeaveOption">
                         <div class="btns flex items-center justify-around">
-                            <p class=" bg-green-500 text-white py-2 px-3 rounded-md focus:outline-none focus:ring-2">
-                                Approved
-                            </p>
+                            <span class="text-green-600 font-bold text-lg"
+                                *ngIf="item.leaveData.status === 'Approved' ">{{item.leaveData.status}}</span>
+                            <span class="text-red-600 font-bold text-lg"
+                                *ngIf="item.leaveData.status === 'Rejected' ">{{item.leaveData.status}}</span>
                         </div>
                     </td>
                 </tr>
+
+                <!-- <tr class="bg-white border-b dark:border-gray-200" *ngFor="let item of allLeaves">
+                    <th scope="row"
+                        class=" flex items-center  px-3 py-4 font-medium text-gray-600 whitespace-nowrap dark:text-gray-700">
+                        <img class="mr-3 rounded-full h-[50px] w-[50px]" [src]="item.employee.image" alt="profile">
+                        <div class="flex flex-col text-left">
+                            {{item.employee.fullname}}
+                        </div>
+                    </th>
+                    <td class="px-6 py-4">
+                        {{item.employee.department.name | uppercase}}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{item.leaveData.leaveType}}
+                    </td>
+                    <td class="px-6 py-4 font-semibold">
+                        {{item.leaveData.startDate | date:'shortDate'}}
+                    </td>
+                    <td class="px-6 py-4 font-semibold">
+                        {{item.leaveData.endDate | date:'shortDate'}}
+                    </td>
+                    <td class="px-6 py-4 max-w-36 font-bold">
+                        {{item.leaveData.days}}
+                    </td>
+                    <td class="px-6 py-4 max-w-36" *ngIf="!employeeLeaveOption">
+                        {{item.leaveData.days}}
+                    </td>
+                    <td class="px-6 py-4 max-w-36">
+                        {{item.leaveData.reason}}
+                    </td>
+                    <td class="px-6 py-4 max-w-36" *ngIf="employeeLeaveOption">
+                        <div class="btns flex items-center justify-around">
+                            <button *ngIf="item.leaveData.status === 'pending' "
+                                (click)="leaveStatusUpdate(item.leaveData.employeeId,'approved')" mat-raised-button
+                                class="me-1" color="primary">Approve</button>
+
+                            <span class="text-green-600 font-bold text-lg"
+                                *ngIf="item.leaveData.status === 'Approved' ">{{item.leaveData.status}}</span>
+                            <span class="text-red-600 font-bold text-lg"
+                                *ngIf="item.leaveData.status === 'Rejected' ">{{item.leaveData.status}}</span>
+
+                            <button mat-raised-button color="warn" *ngIf="item.leaveData.status === 'pending'"
+                                (click)=" leaveStatusUpdate(item.leaveData.employeeId,'reject')">Reject</button>
+                        </div>
+                    </td>
+
+                    <td class="px-6 py-4 max-w-36" *ngIf="!employeeLeaveOption">
+                        <div class="btns flex items-center justify-around">
+                            <span class="text-green-600 font-bold text-lg"
+                                *ngIf="item.leaveData.status === 'Approved' ">{{item.leaveData.status}}</span>
+                            <span class="text-red-600 font-bold text-lg"
+                                *ngIf="item.leaveData.status === 'Rejected' ">{{item.leaveData.status}}</span>
+                        </div>
+                    </td>
+                </tr> -->
             </tbody>
         </table>
     </div>
