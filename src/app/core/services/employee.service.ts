@@ -28,8 +28,8 @@ export class EmployeeService {
     return this.http.post(`http://localhost:4000/api/v1/employees/create`, employeeValues)
   }
 
-  getAllEmployeesSrvc(): Observable<object> {
-    return this.http.get('http://localhost:4000/api/v1/employees/')
+  getAllEmployeesSrvc(page?: number, limit?: number): Observable<object> {
+    return this.http.get(`http://localhost:4000/api/v1/employees/?page=${page}&limit=${limit}}`)
   }
 
   getSpecificEmployee(id: string): Observable<object> {
@@ -55,7 +55,7 @@ export class EmployeeService {
     employeeValues.append('role', values.role);
     employeeValues.append('designation', values.designation);
     employeeValues.append('departmentId', values.departmentId);
-    return this.http.patch(`http://localhost:4000/api/v1/employees/${this.id}`, employeeValues)
+    return this.http.patch(`http://localhost:4000/api/v1/employees/${empId}`, employeeValues)
   }
 
 

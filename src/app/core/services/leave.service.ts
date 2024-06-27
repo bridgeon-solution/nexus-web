@@ -15,4 +15,20 @@ export class LeaveService {
   leaveSubmit(leaveData: LeaveData): Observable<object> {
     return this.http.post(`http://localhost:4001/api/v1/leaves/create/${this.id}`, leaveData)
   }
+
+  getLeavesById() {
+    return this.http.get(`http://localhost:4001/api/v1/leaves/${this.id}`)
+  }
+
+  fetchAllLeaves(): Observable<object> {
+    return this.http.get('http://localhost:4001/api/v1/leaves/')
+  }
+
+  leaveApproveUpdate(id: number): Observable<object> {
+    return this.http.patch(`http://localhost:4001/api/v1/leaves/approve/${id}`, 'Approve')
+  }
+
+  leaveRejectUpdate(id: number): Observable<object> {
+    return this.http.patch(`http://localhost:4001/api/v1/leaves/reject/${id}`, 'Reject')
+  }
 }

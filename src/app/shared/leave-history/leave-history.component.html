@@ -1,28 +1,34 @@
-<div class="bg-gray-100 w-full h-[550px] rounded-xl">
+<div class="bg-gray-100 w-full h-[550px] rounded-xl px-3">
     <h1 class="ms-2 text-5xl p-10 font-light">Leave History</h1>
-    <table class="w-full rounded-lg shadow-md">
-        <thead>
-            <tr class="text-xs font-medium text-left text-gray-700 bg-gray-200">
-                <th scope="col" class="px-6 py-3">#</th>
-                <th scope="col" class="px-6 py-3">Type</th>
-                <th scope="col" class="px-6 py-3">Conditions</th>
-                <th scope="col" class="px-6 py-3">From</th>
-                <th scope="col" class="px-6 py-3">To</th>
-                <th scope="col" class="px-6 py-3">Applied</th>
-                <th scope="col" class="px-6 py-3">Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="border-b hover:bg-gray-300">
-                <td class="px-6 py-4">1</td>
-                <td class="px-6 py-4">Self Quanrantine Leave</td>
-                <td class="px-6 py-4">This is just demo condition for testing purpose!!!</td>
-                <td class="px-6 py-4">2022-02-11</td>
-                <td class="px-6 py-4">2022-02-11</td>
-                <td class="px-6 py-4">2024-04-29</td>
-                <td class="px-6 py-4">Pending</td>
-            </tr>
-        </tbody>
-    </table>
-
+    <div *ngIf="leaveData.length>0" class="max-h-[400px] overflow-y-scroll">
+        <table class="w-full rounded-lg shadow-md ">
+            <thead>
+                <tr class="sticky top-0 text-xs font-medium text-left text-gray-700 bg-gray-200">
+                    <th scope="col" class="px-6 py-3">#</th>
+                    <th scope="col" class="px-6 py-3">Type</th>
+                    <th scope="col" class="px-6 py-3">Conditions</th>
+                    <th scope="col" class="px-6 py-3">From</th>
+                    <th scope="col" class="px-6 py-3">To</th>
+                    <th scope="col" class="px-6 py-3">Applied</th>
+                    <th scope="col" class="px-6 py-3">No.of days</th>
+                    <th scope="col" class="px-6 py-3">Status</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let item of leaveData,let i = index">
+                <tr class="border-b hover:bg-gray-300">
+                    <td class="px-6 py-4">{{i+1}}</td>
+                    <td class="px-6 py-4">{{item.leaveType}}</td>
+                    <td class="px-6 py-4">{{item.reason}}</td>
+                    <td class="px-6 py-4">{{item.startDate | date:'shortDate'}}</td>
+                    <td class="px-6 py-4">{{item.endDate | date:'shortDate'}}</td>
+                    <td class="px-6 py-4">{{item.createdAt | date:'shortDate'}}</td>
+                    <td class="px-6 py-4">{{item.days}}</td>
+                    <td class="px-6 py-4">{{item.status}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center" *ngIf="leaveData.length === 0">
+        <p class="text-gray-500 font-medium">You don't have any leave history yet.</p>
+    </div>
 </div>

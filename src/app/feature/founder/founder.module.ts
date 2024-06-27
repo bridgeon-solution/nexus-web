@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { DepartmentComponent } from './department/department.component';
 import { FounderRoutingModule } from './founder-routing.module';
 import { FormsModule } from '@angular/forms';
+import { ManageDepartmentComponent } from './manage-department/manage-department.component';
 
 
 
 @NgModule({
   declarations: [
-    DepartmentComponent
+    DepartmentComponent,
+    ManageDepartmentComponent
   ],
   imports: [
     CommonModule,

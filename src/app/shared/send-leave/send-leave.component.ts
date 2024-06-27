@@ -20,7 +20,9 @@ import { LeaveService } from 'src/app/core/services/leave.service';
 })
 export class SendLeaveComponent implements OnInit {
   @ViewChild('leaveform') leaveFrom: NgForm;
-  leaveDays: number = 0;
+  startDate: string | null = null;
+  endDate: string | null = null;
+  days: number | null = 0;
 
   constructor(private leaveService: LeaveService, private snackBar: MatSnackBar) { }
 
@@ -28,17 +30,18 @@ export class SendLeaveComponent implements OnInit {
 
   }
 
-  dateSelecting() {
+  calculateDateDifference(): void {
     const data: LeaveData = this.leaveFrom.value;
     const sDate = new Date(data.startDate);
     const eDate = new Date(data.endDate);
     const timeDifference: number = Math.abs(sDate.getTime() - eDate.getTime());
-    this.leaveDays = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+    this.days = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
 
   }
 
   leaveSubmit() {
     const leaveValues: LeaveData = this.leaveFrom.value;
+    leaveValues.days = this.days;
     this.leaveService.leaveSubmit(leaveValues).subscribe((res: { status: string }) => {
       this.leaveFrom.reset()
       this.snackBar.open(res.status, 'Close', { duration: 5000 });

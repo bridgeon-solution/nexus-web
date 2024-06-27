@@ -26,44 +26,7 @@
         </div>
     </div>
 
-    <div class="add-department  mt-10" *ngIf="manageDepartmentPage">
-        <h1 class="font-normal text-gray-500 text-3xl">Manage Department</h1>
-        <table class="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-gray-900">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-pink-200 dark:text-gray-900">
-                <tr>
-                    <th scope="col" class="px-6 py-3">
-                        #
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Department name
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Action
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="bg-white border-b dark:border-gray-200" *ngFor="let department of departments, let i = index">
-                    <td class="px-6 py-4">
-                        {{i+1}}
-                    </td>
-                    <td class="px-6 py-4">
-                        {{department.name}}
-                    </td>
-                    <td class=" w-1/12">
-                        <div class="flex items-center justify-center">
-                            <button
-                                class="mr-4 buttons bg-blue-600 text-white py-2 px-10 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300">
-                                Edit
-                            </button>
-                            <button (click)="deleteDepartment(department.id)"
-                                class="buttons bg-red-500 text-white py-2 px-10 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-700">
-                                Delete
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div *ngIf="manageDepartmentPage" class="mt-10">
+        <app-manage-department></app-manage-department>
     </div>
 </div>

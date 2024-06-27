@@ -43,7 +43,7 @@ export class LoginComponent {
       this.router.navigate(['home']);
     }, (err) => {
       console.log(err);
-      this.snackBar.open(err.message, 'Close', { duration: 5000 });
+      this.snackBar.open('User Not Found', 'Close', { duration: 5000 });
 
     })
   }
