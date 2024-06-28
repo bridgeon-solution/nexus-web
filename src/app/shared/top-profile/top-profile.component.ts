@@ -25,7 +25,7 @@ export class TopProfileComponent implements OnInit {
         this.employeeData.push(res.data);
       })
     } else {
-      this.employeeService.getSpecificEmployee(this.id).subscribe((res: { status: string, data: Employee }) => {
+      this.employeeService.getEmployeeId(this.id).subscribe((res: { status: string, data: Employee }) => {
         this.employeeData.push(res.data);
       })
     }

@@ -13,7 +13,7 @@ export class DepartmentComponent implements OnInit {
   @ViewChild('addDepartmentForm') values: NgForm;
   addDepartmentPage: boolean = true;
   manageDepartmentPage: boolean = false;
-  
+
 
   constructor(private departmnetService: DepartmentService, private snackBar: MatSnackBar) { }
 
