@@ -78,7 +78,7 @@ export class EmployeeDetailsComponent implements OnInit {
   }
 
   fetchEmployess() {
-    this.employeeSrvc.getAllEmployeesSrvc(this.currentPage, this.itemsPerPage).subscribe((res: { status: string, data: [Employee] }) => {
+    this.employeeSrvc.getAllEmployees(this.currentPage, this.itemsPerPage).subscribe((res: { status: string, data: [Employee] }) => {
       this.allEmployees = res.data
     })
   }

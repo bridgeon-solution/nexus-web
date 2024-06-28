@@ -11,7 +11,7 @@ export class EmployeeService {
   id: string = localStorage.getItem('id')
   constructor(private http: HttpClient) { }
 
-  addOrEditEmployee(values: AddEmployee, file: File): Observable<object> {
+  createEmployee(values: AddEmployee, file: File): Observable<object> {
     let employeeValues: FormData = new FormData();
     employeeValues.append('fullname', values.fullname);
     employeeValues.append('image', file);
@@ -28,11 +28,11 @@ export class EmployeeService {
     return this.http.post(`http://localhost:4000/api/v1/employees/create`, employeeValues)
   }
 
-  getAllEmployeesSrvc(page?: number, limit?: number): Observable<object> {
+  getAllEmployees(page?: number, limit?: number): Observable<object> {
     return this.http.get(`http://localhost:4000/api/v1/employees/?page=${page}&limit=${limit}}`)
   }
 
-  getSpecificEmployee(id: string): Observable<object> {
+  getEmployeeId(id: string): Observable<object> {
     return this.http.get(`http://localhost:4000/api/v1/employees/${id}`)
   }
 

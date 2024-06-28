@@ -49,7 +49,7 @@ export class PayRollComponent implements OnInit, AfterViewInit {
   }
 
   fetchEmployee() {
-    this.employeeService.getAllEmployeesSrvc().subscribe((res: { status: string, data: [Employee] }) => {
+    this.employeeService.getAllEmployees().subscribe((res: { status: string, data: [Employee] }) => {
       console.log(res);
       this.allEmployees = res.data;
       this.dataSource = new MatTableDataSource<Employee>(this.allEmployees);

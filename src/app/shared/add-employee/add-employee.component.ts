@@ -66,7 +66,7 @@ export class AddEmployeeComponent implements OnInit {
   }
 
   getSpecificEmployee() {
-    this.employeeService.getSpecificEmployee(this.data.id).subscribe((res: { status: string, data: Employee }) => {
+    this.employeeService.getEmployeeId(this.data.id).subscribe((res: { status: string, data: Employee }) => {
       const nnormalFormDob = new Date(res.data.birthdate);
       const year = nnormalFormDob.getFullYear();
       const month = String(nnormalFormDob.getMonth() + 1).padStart(2, '0'); // Add leading zero for single-digit months
@@ -137,7 +137,7 @@ export class AddEmployeeComponent implements OnInit {
     employeeValues.departmentId = this.departmentId.toString();
     employeeValues.role = this.roleOption;
     employeeValues.gender = this.genderOption;
-    this.employeeService.addOrEditEmployee(employeeValues, this.file).subscribe((res: { status: string }) => {
+    this.employeeService.createEmployee(employeeValues, this.file).subscribe((res: { status: string }) => {
       if (res.status === 'success') {
         this.dialogRef.close('added')
         this.addEmployeeForm.reset();
