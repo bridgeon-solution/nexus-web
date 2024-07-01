@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Team, TeamData } from '../models/team.model';
+import { TeamDatas, TeamData } from '../models/team.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,24 +10,24 @@ export class TeamService {
 
   constructor(private http: HttpClient) { }
 
-  addTeam(teamData: TeamData): Observable<Team> {
-    return this.http.post<Team>('http://localhost:4003/api/v1/teams/create', teamData)
+  addTeam(teamData: TeamData): Observable<TeamDatas> {
+    return this.http.post<TeamDatas>('http://localhost:4003/api/v1/teams/create', teamData)
   }
 
-  deleteTeam(teamId: string): Observable<Team> {
-    return this.http.delete<Team>(`http://localhost:4002/api/v1/teams/${teamId}`)
+  deleteTeam(teamId: string): Observable<TeamDatas> {
+    return this.http.delete<TeamDatas>(`http://localhost:4003/api/v1/teams/${teamId}`)
   }
 
-  updateTeam(teamId, updateData: TeamData): Observable<Team> {
-    return this.http.patch<Team>(`http://localhost:4002/api/v1/teams/${teamId}`, updateData)
+  updateTeam(teamId, updateData: TeamData): Observable<TeamDatas> {
+    return this.http.patch<TeamDatas>(`http://localhost:4003/api/v1/teams/${teamId}`, updateData)
   }
 
-  getAllTeamsByLead(): Observable<Team[]> {
-    return this.http.get<Team[]>(`http://localhost:4002/api/v1/teams/teamlead/teams`)
+  getAllTeamsByLead(): Observable<Object> {
+    return this.http.get(`http://localhost:4003/api/v1/teams/teamlead/teams`)
   }
 
-  getAllTeams(): Observable<Team[]> {
-    return this.http.get<Team[]>(`http://localhost:4002/api/v1/teams/`)
+  getAllTeams(): Observable<Object> {
+    return this.http.get<Object>(`http://localhost:4003/api/v1/teams/`)
   }
 
 }

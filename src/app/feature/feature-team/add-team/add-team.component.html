@@ -1,20 +1,5 @@
 <h1 class="sm:ms-5-ms-10 text-5xl font-roboto ">Manage Teams</h1>
 <div class="sm:ms-5 relative -ms-10">
-  <div class="options flex items-center mb-5 mt-10 max-w-[220px] justify-between">
-    <!--THe follwing COdes are change page navs-->
-    <div class="flex flex-col items-center">
-      <p role="button" (click)="changePage('addTeamPage')">Add Team</p>
-      <div *ngIf="addTeamPage" class="lines w-[60px] h-[2px] bg-blue-600"></div>
-    </div>
-    <div class="flex flex-col items-center">
-      <p role="button" (click)="changePage('addToTeamPage')">Add Members</p>
-      <div *ngIf="addToTeamPage" class="lines w-[50px] h-[2px] bg-blue-600"></div>
-    </div>
-    <div class="flex flex-col items-center absolute left-[270px]">
-      <p role="button" (click)="changePage('manageTeamsPage')">Manage</p>
-      <div *ngIf="manageTeamsPage" class="lines w-[50px] h-[2px] bg-blue-600"></div>
-    </div>
-  </div>
 
   <!--The Following codes are ADD Team Codes-->
   <div class="add-department  mt-10" *ngIf="addTeamPage">
@@ -26,13 +11,49 @@
           class="w-full rounded-md border border-gray-400 px-3 py-3 focus:outline-none focus:ring-1 focus:ring-blue-500">
       </form>
       <button type="submit" (click)="addTeam()"
-        class="absolute right-0 top-28 bg-blue-500 text-white py-2 px-6 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+        class="absolute right-0 top-[90px] bg-blue-500 text-white py-2 px-6 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
         Submit
       </button>
     </div>
   </div>
   <!--The following codes are Add Members Page-->
-  <app-add-to-team *ngIf="addToTeamPage"></app-add-to-team>
   <!--The following codes are manage Teams page-->
-  <app-manage-team *ngIf="manageTeamsPage"></app-manage-team>
+  <table *ngIf="addTeamPage"
+    class="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-gray-900 mt-[75px]">
+    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-pink-200 dark:text-gray-900">
+      <tr>
+        <th scope="col" class="px-6 py-3">
+          #
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Team name
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Action
+        </th>
+      </tr>
+    </thead>
+    <tbody [@listAnim]="teams.length">
+      <tr class="bg-white border-b dark:border-gray-200" *ngFor="let team of teams, let i = index">
+        <td class="px-6 py-4">
+          {{i+1}}
+        </td>
+        <td class="px-6 py-4">
+          {{team.name}}
+        </td>
+        <td class=" w-[200px]">
+          <div class="flex items-center justify-center">
+            <button (click)="addMembers(team._id)"
+              class="mr-4 bg-green-500 text-white py-2 px-10 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 hover:bg-blue-600">
+              Add
+            </button>
+            <button (click)="deleteTeam(team._id)"
+              class="buttons bg-red-500  text-white py-2 px-10 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600 hover:bg-red-600">
+              Delete
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

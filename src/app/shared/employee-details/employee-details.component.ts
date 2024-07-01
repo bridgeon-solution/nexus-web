@@ -158,7 +158,6 @@ export class EmployeeDetailsComponent implements OnInit {
 
   onPageChange(page: number): void {
     console.log(page);
-
     this.currentPage = page;
     this.fetchEmployess();
   }
