@@ -1,8 +1,10 @@
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Department } from 'src/app/core/models/api.model';
 import { DepartmentService } from 'src/app/core/services/department.service';
+import { AddEmployeeComponent } from 'src/app/shared/add-employee/add-employee.component';
 
 @Component({
   selector: 'app-manage-department',
@@ -28,7 +30,7 @@ export class ManageDepartmentComponent implements OnInit {
 
   departments: Department[] = [];
 
-  constructor(private departmnetService: DepartmentService, private snackBar: MatSnackBar) { }
+  constructor(private departmnetService: DepartmentService, private snackBar: MatSnackBar,private matDialog:MatDialog) { }
 
   ngOnInit(): void {
     this.fetchDepartments()
@@ -48,7 +50,7 @@ export class ManageDepartmentComponent implements OnInit {
           horizontalPosition: 'center', // Position the snackbar
           verticalPosition: 'top',
         });
-        this.fetchDepartments();
+        this.departments = this.departments.filter((x) => { return x.id !== id })
       }
     }, (err) => {
       console.log(err);
@@ -58,5 +60,11 @@ export class ManageDepartmentComponent implements OnInit {
         verticalPosition: 'top',
       });
     })
+  }
+
+  editDepartment() {
+    const dialog = this.matDialog.open(AddEmployeeComponent, {
+      data: { option: 'department' }
+    });
   }
 }

@@ -78,7 +78,7 @@
     height: 3rem;
     color: #000000;
     text-decoration: none;
-    transition: all .1s ease;
+    /* transition: all 2.1s ease; */
 }
 
 .sidenav-link-icon {
@@ -134,3 +134,4 @@
 .logout {
     margin-top: 5rem;
 }
+

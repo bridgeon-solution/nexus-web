@@ -67,9 +67,9 @@
         </div>
 
 
-        <div class="relative overflow-x-auto mt-10">
+        <div class="relative overflow-y-scroll h-[320px] mt-10">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-900">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-pink-200 dark:text-gray-900">
+                <thead class="sticky top-0 text-xs text-gray-700 uppercase bg-gray-50 dark:bg-pink-200 dark:text-gray-900">
                     <tr>
                         <th scope="col" class="px-6 py-3">
                             Name
@@ -136,7 +136,7 @@
                         <td class="px-6 py-4">
                             {{item.salary}}
                         </td>
-                        <td class="px-6 py-4 relative">
+                        <td class="px-6 py-4">
                             <button mat-icon-button [matMenuTriggerFor]="menu"
                                 aria-label="Example icon-button with a menu">
                                 <mat-icon>more_vert</mat-icon>

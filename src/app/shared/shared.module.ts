@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
+import { ChangeDetectionStrategy, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { LoginComponent } from '../feature/feature-auth/login/login.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 import { PaymentCardsComponent } from './payment-cards/payment-cards.component';
 import { PaymentComponent } from './payment/payment.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
@@ -25,6 +25,10 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SkeletonComponent } from './skeleton/skeleton.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatNativeDateModule } from '@angular/material/core';
+import { ConfirmationModalComponent } from './confirmation-modal/confirmation-modal.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +45,7 @@ import { SkeletonComponent } from './skeleton/skeleton.component';
     FounderDashboardComponent,
     LeaveHistoryComponent,
     SkeletonComponent,
+    ConfirmationModalComponent,
   ],
   imports: [
     CommonModule,
@@ -54,9 +59,13 @@ import { SkeletonComponent } from './skeleton/skeleton.component';
     MatTableModule,
     MatDialogModule,
     RouterModule,
-    MatButtonModule, 
-    MatMenuModule, 
-    MatIconModule
+    MatButtonModule,
+    MatMenuModule,
+    MatIconModule,
+    MatFormFieldModule, 
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   exports: [
     PaymentCardsComponent,
@@ -68,6 +77,9 @@ import { SkeletonComponent } from './skeleton/skeleton.component';
     FounderDashboardComponent,
     LeaveHistoryComponent,
     SkeletonComponent
+  ],
+  providers:[
+    // provideNativeDateAdapter
   ]
 })
 export class SharedModule { }
