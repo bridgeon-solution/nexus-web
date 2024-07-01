@@ -4,25 +4,39 @@
         <form action="" class="flex flex-col items-center" #leaveform="ngForm">
 
             <div class="w-full">
-                <label for="start" class="text-sm block mb-2 font-normal">Starting Date:</label>
-                <input type="date" id="start" name="startDate" required [(ngModel)]="startDate"
-                    (change)="calculateDateDifference()"
-                    class="w-full cursor-pointer rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500">
+                <mat-form-field class="example-form-field w-full">
+                    <mat-label>Start date</mat-label>
+                    <input matInput [matDatepicker]="datepicker" name="startDate" required [(ngModel)]="startDate"
+                        (dateChange)="calculateDateDifference($event)" />
+                    <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+                    <mat-datepicker #datepicker>
+                        <mat-datepicker-actions>
+                            <button mat-button matDatepickerCancel>Cancel</button>
+                            <button mat-raised-button matDatepickerApply>Apply</button>
+                        </mat-datepicker-actions>
+                    </mat-datepicker>
+                </mat-form-field>
             </div>
 
             <div class="w-full">
-                <label for="end" class="text-sm block mt-5 mb-2 font-normal">End Date:</label>
-                <input type="date" id="end" name="endDate" required [(ngModel)]="endDate"
-                    (change)="calculateDateDifference()"
-                    class="w-full cursor-pointer rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500">
-
+                <mat-form-field class="example-form-field w-full">
+                    <mat-label>End date</mat-label>
+                    <input matInput [matDatepicker]="datepickers" name="endDate" required [(ngModel)]="endDate"
+                        (dateChange)="calculateDateDifference($event)" />
+                    <mat-datepicker-toggle matIconSuffix [for]="datepickers"></mat-datepicker-toggle>
+                    <mat-datepicker #datepickers>
+                        <mat-datepicker-actions>
+                            <button mat-button matDatepickerCancel>Cancel</button>
+                            <button mat-raised-button matDatepickerApply>Apply</button>
+                        </mat-datepicker-actions>
+                    </mat-datepicker>
+                </mat-form-field>
             </div>
 
-            <div class="w-full">
-                <label for="end" class="text-sm block mt-1 mb-1 font-normal">Total days:</label>
-                <input [(ngModel)]="days" type="text" id="end" name="endDate" required ngModel readonly
+            <div class="w-full flex justify-center flex-col">
+                <label for="end" class="text-sm blockmb-1 font-normal">Total days:</label>
+                <input [(ngModel)]="days" type="text" id="end" name="days" required ngModel readonly
                     class="w-[90px] cursor-pointer rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500">
-
             </div>
 
             <div class="w-full">

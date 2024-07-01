@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { HrService } from 'src/app/core/services/hr.service';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { ToastrService } from 'ngx-toastr';
-import { AddEmployeeComponent } from 'src/app/shared/add-employee/add-employee.component';
+import { AddEmployeeComponent } from 'src/app/shared/add-modal/add-employee.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 

@@ -10,21 +10,185 @@
             <div class="w-[40px] h-[2px] bg-blue-600" *ngIf="!employeeLeaveOption"></div>
         </div>
     </div>
-
 </div>
 
-<div class="employee">
-    <div class="flex items-center mt-10">
-        <i class="fas fa-search text-gray-400 ml-3 cursor-pointer mr-6"></i>
-        <input type="text" [(ngModel)]="searchQuery" (input)="filterLeave()"
-            class="min-w-[550px] rounded-md border border-gray-300 pl-5 py-4 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-transparent"
-            placeholder="Search Employees by Name, Department...">
-    </div>
+<mat-form-field class="mt-11 w-[180px] bg-white" *ngIf="!employeeLeaveOption && leavesHistory.length > 0">
+    <mat-label>Select Status</mat-label>
+    <mat-select [(ngModel)]="selectedStatus" [disabled]="disableSelect.value">
+        <mat-option value="All">All</mat-option>
+        <mat-option value="Approved">Approved</mat-option>
+        <mat-option value="Rejected">Rejected</mat-option>
+    </mat-select>
+</mat-form-field>
 
-    <div class="relative overflow-x-auto mt-5">
-        <table class="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-gray-900">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-pink-200 dark:text-gray-900">
-                <tr>
+
+<mat-form-field class="mt-11 w-[550px] bg-white" *ngIf="employeeLeaveOption && allLeaves.length > 0">
+    <mat-label>Select Department</mat-label>
+    <mat-select [(ngModel)]="selectedDepartment" [disabled]="disableSelect.value">
+        <mat-option *ngFor="let item of departmnents" [value]="item.name">{{ item.name }}</mat-option>
+    </mat-select>
+</mat-form-field>
+
+
+<!-- Leaves -->
+<div *ngIf="employeeLeaveOption">
+    <div class="text-center mt-[100px]" *ngIf="allLeaves.length === 0">
+        <p class="text-gray-500 font-medium">You don't have any penaing leaves</p>
+    </div>
+    <div class="manage-leaves">
+        <div class="relative overflow-x-auto">
+            <table *ngIf="allLeaves.length > 0"
+                class="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-gray-900">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-pink-200 dark:text-gray-900">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            Name
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Department
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Leave TYpe
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            From
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            To
+                        </th>
+                        <th scope="col" class="px-6 py-3" *ngIf="!employeeLeaveOption">
+                            Balance
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Days
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Description
+                        </th>
+                        <th scope="col" class="px-6 py-3" *ngIf="employeeLeaveOption">
+                            Action
+                        </th>
+                        <th scope="col" class="px-6 py-3" *ngIf="!employeeLeaveOption">
+                            Status
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody *ngIf="loading">
+                    <tr class="bg-white border-b dark:border-gray-200 animate-pulse">
+                        <th scope="row"
+                            class="flex items-center px-3 py-4 font-medium text-gray-600 whitespace-nowrap dark:text-gray-700">
+                            <div class="mr-3 rounded-full bg-gray-200 h-[50px] w-[50px]"></div>
+                            <div class="flex flex-col text-left">
+                                <div class="w-24 bg-gray-200 h-4 rounded"></div>
+                            </div>
+                        </th>
+                        <td class="px-6 py-4">
+                            <div class="w-24 bg-gray-200 h-4 rounded"></div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="w-24 bg-gray-200 h-4 rounded"></div>
+                        </td>
+                        <td class="px-6 py-4 font-semibold">
+                            <div class="w-20 bg-gray-200 h-4 rounded"></div>
+                        </td>
+                        <td class="px-6 py-4 font-semibold">
+                            <div class="w-20 bg-gray-200 h-4 rounded"></div>
+                        </td>
+                        <td class="px-6 py-4 max-w-36 font-bold">
+                            <div class="w-10 bg-gray-200 h-4 rounded"></div>
+                        </td>
+                        <!-- <td class="px-6 py-4 max-w-36" *ngIf="!employeeLeaveOption">
+                                <div class="w-10 bg-gray-200 h-4 rounded"></div>
+                            </td> -->
+                        <td class="px-6 py-4 max-w-36">
+                            <div class="w-32 bg-gray-200 h-4 rounded"></div>
+                        </td>
+                        <td class="px-6 py-4 max-w-36" *ngIf="employeeLeaveOption">
+                            <div class="btns flex items-center justify-around">
+                                <div class="w-20 bg-gray-200 h-8 rounded me-2"></div>
+                                <div class="w-20 bg-gray-200 h-8 rounded"></div>
+                            </div>
+                        </td>
+                        <!-- <td class="px-6 py-4 max-w-36" *ngIf="!employeeLeaveOption">
+                                <div class="btns flex items-center justify-around">
+                                    <div class="w-24 bg-gray-200 h-6 rounded"></div>
+                                </div>
+                            </td> -->
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr class="bg-white border-b dark:border-gray-200" *ngFor="let item of filterLeave()">
+                        <th scope="row"
+                            class=" flex items-center  px-3 py-4 font-medium text-gray-600 whitespace-nowrap dark:text-gray-700">
+                            <img class="mr-3 rounded-full h-[50px] w-[50px]" [src]="item.employee.image" alt="profile">
+                            <div class="flex flex-col text-left">
+                                {{item.employee.fullname}}
+                            </div>
+                        </th>
+                        <td class="px-6 py-4">
+                            {{item.employee.department.name | uppercase}}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{item.leaveData.leaveType}}
+                        </td>
+                        <td class="px-6 py-4 font-semibold">
+                            {{item.leaveData.startDate | date:'shortDate'}}
+                        </td>
+                        <td class="px-6 py-4 font-semibold">
+                            {{item.leaveData.endDate | date:'shortDate'}}
+                        </td>
+                        <td class="px-6 py-4 max-w-36 font-bold">
+                            {{item.leaveData.days}}
+                        </td>
+                        <td class="px-6 py-4 max-w-36" *ngIf="!employeeLeaveOption">
+                            {{item.leaveData.days}}
+                        </td>
+                        <td class="px-6 py-4 max-w-36">
+                            {{item.leaveData.reason}}
+                        </td>
+                        <td class="px-6 py-4 max-w-36" *ngIf="employeeLeaveOption">
+                            <div class="btns flex items-center justify-around">
+                                <button *ngIf="item.leaveData.status === 'Pending' "
+                                    (click)="leaveStatusUpdate(item.leaveData._id , 'approved')" mat-raised-button
+                                    class="me-1" color="primary">Approve</button>
+
+                                <span class="text-green-600 font-bold text-lg"
+                                    *ngIf="item.leaveData.status === 'Approved' ">{{item.leaveData.status}}</span>
+                                <span class="text-red-600 font-bold text-lg"
+                                    *ngIf="item.leaveData.status === 'Rejected' ">{{item.leaveData.status}}</span>
+
+                                <button mat-raised-button color="warn" *ngIf="item.leaveData.status === 'Pending'"
+                                    (click)=" leaveStatusUpdate(item.leaveData._id,'reject')">Reject</button>
+                            </div>
+                        </td>
+
+                        <td class="px-6 py-4 max-w-36" *ngIf="!employeeLeaveOption">
+                            <div class="btns flex items-center justify-around">
+                                <span class="text-green-600 font-bold text-lg"
+                                    *ngIf="item.leaveData.status === 'Approved' ">{{item.leaveData.status}}</span>
+                                <span class="text-red-600 font-bold text-lg"
+                                    *ngIf="item.leaveData.status === 'Rejected' ">{{item.leaveData.status}}</span>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<!-- Leave history -->
+<div class="leave-history h-[400px] mt-[1px]" *ngIf="!employeeLeaveOption">
+    <div class="text-center mt-[100px]" *ngIf="leavesHistory.length === 0">
+        <p class="text-gray-500 font-medium">You don't have any leave history yet.</p>
+    </div>
+    <div class="relative h-[380px] overflow-y-scroll scroll-m-11 mt-5">
+        <table *ngIf="leavesHistory.length > 0"
+            class="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-gray-900">
+            <thead class="sticky top-0 text-xs text-gray-700 uppercase bg-gray-50 dark:bg-pink-200 dark:text-gray-900">
+                <tr class="">
                     <th scope="col" class="px-6 py-3">
                         Name
                     </th>
@@ -57,53 +221,8 @@
                     </th>
                 </tr>
             </thead>
-
-            <tbody *ngIf="allLeaves.length === 0">
-                <tr class="bg-white border-b dark:border-gray-200 animate-pulse">
-                    <th scope="row"
-                        class="flex items-center px-3 py-4 font-medium text-gray-600 whitespace-nowrap dark:text-gray-700">
-                        <div class="mr-3 rounded-full bg-gray-200 h-[50px] w-[50px]"></div>
-                        <div class="flex flex-col text-left">
-                            <div class="w-24 bg-gray-200 h-4 rounded"></div>
-                        </div>
-                    </th>
-                    <td class="px-6 py-4">
-                        <div class="w-24 bg-gray-200 h-4 rounded"></div>
-                    </td>
-                    <td class="px-6 py-4">
-                        <div class="w-24 bg-gray-200 h-4 rounded"></div>
-                    </td>
-                    <td class="px-6 py-4 font-semibold">
-                        <div class="w-20 bg-gray-200 h-4 rounded"></div>
-                    </td>
-                    <td class="px-6 py-4 font-semibold">
-                        <div class="w-20 bg-gray-200 h-4 rounded"></div>
-                    </td>
-                    <td class="px-6 py-4 max-w-36 font-bold">
-                        <div class="w-10 bg-gray-200 h-4 rounded"></div>
-                    </td>
-                    <!-- <td class="px-6 py-4 max-w-36" *ngIf="!employeeLeaveOption">
-                            <div class="w-10 bg-gray-200 h-4 rounded"></div>
-                        </td> -->
-                    <td class="px-6 py-4 max-w-36">
-                        <div class="w-32 bg-gray-200 h-4 rounded"></div>
-                    </td>
-                    <td class="px-6 py-4 max-w-36" *ngIf="employeeLeaveOption">
-                        <div class="btns flex items-center justify-around">
-                            <div class="w-20 bg-gray-200 h-8 rounded me-2"></div>
-                            <div class="w-20 bg-gray-200 h-8 rounded"></div>
-                        </div>
-                    </td>
-                    <!-- <td class="px-6 py-4 max-w-36" *ngIf="!employeeLeaveOption">
-                            <div class="btns flex items-center justify-around">
-                                <div class="w-24 bg-gray-200 h-6 rounded"></div>
-                            </div>
-                        </td> -->
-                </tr>
-            </tbody>
-
             <tbody>
-                <tr class="bg-white border-b dark:border-gray-200" *ngFor="let item of filterLeave()">
+                <tr class="bg-white border-b dark:border-gray-200" *ngFor="let item of filterLeaveHistory()">
                     <th scope="row"
                         class=" flex items-center  px-3 py-4 font-medium text-gray-600 whitespace-nowrap dark:text-gray-700">
                         <img class="mr-3 rounded-full h-[50px] w-[50px]" [src]="item.employee.image" alt="profile">
@@ -132,22 +251,6 @@
                     <td class="px-6 py-4 max-w-36">
                         {{item.leaveData.reason}}
                     </td>
-                    <td class="px-6 py-4 max-w-36" *ngIf="employeeLeaveOption">
-                        <div class="btns flex items-center justify-around">
-                            <button *ngIf="item.leaveData.status === 'pending' "
-                                (click)="leaveStatusUpdate(item.leaveData.employeeId,'approved')" mat-raised-button
-                                class="me-1" color="primary">Approve</button>
-
-                            <span class="text-green-600 font-bold text-lg"
-                                *ngIf="item.leaveData.status === 'Approved' ">{{item.leaveData.status}}</span>
-                            <span class="text-red-600 font-bold text-lg"
-                                *ngIf="item.leaveData.status === 'Rejected' ">{{item.leaveData.status}}</span>
-
-                            <button mat-raised-button color="warn" *ngIf="item.leaveData.status === 'pending'"
-                                (click)=" leaveStatusUpdate(item.leaveData.employeeId,'reject')">Reject</button>
-                        </div>
-                    </td>
-
                     <td class="px-6 py-4 max-w-36" *ngIf="!employeeLeaveOption">
                         <div class="btns flex items-center justify-around">
                             <span class="text-green-600 font-bold text-lg"
@@ -157,62 +260,8 @@
                         </div>
                     </td>
                 </tr>
-
-                <!-- <tr class="bg-white border-b dark:border-gray-200" *ngFor="let item of allLeaves">
-                    <th scope="row"
-                        class=" flex items-center  px-3 py-4 font-medium text-gray-600 whitespace-nowrap dark:text-gray-700">
-                        <img class="mr-3 rounded-full h-[50px] w-[50px]" [src]="item.employee.image" alt="profile">
-                        <div class="flex flex-col text-left">
-                            {{item.employee.fullname}}
-                        </div>
-                    </th>
-                    <td class="px-6 py-4">
-                        {{item.employee.department.name | uppercase}}
-                    </td>
-                    <td class="px-6 py-4">
-                        {{item.leaveData.leaveType}}
-                    </td>
-                    <td class="px-6 py-4 font-semibold">
-                        {{item.leaveData.startDate | date:'shortDate'}}
-                    </td>
-                    <td class="px-6 py-4 font-semibold">
-                        {{item.leaveData.endDate | date:'shortDate'}}
-                    </td>
-                    <td class="px-6 py-4 max-w-36 font-bold">
-                        {{item.leaveData.days}}
-                    </td>
-                    <td class="px-6 py-4 max-w-36" *ngIf="!employeeLeaveOption">
-                        {{item.leaveData.days}}
-                    </td>
-                    <td class="px-6 py-4 max-w-36">
-                        {{item.leaveData.reason}}
-                    </td>
-                    <td class="px-6 py-4 max-w-36" *ngIf="employeeLeaveOption">
-                        <div class="btns flex items-center justify-around">
-                            <button *ngIf="item.leaveData.status === 'pending' "
-                                (click)="leaveStatusUpdate(item.leaveData.employeeId,'approved')" mat-raised-button
-                                class="me-1" color="primary">Approve</button>
-
-                            <span class="text-green-600 font-bold text-lg"
-                                *ngIf="item.leaveData.status === 'Approved' ">{{item.leaveData.status}}</span>
-                            <span class="text-red-600 font-bold text-lg"
-                                *ngIf="item.leaveData.status === 'Rejected' ">{{item.leaveData.status}}</span>
-
-                            <button mat-raised-button color="warn" *ngIf="item.leaveData.status === 'pending'"
-                                (click)=" leaveStatusUpdate(item.leaveData.employeeId,'reject')">Reject</button>
-                        </div>
-                    </td>
-
-                    <td class="px-6 py-4 max-w-36" *ngIf="!employeeLeaveOption">
-                        <div class="btns flex items-center justify-around">
-                            <span class="text-green-600 font-bold text-lg"
-                                *ngIf="item.leaveData.status === 'Approved' ">{{item.leaveData.status}}</span>
-                            <span class="text-red-600 font-bold text-lg"
-                                *ngIf="item.leaveData.status === 'Rejected' ">{{item.leaveData.status}}</span>
-                        </div>
-                    </td>
-                </tr> -->
             </tbody>
         </table>
+        <app-skeleton *ngIf="leavesHistory.length === 0"></app-skeleton>
     </div>
 </div>

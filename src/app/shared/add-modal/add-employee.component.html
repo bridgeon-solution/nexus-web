@@ -196,6 +196,17 @@
         <span *ngIf="!loading">Submit</span>
         <div *ngIf="loading" class="loading-text">Loading...</div>
     </button>
+</div>
 
 
+<div *ngIf="data.option ===  'department'">
+    <h2 mat-dialog-title>Change department name</h2>
+    <mat-dialog-content class="w-[400px]">
+        <input type="text" class="w-[300px] p-4 rounded-lg border-gray-400">
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Submit
+        </button>
+    </mat-dialog-actions>
 </div>

@@ -10,10 +10,10 @@ export class LeaveService {
 
   constructor(private http: HttpClient) { }
 
-  id: number = Number(localStorage.getItem('id'))
+  id: string = localStorage.getItem('id');
 
   leaveSubmit(leaveData: LeaveData): Observable<object> {
-    return this.http.post(`http://localhost:4001/api/v1/leaves/create/${this.id}`, leaveData)
+    return this.http.post(`http://localhost:4008/leave/create/${this.id}`, leaveData)
   }
 
   getLeavesById() {
@@ -24,11 +24,11 @@ export class LeaveService {
     return this.http.get('http://localhost:4001/api/v1/leaves/')
   }
 
-  leaveApproveUpdate(id: number): Observable<object> {
+  leaveApproveUpdate(id: string): Observable<object> {
     return this.http.patch(`http://localhost:4001/api/v1/leaves/approve/${id}`, 'Approve')
   }
 
-  leaveRejectUpdate(id: number): Observable<object> {
+  leaveRejectUpdate(id: string): Observable<object> {
     return this.http.patch(`http://localhost:4001/api/v1/leaves/reject/${id}`, 'Reject')
   }
 }

@@ -48,13 +48,15 @@ export class AddEmployeeComponent implements OnInit {
   loading: boolean = false;
   submitLoading: boolean = false;
 
-  constructor(private departmentService: DepartmentService, private employeeService: EmployeeService, private dialogRef: MatDialogRef<AddEmployeeComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private snackBar: MatSnackBar) { }
+  constructor(private departmentService: DepartmentService, private employeeService: EmployeeService, private dialogRef: MatDialogRef<AddEmployeeComponent>, @Inject(MAT_DIALOG_DATA) public data: { option: string, id: number }, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.getAllDepartments();
     if (this.data.option === "edit employee") {
       this.getSpecificEmployee();
     }
+    console.log(this.data.option);
+
   }
 
   getAllDepartments() {
@@ -66,7 +68,9 @@ export class AddEmployeeComponent implements OnInit {
   }
 
   getSpecificEmployee() {
-    this.employeeService.getSpecificEmployee(this.data.id).subscribe((res: { status: string, data: Employee }) => {
+    const id: string = this.data.id.toString();
+    this.employeeService.getSpecificEmployee(id).subscribe((res: { status: string, data: Employee }) => {
+      console.log(res);
       const nnormalFormDob = new Date(res.data.birthdate);
       const year = nnormalFormDob.getFullYear();
       const month = String(nnormalFormDob.getMonth() + 1).padStart(2, '0'); // Add leading zero for single-digit months

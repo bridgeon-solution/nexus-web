@@ -3,7 +3,7 @@ import { Department, Employee } from 'src/app/core/models/api.model';
 import { EmployeeService } from 'src/app/core/services/employee.service';
 import { DepartmentService } from 'src/app/core/services/department.service';
 import { MatDialog } from '@angular/material/dialog';
-import { AddEmployeeComponent } from '../add-employee/add-employee.component';
+import { AddEmployeeComponent } from '../add-modal/add-employee.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { animate, style, transition, trigger } from '@angular/animations';
 
@@ -130,11 +130,10 @@ export class EmployeeDetailsComponent implements OnInit {
 
   // deleting employee
   deleteEmployee(id: number) {
-    console.log(id);
     this.employeeSrvc.deleteEmployee(id).subscribe((res: { status: string, data: [Employee] }) => {
       if (res.status === 'success') {
         this.snackBar.open("Deleted", "Colse", { duration: 5000 });
-        this.fetchEmployess()
+        this.allEmployees = this.allEmployees.filter((x) => { return x.id !== id });
       } else {
         this.snackBar.open("Somwthing went wrong", "Colse", { duration: 5000 });
       }
@@ -157,8 +156,6 @@ export class EmployeeDetailsComponent implements OnInit {
   }
 
   onPageChange(page: number): void {
-    console.log(page);
-
     this.currentPage = page;
     this.fetchEmployess();
   }

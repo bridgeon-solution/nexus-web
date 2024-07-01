@@ -4,6 +4,7 @@ import { DepartmentComponent } from './department/department.component';
 import { FounderRoutingModule } from './founder-routing.module';
 import { FormsModule } from '@angular/forms';
 import { ManageDepartmentComponent } from './manage-department/manage-department.component';
+import { MatIconModule } from '@angular/material/icon';
 
 
 
@@ -15,7 +16,8 @@ import { ManageDepartmentComponent } from './manage-department/manage-department
   imports: [
     CommonModule,
     FounderRoutingModule,
-    FormsModule
+    FormsModule,
+    MatIconModule
   ]
 })
 export class FounderModule { }

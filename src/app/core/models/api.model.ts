@@ -28,6 +28,7 @@ interface Department {
 }
 
 interface LeaveData {
+  _id: string,
   startDate: Date,
   endDate: Date,
   reason: string,
