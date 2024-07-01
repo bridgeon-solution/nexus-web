@@ -5,7 +5,6 @@ import { FeatureTeamRoutingModule } from './feature-team-routing.module';
 import { AddTeamComponent } from './add-team/add-team.component';
 import { AddToTeamComponent } from './add-to-team/add-to-team.component';
 import { FormsModule } from '@angular/forms';
-import { ManageTeamComponent } from './manage-team/manage-team.component';
 
 
 @NgModule({
@@ -13,7 +12,6 @@ import { ManageTeamComponent } from './manage-team/manage-team.component';
     ViewTeamComponent,
     AddTeamComponent,
     AddToTeamComponent,
-    ManageTeamComponent
   ],
   imports: [
     CommonModule,
