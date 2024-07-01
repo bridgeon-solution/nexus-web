@@ -78,7 +78,7 @@ export class EmployeeDetailsComponent implements OnInit {
   }
 
   fetchEmployess() {
-    this.employeeSrvc.getAllEmployeesSrvc(this.currentPage, this.itemsPerPage).subscribe((res: { status: string, data: [Employee] }) => {
+    this.employeeSrvc.getAllEmployees(this.currentPage, this.itemsPerPage).subscribe((res: { status: string, data: [Employee] }) => {
       this.allEmployees = res.data
     })
   }
@@ -156,6 +156,9 @@ export class EmployeeDetailsComponent implements OnInit {
   }
 
   onPageChange(page: number): void {
+
+    console.log(page);
+
     this.currentPage = page;
     this.fetchEmployess();
   }
