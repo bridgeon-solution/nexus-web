@@ -69,12 +69,11 @@ export class AddEmployeeComponent implements OnInit {
 
   getSpecificEmployee() {
     const id: string = this.data.id.toString();
-    this.employeeService.getSpecificEmployee(id).subscribe((res: { status: string, data: Employee }) => {
-      console.log(res);
-      const nnormalFormDob = new Date(res.data.birthdate);
-      const year = nnormalFormDob.getFullYear();
-      const month = String(nnormalFormDob.getMonth() + 1).padStart(2, '0'); // Add leading zero for single-digit months
-      const day = String(nnormalFormDob.getDate()).padStart(2, '0');
+    this.employeeService.getEmployeeId(id).subscribe((res: { status: string, data: Employee }) => {
+      const normalFormDob = new Date(res.data.birthdate);
+      const year = normalFormDob.getFullYear();
+      const month = String(normalFormDob.getMonth() + 1).padStart(2, '0'); // Add leading zero for single-digit months
+      const day = String(normalFormDob.getDate()).padStart(2, '0');
 
       const convertedDob = `${year}-${month}-${day}`
 

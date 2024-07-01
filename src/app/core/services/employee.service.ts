@@ -32,7 +32,7 @@ export class EmployeeService {
     return this.http.get(`http://localhost:4000/api/v1/employees/?page=${page}&limit=${limit}}`)
   }
 
-  getSpecificEmployee(id: string): Observable<object> {
+  getEmployeeId(id: string): Observable<object> {
     return this.http.get(`http://localhost:4000/api/v1/employees/${id}`)
   }
 
