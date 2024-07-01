@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Department } from 'src/app/core/models/api.model';
 import { DepartmentService } from 'src/app/core/services/department.service';
-import { AddEmployeeComponent } from 'src/app/shared/add-modal/add-employee.component';
+import { AddEmployeeComponent } from 'src/app/shared/add-employee/add-employee.component';
 
 @Component({
   selector: 'app-manage-department',

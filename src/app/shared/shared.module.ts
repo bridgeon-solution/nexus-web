@@ -16,7 +16,7 @@ import { EmployeeDetailsComponent } from './employee-details/employee-details.co
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AnnouncementsComponent } from './announcements/announcements.component';
-import { AddEmployeeComponent } from './add-modal/add-employee.component';
+import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { SendLeaveComponent } from './send-leave/send-leave.component';
 import { TopProfileComponent } from './top-profile/top-profile.component';
 import { FounderDashboardComponent } from './founder-dashboard/founder-dashboard.component';
@@ -29,8 +29,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ConfirmationModalComponent } from './confirmation-modal/confirmation-modal.component';
-// import {} from '@angular/material/core';
-
 
 @NgModule({
   declarations: [

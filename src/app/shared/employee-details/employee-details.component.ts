@@ -3,7 +3,7 @@ import { Department, Employee } from 'src/app/core/models/api.model';
 import { EmployeeService } from 'src/app/core/services/employee.service';
 import { DepartmentService } from 'src/app/core/services/department.service';
 import { MatDialog } from '@angular/material/dialog';
-import { AddEmployeeComponent } from '../add-modal/add-employee.component';
+import { AddEmployeeComponent } from '../add-employee/add-employee.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { animate, style, transition, trigger } from '@angular/animations';
 
