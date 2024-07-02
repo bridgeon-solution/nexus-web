@@ -37,10 +37,7 @@ export class PayRollComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['position', 'Staff', 'Base salary', 'Deduction', 'Total'];
   dropDownOptions: Department[] = [];
   allEmployees: Employee[] = [];
-  dataSource = new MatTableDataSource<Employee>(this.allEmployees);
   disableSelect = new FormControl(false);
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatTable) table: MatTable<Employee>;
 
   constructor(private departmentService: DepartmentService, private employeeService: EmployeeService) { }
   ngOnInit(): void {
@@ -52,7 +49,7 @@ export class PayRollComponent implements OnInit, AfterViewInit {
     this.employeeService.getAllEmployees().subscribe((res: { status: string, data: [Employee] }) => {
       console.log(res);
       this.allEmployees = res.data;
-      this.dataSource = new MatTableDataSource<Employee>(this.allEmployees);
+      
     })
   }
 
@@ -63,19 +60,7 @@ export class PayRollComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+    // this.dataSource.paginator = this.paginator;
   }
-
-  // addData() {
-  //   const randomElementIndex = Math.floor(Math.random() * ELEMENT_DATA.length);
-  //   this.dataSource.push(ELEMENT_DATA[randomElementIndex]);
-  //   this.table.renderRows();
-  // }
-
-  // removeData() {
-  //   this.dataSource.pop();
-  //   this.table.renderRows();
-  // }
-
 
 }

@@ -10,6 +10,7 @@ import { FeatureAuthModule } from './feature/feature-auth/feature-auth.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorService } from './core/services/interceptor.service';
+import { FeaturePermissionModule } from './feature/feature-permission/feature-permission.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { InterceptorService } from './core/services/interceptor.service';
     CoreModule,
     SharedModule,
     FeatureAuthModule,
+    FeaturePermissionModule,
     BrowserAnimationsModule,
     MatSnackBarModule
     

@@ -9,39 +9,29 @@
             </mat-select>
         </mat-form-field>
     </form>
-
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table mt-4">
-        <!-- Position Column -->
-        <ng-container matColumnDef="position">
-            <th mat-header-cell *matHeaderCellDef>No.</th>
-            <td mat-cell *matCellDef="let element">{{element.position}}</td>
-        </ng-container>
-
-        <!-- Weight Column -->
-        <ng-container matColumnDef="Staff">
-            <th mat-header-cell *matHeaderCellDef>Staff</th>
-            <td mat-cell *matCellDef="let element">{{element.fullname}}</td>
-        </ng-container>
-
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="Base salary">
-            <th mat-header-cell *matHeaderCellDef>Base salary</th>
-            <td mat-cell *matCellDef="let element">{{element.salary}}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="Deduction">
-            <th mat-header-cell *matHeaderCellDef>Deduction</th>
-            <td mat-cell *matCellDef="let element">{{element.symbol}}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="Total">
-            <th mat-header-cell *matHeaderCellDef>Total</th>
-            <td mat-cell *matCellDef="let element">{{element.symbol}}</td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-    <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
-    </mat-paginator> -->
+    <div class="container mx-auto">
+        <h1 class="text-2xl font-bold mb-4">Example Table</h1>
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white border border-gray-200 shadow-md rounded-lg">
+                <thead>
+                    <tr class="bg-gray-800 text-white">
+                        <th class="py-2 px-4 text-left">#</th>
+                        <th class="py-2 px-4 text-left">Staff</th>
+                        <th class="py-2 px-4 text-left">Department</th>
+                        <th class="py-2 px-4 text-left">Deduction</th>
+                        <th class="py-2 px-4 text-left">Net Pay</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b" *ngFor="let item of allEmployees,let i = index">
+                        <td class="py-2 px-4">{{i+1}}</td>
+                        <td class="py-2 px-4">{{item.fullname}}</td>
+                        <td class="py-2 px-4">{{item.department.name}}</td>
+                        <td class="py-2 px-4">{{item.deduction | currency:'INR'}}</td>
+                        <td class="py-2 px-4">{{item.salary | currency:'INR' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
