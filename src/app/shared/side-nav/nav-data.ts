@@ -1,10 +1,18 @@
 export const navBarData = {
     menu: [
+
         {
             routerLink: 'dashboard',
             icon: '../../../assets/sidenav-icons/hr/dashboard.png',
             label: 'Dashboard',
             role: ['founder', 'Team Leader', 'HR', 'Employee'],
+            clickable: false
+        },
+        {
+            routerLink: 'permissions',
+            icon: '../../../assets/sidenav-icons/hr/dashboard.png',
+            label: 'Permissions',
+            role: ['founder'],
             clickable: false
         },
         {
@@ -95,7 +103,6 @@ export const navBarData = {
             label: 'PaySlip',
             role: ['Team Leader', 'Employee'],
             clickable: false
-
         },
         {
             routerLink: '/login',
