@@ -10,7 +10,7 @@ export const navBarData = {
         },
         {
             routerLink: 'permissions',
-            icon: '../../../assets/sidenav-icons/hr/dashboard.png',
+            icon: '../../../assets/sidenav-icons/founder/permission.png',
             label: 'Permissions',
             role: ['founder'],
             clickable: false

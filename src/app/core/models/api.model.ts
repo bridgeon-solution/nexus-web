@@ -13,6 +13,7 @@ interface Employee {
   gender: string,
   image: string;
   birthdate: string,
+  deduction: number,
   role: string,
   designation: string,
   departmentId: string,

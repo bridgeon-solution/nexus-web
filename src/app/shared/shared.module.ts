@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { PaymentCardsComponent } from './payment-cards/payment-cards.component';
 import { PaymentComponent } from './payment/payment.component';
@@ -29,6 +29,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ConfirmationModalComponent } from './confirmation-modal/confirmation-modal.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,7 @@ import { ConfirmationModalComponent } from './confirmation-modal/confirmation-mo
     NgxPaginationModule,
     FormsModule,
     MatToolbarModule,
-    MatSidenavModule,
+    MatSelectModule,
     MatButtonModule,
     MatIconModule,
     MatDividerModule,
@@ -65,7 +66,9 @@ import { ConfirmationModalComponent } from './confirmation-modal/confirmation-mo
     MatFormFieldModule, 
     MatInputModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    ReactiveFormsModule
+
   ],
   exports: [
     PaymentCardsComponent,

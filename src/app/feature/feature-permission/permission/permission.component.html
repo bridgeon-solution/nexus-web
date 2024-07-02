@@ -1,0 +1,10 @@
+<p>Slide Toggle using a simple NgModel.</p>
+
+<p>Slide Toggle inside of a Template-driven form</p>
+<mat-slide-toggle [(ngModel)]="isChecked">Slide Toggle Checked: {{isChecked}}</mat-slide-toggle>
+
+
+<form class="example-form" #form="ngForm" (ngSubmit)="alertFormValues(form.form)">
+    <mat-slide-toggle ngModel color="cyan" name="enableWifi">Enable Wifi</mat-slide-toggle>
+    <mat-slide-toggle labelPosition="before" ngModel name="acceptTerms" required>Accept Terms of Service</mat-slide-toggle>
+</form> 

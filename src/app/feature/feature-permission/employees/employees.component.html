@@ -1,0 +1,29 @@
+<div class="container mx-auto p-6">
+    <h1 class="text-2xl font-bold mb-4">Staffs</h1>
+    <div class="overflow-x-auto rounded-md">
+        <table class="min-w-full bg-white border border-gray-200 shadow-md rounded-lg">
+            <thead>
+                <tr class="bg-gray-800 text-white">
+                    <th class="py-2 px-4 text-left">Staff</th>
+                    <th class="py-2 px-4 text-left">Department</th>
+                    <th class="py-2 px-4 text-left">Role</th>
+                </tr>
+            </thead>
+            <tbody [@listAnim]="employees.length" >
+                <tr *ngFor="let employee of employees" class="data border-b hover:bg-gray-300 cursor-pointer" role="button" (click)="clickOn(employee.id)">
+                    <th scope="row"
+                        class=" flex items-center px-3 py-4 font-medium text-gray-600 whitespace-nowrap dark:text-gray-700">
+                        <img class="mr-3 rounded-full h-[50px] w-[50px] object-cover" [src]="employee.image"
+                            alt="profile">
+                        <div class="flex flex-col items-start">
+                            {{employee.fullname}}
+                            <span class="text-gray-400">{{employee.email}}</span>
+                        </div>
+                    </th>
+                    <td class="py-2 px-4"> {{employee.department.name}} </td>
+                    <td class="py-2 px-4"> {{employee.role}} </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

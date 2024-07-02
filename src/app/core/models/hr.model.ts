@@ -3,13 +3,13 @@ interface AddEmployee {
     email: string,
     phone: string,
     password: string;
-    salary: string  ,
+    salary: string,
     gender: string,
     image: FormDataEntryValue;
     birthdate: string,
     role: string,
     designation: string,
-    departmentId: string    ,
+    departmentId: string,
 }
 
 export {

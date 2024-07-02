@@ -40,13 +40,20 @@
             </div>
 
             <div class="w-full">
-                <label for="type" class="text-sm block mt-4 mb-2 font-normal">Your Leave Type:</label>
-                <input type="text" id="type" placeholder="Leave type" name="leaveType" ngModel required
-                    class="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500">
+                <label for="type" class="text-sm block mt-4 mb-0 font-normal">Your Leave Type:</label>
+                <mat-form-field class="w-full">
+                    <mat-label>Select Leave Type</mat-label>
+                    <mat-select [(ngModel)]="selectedLeaveType" name="leaveType" [disabled]="disableSelect.value">
+                        <mat-option value="Casual Leave">Casual Leave (CL)</mat-option>
+                        <mat-option value="Sick Leave">Sick Leave (SL)</mat-option>
+                        <mat-option value="Annual Leave">Annual Leave (AL)</mat-option>
+                        <mat-option value="Unpaid Leave">Unpaid Leave (UL)</mat-option>
+                    </mat-select>
+                </mat-form-field>
             </div>
 
             <div class="w-full">
-                <label for="condition" class="text-sm block mt-5 mb-2 font-normal">Describe Your Conditions:</label>
+                <label for="condition" class="text-sm block mb-2 font-normal">Describe Your Conditions:</label>
                 <textarea id="condition"
                     class="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
                     name="reason" required ngModel rows="4"></textarea>

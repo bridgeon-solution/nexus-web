@@ -74,12 +74,6 @@ export class AddEmployeeComponent implements OnInit {
       const year = normalFormDob.getFullYear();
       const month = String(normalFormDob.getMonth() + 1).padStart(2, '0'); // Add leading zero for single-digit months
       const day = String(normalFormDob.getDate()).padStart(2, '0');
-    this.employeeService.getEmployeeId(this.data.id).subscribe((res: { status: string, data: Employee }) => {
-      const nnormalFormDob = new Date(res.data.birthdate);
-      const year = nnormalFormDob.getFullYear();
-      const month = String(nnormalFormDob.getMonth() + 1).padStart(2, '0'); // Add leading zero for single-digit months
-      const day = String(nnormalFormDob.getDate()).padStart(2, '0');
-
 
       const convertedDob = `${year}-${month}-${day}`
 
@@ -146,9 +140,8 @@ export class AddEmployeeComponent implements OnInit {
     employeeValues.departmentId = this.departmentId.toString();
     employeeValues.role = this.roleOption;
     employeeValues.gender = this.genderOption;
-    this.employeeService.createEmployee(employeeValues, this.file).subscribe((res: { status: string }) => {
-      if (res.status === 'success') {
-        this.dialogRef.close('added')
+    this.employeeService.createEmployee(employeeValues, this.file).subscribe((res: { status: string, data: Employee }) => {
+      if (res.data) {
         this.addEmployeeForm.reset();
         this.dialogRef.close('added');
         this.loading = false;
@@ -171,8 +164,8 @@ export class AddEmployeeComponent implements OnInit {
     employeeValues.role = this.roleOption;
     employeeValues.gender = this.genderOption;
 
-    this.employeeService.updateEmployee(employeeValues, this.file, this.data.id).subscribe((res: { status: string }) => {
-      if (res.status === 'success') {
+    this.employeeService.updateEmployee(employeeValues, this.file, this.data.id).subscribe((res: { status: string, data: Employee }) => {
+      if (res.data) {
         this.loading = false;
         this.dialogRef.close('updated')
         this.snackBar.open("Staff Updated", "Colse", { duration: 5000 });

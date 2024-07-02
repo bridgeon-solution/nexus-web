@@ -157,21 +157,19 @@ export class DashboardComponent implements OnInit {
       }
     })
     this.fetchDepartment();
-    this.animateNumber()
+    // this.animateNumber()
   }
 
   fetchDepartment() {
     this.departmentService.getAllDepartments().subscribe((res: { status: string, data: [Department] }) => {
-      console.log(res.data.length);
       this.departmentCount = res.data.length
-      let data = this.data.filter((x)=>{return x.head === 'Departments'});
-      data.map((x)=>{return x.count = this.departmentCount})
+      let data = this.data.filter((x) => { return x.head === 'Departments' });
+      data.map((x) => { return x.count = this.departmentCount })
     })
   }
 
   animateNumber() {
-    console.log(this.data.map((x)=>{return x.count}));
-
+    // console.log(this.data.map((x)=>{return x.count}));
     const intervalId = setInterval(() => {
       this.data.forEach((element) => {
         if (this.currentNumber >= element.count) {
