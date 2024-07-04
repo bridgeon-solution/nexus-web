@@ -1,8 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { Department, Employee } from 'src/app/core/models/api.model';
+import { Department, EmployeePayment } from 'src/app/core/models/api.model';
 import { DepartmentService } from 'src/app/core/services/department.service';
 import { EmployeeService } from 'src/app/core/services/employee.service';
 
@@ -34,10 +32,15 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 
 export class PayRollComponent implements OnInit, AfterViewInit {
+
   displayedColumns: string[] = ['position', 'Staff', 'Base salary', 'Deduction', 'Total'];
   dropDownOptions: Department[] = [];
-  allEmployees: Employee[] = [];
-  disableSelect = new FormControl(false);
+  allEmployees: EmployeePayment[] = [];
+  disableSelect = new FormControl();
+  totalEmployees: number = 0;
+  selectedDepartment: string = '';
+  currentPage: number = 1;
+  itemsPerPage: number = 10;
 
   constructor(private departmentService: DepartmentService, private employeeService: EmployeeService) { }
   ngOnInit(): void {
@@ -46,21 +49,34 @@ export class PayRollComponent implements OnInit, AfterViewInit {
   }
 
   fetchEmployee() {
-    this.employeeService.getAllEmployees().subscribe((res: { status: string, data: [Employee] }) => {
-      console.log(res);
-      this.allEmployees = res.data;
-      
+    this.employeeService.getAllEmployees(this.currentPage, this.itemsPerPage).subscribe((res: { status: string, data: { data: [EmployeePayment], total: number } }) => {
+      this.allEmployees = res.data.data;
+      this.totalEmployees = res.data.total;
     })
   }
 
   fetchDepartment() {
     this.departmentService.getAllDepartments().subscribe((res: { status: string, data: [Department] }) => {
-      this.dropDownOptions = res.data
+      this.dropDownOptions = res.data;
+      this.dropDownOptions.push({ id: 0, name: 'All' })
     })
+  }
+
+  filterEmployee() {
+    if (this.selectedDepartment === 'All' || this.selectedDepartment.length === 0) {
+      return this.allEmployees
+    }
+    return this.allEmployees.filter((x) => { return x.department.name === this.selectedDepartment })
   }
 
   ngAfterViewInit() {
     // this.dataSource.paginator = this.paginator;
+  }
+
+  onPageChange(event: any): void {
+    this.currentPage = event.pageIndex + 1;
+    this.itemsPerPage = event.pageSize;
+    this.fetchEmployee();
   }
 
 }

@@ -30,6 +30,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ConfirmationModalComponent } from './confirmation-modal/confirmation-modal.component';
 import { MatSelectModule } from '@angular/material/select';
+import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -57,9 +58,9 @@ import { MatSelectModule } from '@angular/material/select';
     MatButtonModule,
     MatIconModule,
     MatDividerModule,
-    MatTableModule,
     MatDialogModule,
     RouterModule,
+    MatPaginatorModule,
     MatButtonModule,
     MatMenuModule,
     MatIconModule,

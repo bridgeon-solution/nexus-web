@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AddEmployee } from '../models/hr.model';
@@ -29,7 +29,14 @@ export class EmployeeService {
   }
 
   getAllEmployees(page?: number, limit?: number): Observable<object> {
-    return this.http.get(`http://localhost:4000/api/v1/employees/?page=${page}&limit=${limit}}`)
+    if (!page || !limit) {
+      return this.http.get(`http://localhost:4000/api/v1/employees/all`)
+    }
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('pageSize', limit.toString());
+
+    return this.http.get(`http://localhost:4000/api/v1/employees?${params}`)
   }
 
   getEmployeeId(id: string): Observable<object> {

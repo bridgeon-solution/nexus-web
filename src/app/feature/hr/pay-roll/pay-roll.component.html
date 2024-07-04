@@ -4,13 +4,14 @@
     <form class="example-form">
         <mat-form-field class="w-[500px]">
             <mat-label>Choose Department Name</mat-label>
-            <mat-select [disabled]="disableSelect.value">
+            <mat-select name="selectedDepartment" [(ngModel)]="selectedDepartment" [disabled]="disableSelect.value">
                 <mat-option *ngFor="let item of dropDownOptions" [value]="item.name">{{item.name}}</mat-option>
             </mat-select>
         </mat-form-field>
     </form>
+
     <div class="container mx-auto">
-        <h1 class="text-2xl font-bold mb-4">Example Table</h1>
+        <h1 class="text-2xl font-bold mb-4">Staffs</h1>
         <div class="overflow-x-auto">
             <table class="min-w-full bg-white border border-gray-200 shadow-md rounded-lg">
                 <thead>
@@ -18,20 +19,31 @@
                         <th class="py-2 px-4 text-left">#</th>
                         <th class="py-2 px-4 text-left">Staff</th>
                         <th class="py-2 px-4 text-left">Department</th>
+                        <th class="py-2 px-4 text-left">Base Salary</th>
                         <th class="py-2 px-4 text-left">Deduction</th>
                         <th class="py-2 px-4 text-left">Net Pay</th>
+                        <th class="py-2 px-4 text-left"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="border-b" *ngFor="let item of allEmployees,let i = index">
+                    <tr class="border-b" *ngFor="let item of filterEmployee(),let i = index">
                         <td class="py-2 px-4">{{i+1}}</td>
                         <td class="py-2 px-4">{{item.fullname}}</td>
                         <td class="py-2 px-4">{{item.department.name}}</td>
+                        <td class="py-2 px-4">{{item.salary | currency:'INR'}}</td>
                         <td class="py-2 px-4">{{item.deduction | currency:'INR'}}</td>
-                        <td class="py-2 px-4">{{item.salary | currency:'INR' }}</td>
+                        <td class="py-2 px-4">{{item.salary - item.deduction| currency:'INR' }}</td>
+                        <td class="py-2 px-4">
+                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm">
+                                Generate
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
+            <mat-paginator [length]="totalEmployees" [pageSize]="currentPage" [pageSizeOptions]="[5, 10, 15]"
+                aria-label="Select page" (page)="onPageChange($event)">
+            </mat-paginator>
         </div>
     </div>
 </div>
