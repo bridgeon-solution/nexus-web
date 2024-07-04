@@ -12,6 +12,7 @@ const routes: Routes = [
       { path: '', loadChildren: () => import('./feature/founder/founder.module').then(m => m.FounderModule) },
       { path: '', loadChildren: () => import('./feature/team-leader/team-leader.module').then(m => m.TeamLeaderModule) },
       { path: '', loadChildren: () => import('./feature/feature-team/feature-team.module').then(m => m.FeatureTeamModule) },
+      { path: '', loadChildren: () => import('./feature/feature-permission/feature-permission.module').then(m => m.FeaturePermissionModule) },
       { path: 'profile', component: ProfileComponent }
 
     ]
