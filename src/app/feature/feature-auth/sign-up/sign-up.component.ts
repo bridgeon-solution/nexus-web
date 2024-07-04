@@ -1,5 +1,7 @@
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 
@@ -7,7 +9,15 @@ import { AuthService } from 'src/app/core/services/auth.service';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.css']
+  styleUrls: ['./sign-up.component.css'],
+  animations: [
+    trigger('slideIn', [
+      transition('void => *', [
+        style({ transform: 'translateX(-100%)' }), // Start from left, 100% off-screen
+        animate('0.9s ease-in-out') // Animate for 0.5 seconds with ease-in-out timing
+      ])
+    ])
+  ]
 })
 export class SignUpComponent implements OnInit {
   @ViewChild('signUpForm') signUpFormValues: NgForm;
@@ -17,7 +27,7 @@ export class SignUpComponent implements OnInit {
   isLoading: boolean = false;
   notLoading: boolean = true;
 
-  constructor(private authSrvc: AuthService, private route: Router) { }
+  constructor(private authSrvc: AuthService, private route: Router, private snackBar:MatSnackBar) { }
 
   ngOnInit(): void {
 
@@ -49,13 +59,13 @@ export class SignUpComponent implements OnInit {
         this.isLoading = false;
         this.notLoading = true;
       }
-      alert('Successfully registered');
+      this.snackBar.open("Successfully Registered","",{duration:5000, direction:'ltr'});
       this.route.navigate(['payment']);
     }, (err) => {
       console.log(err);
       this.isLoading = false;
       this.notLoading = true;
-      alert('An error Occured');
+      this.snackBar.open("An Error Occured","",{duration:5000})
     })
   }
 

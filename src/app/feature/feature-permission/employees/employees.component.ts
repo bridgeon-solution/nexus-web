@@ -34,8 +34,8 @@ export class EmployeesComponent implements OnInit {
   }
 
   fetchEmployees() {
-    this.employeeService.getAllEmployees().subscribe((res: { status: string, data: [Employee] }) => {
-      this.employees = res.data;
+    this.employeeService.getAllEmployees(1, 10).subscribe((res: { status: string, data: { data: [Employee] } }) => {
+      this.employees = res.data.data;
     })
   }
 

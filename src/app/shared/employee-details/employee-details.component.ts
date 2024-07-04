@@ -52,10 +52,9 @@ export class EmployeeDetailsComponent implements OnInit {
   menuOpen: number = null;
   searchTable: boolean = false;
   selectedOption: string = 'All';
+  totalEmployees: number = 0;
   currentPage: number = 1;
-  itemsPerPage: number = 2;
-  totalItems: number;
-  page: number;
+  itemsPerPage: number = 4;
 
   constructor(private employeeSrvc: EmployeeService, private departmentService: DepartmentService, private matDialog: MatDialog, private snackBar: MatSnackBar) {
   }
@@ -78,8 +77,10 @@ export class EmployeeDetailsComponent implements OnInit {
   }
 
   fetchEmployess() {
-    this.employeeSrvc.getAllEmployees(this.currentPage, this.itemsPerPage).subscribe((res: { status: string, data: [Employee] }) => {
-      this.allEmployees = res.data
+    this.employeeSrvc.getAllEmployees(this.currentPage, this.itemsPerPage).subscribe((res: { status: string, data: { data: [Employee], total: number } }) => {
+      console.log(res);
+      this.allEmployees = res.data.data;
+      this.totalEmployees = res.data.total;
     })
   }
 
@@ -155,13 +156,24 @@ export class EmployeeDetailsComponent implements OnInit {
     });
   }
 
-  onPageChange(page: number): void {
-
-    console.log(page);
-
-    this.currentPage = page;
-    this.fetchEmployess();
+  nextPage(): void {
+    if (this.currentPage * this.itemsPerPage < this.totalEmployees) {
+      this.currentPage++;
+      this.fetchEmployess();
+    }
   }
 
+  previousPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.fetchEmployess();
+    }
+  }
+
+  onPageChange(event: any): void {
+    this.currentPage = event.pageIndex + 1;
+    this.itemsPerPage = event.pageSize;
+    this.fetchEmployess();
+  }
 
 }

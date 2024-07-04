@@ -1,6 +1,6 @@
 <h1 class="sm:ms-5-ms-10 text-5xl font-roboto ">Employees</h1>
 <div class="sm:ms-5 relative -ms-10">
-    <div class="options flex items-center mt-12 max-w-[200px] justify-between">
+    <div class="options flex items-center mt-9 max-w-[200px] justify-between">
         <div class="flex flex-col items-center">
             <p (click)="selectEmpOptions()" role="button">All Employees</p>
             <div *ngIf="employeeDetailsOption" class="lines w-[60px] h-[2px] bg-blue-600"></div>
@@ -19,7 +19,7 @@
 
     <!-- Employee details -->
     <div class="employee" *ngIf="employeeDetailsOption">
-        <div class="flex items-center mb-4 mt-10 w-full max-w-3xl px-4">
+        <div class="flex items-center mb-4 mt-9 w-full max-w-3xl px-4">
             <i class="fas fa-search text-gray-400 cursor-pointer mr-4"></i>
             <input type="text" [(ngModel)]="str" (input)="textEntering()"
                 class="w-full sm:min-w-[200px] md:min-w-[300px] lg:min-w-[400px] xl:min-w-[550px] rounded-md border border-gray-300 pl-5 py-4 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-transparent"
@@ -67,9 +67,10 @@
         </div>
 
 
-        <div class="relative overflow-y-scroll h-[320px] mt-10">
+        <div class="relative overflow-y-scroll max-h-[390px] mt-5">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-900">
-                <thead class="sticky top-0 text-xs text-gray-700 uppercase bg-gray-50 dark:bg-pink-200 dark:text-gray-900">
+                <thead
+                    class="sticky top-0 text-xs text-gray-700 uppercase bg-gray-50 dark:bg-pink-200 dark:text-gray-900">
                     <tr>
                         <th scope="col" class="px-6 py-3">
                             Name
@@ -204,9 +205,11 @@
                 </tbody>
             </table>
         </div>
+        <mat-paginator [length]="totalEmployees" [pageSize]="currentPage" [pageSizeOptions]="[5, 10]"
+            aria-label="Select page" (page)="onPageChange($event)">
+        </mat-paginator>
     </div>
-
     <div class="teams" *ngIf="!employeeDetailsOption">
-        <h1>Teams</h1>
+        <h1>Teams</h1>k
     </div>
 </div>

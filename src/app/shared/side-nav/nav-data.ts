@@ -40,7 +40,7 @@ export const navBarData = {
 
         },
         {
-            routerLink: 'projects',
+            routerLink: 'project',
             icon: '../../../assets/sidenav-icons/hr/project.png',
             label: 'Projects',
             role: ['Team Leader', 'founder', 'HR', 'Employee'],
