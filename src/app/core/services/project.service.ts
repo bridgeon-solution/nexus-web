@@ -27,4 +27,9 @@ export class ProjectService {
   fetchAllProjects(): Observable<object> {
     return this.http.get(`http://localhost:4004/api/v1/projects/`)
   }
+
+  fetchProjectById(id: string):Observable<object> {
+    return this.http.get<ProjectInterface>(`http://localhost:4004/api/v1/projects/${id}`)
+  }
+
 }

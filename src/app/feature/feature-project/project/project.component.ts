@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./project.component.css']
 })
 export class ProjectComponent {
-  projectOption: boolean = false;
+  projectOption: boolean = true;
 
   selectProjectOption() {
     this.projectOption = !this.projectOption;
