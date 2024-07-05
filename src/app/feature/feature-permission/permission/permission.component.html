@@ -1,10 +1,10 @@
-<p>Slide Toggle using a simple NgModel.</p>
-
-<p>Slide Toggle inside of a Template-driven form</p>
-<mat-slide-toggle [(ngModel)]="isChecked">Slide Toggle Checked: {{isChecked}}</mat-slide-toggle>
-
-
-<form *ngFor="let item of allPermissions" class="example-form" #form="ngForm" (ngSubmit)="alertFormValues(form.form)">
-    <mat-slide-toggle [checked]="" (change)="togglePermission(item.id,$event.checked)" labelPosition="before" ngModel
-        color="cyan" name="enableWifi">{{item.name}}</mat-slide-toggle>
-</form>
+<div class="grid grid-cols-1 gap-4">
+    <form *ngFor="let item of allPermissions" class="example-form" #form="ngForm">
+        <div class="flex items-center space-x-4">
+            <mat-slide-toggle [(ngModel)]="item.enabled" (change)="togglePermission(item.permissonsId,$event.checked)"
+                labelPosition="before" ngModel color="cyan" name="enableWifi">
+                <span class="text-sm font-medium">{{ item.permission.name }}</span>
+            </mat-slide-toggle>
+        </div>
+    </form>
+</div>

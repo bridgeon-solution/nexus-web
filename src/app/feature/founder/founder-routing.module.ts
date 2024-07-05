@@ -7,7 +7,7 @@ import { PermissionComponent } from "../feature-permission/permission/permission
 const routes: Routes = [
     { path: 'department', component: DepartmentComponent },
     { path: 'permissions', component: EmployeesComponent },
-    { path: 'employee-permission/:id', component: PermissionComponent },
+    { path: 'permissions/:employeeId', component: PermissionComponent },
 ];
 
 

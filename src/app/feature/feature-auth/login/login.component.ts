@@ -8,6 +8,7 @@ import { founderDetails } from 'src/app/core/models/admin.model';
 
 import { userLogin } from 'src/app/core/models/userlogin.model';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { PermissionService } from 'src/app/core/services/permission.service';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class LoginComponent {
   @ViewChild('loginForm') form: NgForm
-  constructor(private authService: AuthService, private router: Router, private snackBar: MatSnackBar
+  constructor(private authService: AuthService, private router: Router, private snackBar: MatSnackBar, private permissionService: PermissionService
   ) { }
 
 
@@ -38,8 +39,10 @@ export class LoginComponent {
       const id: string = res.data.id.toString()
       localStorage.setItem('token', `Bearer ${res.token}`);
       localStorage.setItem('id', id);
+      this.permissionService.getPermissionByEmpId(id).subscribe((res) => {
+        this.permissionService.setPermission(res.data);
+      })
       this.snackBar.open(res.status, 'Close', { duration: 5000 });
-
       this.router.navigate(['home']);
     }, (err) => {
       console.log(err);

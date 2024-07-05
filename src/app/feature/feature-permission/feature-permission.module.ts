@@ -5,8 +5,6 @@ import { PermissionComponent } from './permission/permission.component';
 import { MatSlideToggleModule, _MatSlideToggleRequiredValidatorModule, } from '@angular/material/slide-toggle';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { FeaturePermissionRouting } from './feature-permission-routing.module';
-
 
 @NgModule({
   declarations: [
@@ -14,7 +12,6 @@ import { FeaturePermissionRouting } from './feature-permission-routing.module';
     PermissionComponent
   ],
   imports: [
-    FeaturePermissionRouting,
     CommonModule,
     MatSlideToggleModule,
     FormsModule,
