@@ -40,7 +40,7 @@ export class EmployeesComponent implements OnInit {
   }
 
   clickOn(id: number) {
-    this.router.navigate(['permissions/', id])
+    this.router.navigate(['home/permissions/', id])
   }
 
 }
