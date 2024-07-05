@@ -11,6 +11,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ViewProjectComponent } from './view-project/view-project.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import {MatCardModule} from '@angular/material/card';
+import { ViewAllProjectsComponent } from './view-all-projects/view-all-projects.component';
 
 
 
@@ -19,6 +23,7 @@ import { ViewProjectComponent } from './view-project/view-project.component';
     ProjectComponent,
     AddProjectComponent,
     ViewProjectComponent,
+    ViewAllProjectsComponent,
   ],
   imports: [
     CommonModule,
@@ -27,10 +32,13 @@ import { ViewProjectComponent } from './view-project/view-project.component';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatSelectModule,
+    MatSnackBarModule,
     MatInputModule,
     MatButtonModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatProgressBarModule,
+    MatCardModule
   ]
 })
 export class FeatureProjectModule { }

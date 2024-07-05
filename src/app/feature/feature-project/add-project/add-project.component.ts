@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, NgForm } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProjectInterface } from 'src/app/core/models/project.model';
 import { Team } from 'src/app/core/models/team.model';
 import { ProjectService } from 'src/app/core/services/project.service';
@@ -21,7 +22,7 @@ export class AddProjectComponent implements OnInit {
   selectedImage: string | null = null;
   file: File = null;
 
-  constructor(private teamService: TeamService, private projectService: ProjectService) { }
+  constructor(private teamService: TeamService, private projectService: ProjectService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.getTeam()
@@ -54,9 +55,13 @@ export class AddProjectComponent implements OnInit {
     const temaId: string = this.selectedTemeId;
     const projectData: ProjectInterface = this.projectValues.value;
     console.log(projectData.endDate);
-    
-    this.projectService.createProject(projectData, this.file, temaId).subscribe((res) => {
-      console.log(res);
+
+    this.projectService.createProject(projectData, this.file, temaId).subscribe((res: { status: string, data: ProjectInterface }) => {
+      if (res.status === "success") {
+        this.snackBar.open("Project Created", "", { duration: 5000 });
+      } else {
+        this.snackBar.open("Something went wrong", "", { duration: 5000 });
+      }
     })
   }
 }

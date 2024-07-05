@@ -54,7 +54,7 @@ export class EmployeeDetailsComponent implements OnInit {
   selectedOption: string = 'All';
   totalEmployees: number = 0;
   currentPage: number = 1;
-  itemsPerPage: number = 4;
+  itemsPerPage: number = 5;
 
   constructor(private employeeSrvc: EmployeeService, private departmentService: DepartmentService, private matDialog: MatDialog, private snackBar: MatSnackBar) {
   }
