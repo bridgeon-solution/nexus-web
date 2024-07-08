@@ -2,7 +2,7 @@ export interface TeamData {
   name: string
 }
 
-export interface TeamDatas {
+export interface TeamResponseData {
   status: string
   data: {
     _id: string,

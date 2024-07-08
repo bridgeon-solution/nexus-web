@@ -46,10 +46,12 @@ export class AddToTeamComponent implements OnInit {
       console.log(error)
     })
   }
-
+  
   addToTeam(employeeId: number) {
     this.teamMemberService.addToTeam(employeeId, this.data.option).subscribe((res) => {
       if (res.status === 'success') {
+        console.log(res);
+        
         this.snackBar.open('Employee Added to the Team', 'Close', {
           duration: 3000, // Duration in milliseconds
           horizontalPosition: 'center', // Position the snackbar
@@ -66,6 +68,13 @@ export class AddToTeamComponent implements OnInit {
         verticalPosition: 'top',
       });
     })
+  }
+
+  buttonChanges(id:number):true {
+    console.log(id);
+    // console.log(this.);
+    
+    return true
   }
 
   deleteFromTeam(employeeId: number) {

@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
 
   title = 'nexus-frontend';
   logged: boolean = false;
+  id: string = localStorage.getItem('id')
 
   constructor(private active: CanActivateService, private permissionService: PermissionService) {
     this.logged = active.isLogged;
@@ -29,10 +30,6 @@ export class AppComponent implements OnInit {
   ontoggleSideNav(data: SideNavToggle) {
     this.screenWidth = data.screenWidth;
     this.isSideNavCollapsed = data.collapsed;
-  }
-
-  hasPermission(permissionName: string) {
-    return this.permissionService.hasPermission(permissionName)
   }
 
 }

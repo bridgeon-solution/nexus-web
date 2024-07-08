@@ -1,0 +1,23 @@
+<div *ngIf="role === 'HR'">
+    <h1 class="text-5xl">Pay Roll Management</h1>
+    <div class="main ms-5">
+        <div class="options flex items-center mt-12 max-w-[250px] justify-between">
+            <div class="flex flex-col items-center">
+                <p role="button" (click)="selectPayRollOption()">Add Pay slip</p>
+                <div class="w-[60px] h-[2px] bg-blue-600" *ngIf="payRollOption"></div>
+            </div>
+            <div class="flex flex-col items-center">
+                <p role="button" (click)="selectPayRollOption()">View pay slip</p>
+                <div class="w-[40px] h-[2px] bg-blue-600" *ngIf="!payRollOption"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="payRollOption">
+    <app-generate-pay-slip></app-generate-pay-slip>
+</div>
+
+<div *ngIf="!payRollOption">
+    <app-view-pay-slip></app-view-pay-slip>
+</div>

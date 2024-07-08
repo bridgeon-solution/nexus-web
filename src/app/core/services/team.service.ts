@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { TeamDatas, TeamData } from '../models/team.model';
+import { TeamResponseData, TeamData } from '../models/team.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,16 +10,16 @@ export class TeamService {
 
   constructor(private http: HttpClient) { }
 
-  addTeam(teamData: TeamData): Observable<TeamDatas> {
-    return this.http.post<TeamDatas>('http://localhost:4003/api/v1/teams/create', teamData)
+  addTeam(teamData: TeamData): Observable<TeamResponseData> {
+    return this.http.post<TeamResponseData>('http://localhost:4003/api/v1/teams/create', teamData)
   }
 
-  deleteTeam(teamId: string): Observable<TeamDatas> {
-    return this.http.delete<TeamDatas>(`http://localhost:4003/api/v1/teams/${teamId}`)
+  deleteTeam(teamId: string): Observable<TeamResponseData> {
+    return this.http.delete<TeamResponseData>(`http://localhost:4003/api/v1/teams/${teamId}`)
   }
 
-  updateTeam(teamId, updateData: TeamData): Observable<TeamDatas> {
-    return this.http.patch<TeamDatas>(`http://localhost:4003/api/v1/teams/${teamId}`, updateData)
+  updateTeam(teamId, updateData: TeamData): Observable<TeamResponseData> {
+    return this.http.patch<TeamResponseData>(`http://localhost:4003/api/v1/teams/${teamId}`, updateData)
   }
 
   getAllTeamsByLead(): Observable<Object> {

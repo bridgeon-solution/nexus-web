@@ -65,6 +65,10 @@ export class EmployeeService {
     return this.http.patch(`http://localhost:4000/api/v1/employees/${empId}`, employeeValues)
   }
 
+  paySlip(id: number): Observable<object> {
+    return this.http.get(`http://localhost:4000/api/v1/employees/generate-paySlip/${id}`)
+  }
+
 
 
 }

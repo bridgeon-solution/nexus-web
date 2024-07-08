@@ -3,7 +3,6 @@ import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { founderDetails } from 'src/app/core/models/admin.model';
 
 import { userLogin } from 'src/app/core/models/userlogin.model';
@@ -39,9 +38,9 @@ export class LoginComponent {
       const id: string = res.data.id.toString()
       localStorage.setItem('token', `Bearer ${res.token}`);
       localStorage.setItem('id', id);
-      this.permissionService.getPermissionByEmpId(id).subscribe((res) => {
-        this.permissionService.setPermission(res.data);
-      })
+      // this.permissionService.getPermissionByEmpId(id).subscribe((res) => {
+      //   this.permissionService.setPermission(res.data);
+      // })
       this.snackBar.open(res.status, 'Close', { duration: 5000 });
       this.router.navigate(['home']);
     }, (err) => {

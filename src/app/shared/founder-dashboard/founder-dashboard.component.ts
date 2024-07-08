@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { LeaveService } from 'src/app/core/services/leave.service';
 
 @Component({
   selector: 'app-founder-dashboard',
@@ -8,10 +9,16 @@ import { Component, Input, OnInit } from '@angular/core';
 export class FounderDashboardComponent implements OnInit {
   @Input() dashboardDatas;
 
+  constructor(private leaveService:LeaveService) { }
 
   ngOnInit(): void {
-  
-    
+    // this.fetchLeave()
+  }
+
+  fetchLeave() {
+    this.leaveService.fetchAllLeaves().subscribe((res)=>{
+      console.log(res);
+    })
   }
 
 

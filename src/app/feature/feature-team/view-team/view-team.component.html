@@ -2,18 +2,20 @@
   <div class="options flex items-center mb-5 mt-10 max-w-[220px] justify-between">
     <div class="flex flex-col items-center">
       <p role="button" (click)="changePage('apply leave')">View Teams</p>
-      <div *ngIf="sendLeavePage" class="lines w-[60px] h-[2px] bg-blue-600"></div>
+      <div *ngIf="teamViewPage" class="lines w-[60px] h-[2px] bg-blue-600"></div>
     </div>
     <div class="flex flex-col items-center">
       <p role="button" (click)="changePage('leave history')">Chat</p>
-      <div *ngIf="leaveHistoryPage" class="lines w-[50px] h-[2px] bg-blue-600"></div>
+      <div *ngIf="teamManagePage" class="lines w-[50px] h-[2px] bg-blue-600"></div>
     </div>
     <div class="flex flex-col items-center">
       <p role="button" (click)="changePage('leave history')">VideoCall</p>
-      <div *ngIf="leaveHistoryPage" class="lines w-[50px] h-[2px] bg-blue-600"></div>
+      <div *ngIf="teamManagePage" class="lines w-[50px] h-[2px] bg-blue-600"></div>
     </div>
   </div>
-  <button routerLink="../addteam"
+  <button routerLink="../addteam" *ngIf="hasPermission('Manage Teams')"
     class="bg-blue-600 hover:bg-blue-700 font-semibold pl-[20px] pr-[20px] pt-[10px] pb-[10px] rounded-md absolute right-4 bottom-0 text-white">Add
     Team</button>
 </div>
+
+<app-view-teams></app-view-teams>

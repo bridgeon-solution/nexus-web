@@ -12,6 +12,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorService } from './core/services/interceptor.service';
 import { FeaturePermissionModule } from './feature/feature-permission/feature-permission.module';
 import { FeatureProjectModule } from './feature/feature-project/feature-project.module';
+import { FeaturePayRollModule } from './feature/feature-pay-roll/feature-pay-roll.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { FeatureProjectModule } from './feature/feature-project/feature-project.
     FeatureProjectModule,
     FeaturePermissionModule,
     BrowserAnimationsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    FeaturePayRollModule
     
   ],
   providers: [
