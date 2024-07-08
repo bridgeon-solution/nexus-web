@@ -29,9 +29,12 @@ export class ViewAllProjectsComponent implements OnInit {
   }
 
   getAllProjects() {
-    this.projectService.fetchAllProjects().subscribe((res: { status: string, data: [ProjectInterface] }) => {
+    const teamLeadId: string = localStorage.getItem('id')
+    this.projectService.fetchProjectByTeamLead(teamLeadId).subscribe((res: { status: string, data: [ProjectInterface] }) => {
       console.log(res);
       this.allProjects = res.data;
+    }, (error) => {
+      console.log(error)
     })
   }
 

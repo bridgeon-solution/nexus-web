@@ -16,7 +16,7 @@ export class AddProjectComponent implements OnInit {
 
   teams: Team[] = [];
   disableSelect = new FormControl(false);
-  selectedTemeId: string = '';
+  selectedTeamId: string = '';
   startDate: Date;
   endDate: Date;
   selectedImage: string | null = null;
@@ -52,11 +52,11 @@ export class AddProjectComponent implements OnInit {
   }
 
   addProject() {
-    const temaId: string = this.selectedTemeId;
+    const teamId: string = this.selectedTeamId;
     const projectData: ProjectInterface = this.projectValues.value;
     console.log(projectData.endDate);
 
-    this.projectService.createProject(projectData, this.file, temaId).subscribe((res: { status: string, data: ProjectInterface }) => {
+    this.projectService.createProject(projectData, this.file, teamId).subscribe((res: { status: string, data: ProjectInterface }) => {
       if (res.status === "success") {
         this.snackBar.open("Project Created", "", { duration: 5000 });
       } else {
