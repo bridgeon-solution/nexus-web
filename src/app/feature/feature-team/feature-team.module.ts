@@ -5,6 +5,7 @@ import { FeatureTeamRoutingModule } from './feature-team-routing.module';
 import { AddTeamComponent } from './add-team/add-team.component';
 import { AddToTeamComponent } from './add-to-team/add-to-team.component';
 import { FormsModule } from '@angular/forms';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     FeatureTeamRoutingModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ]
 })
 export class FeatureTeamModule { }

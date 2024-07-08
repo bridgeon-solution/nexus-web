@@ -4,7 +4,6 @@ import { EmployeeDeatilsComponent } from './employee-deatils/employee-deatils.co
 import { HrRoutingRoutingModule } from './hr-routing-routing.module';
 import { LeaveManagementComponent } from './leave-management/leave-management.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { PayRollComponent } from './pay-roll/pay-roll.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -22,7 +21,6 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
   declarations: [
     EmployeeDeatilsComponent,
     LeaveManagementComponent,
-    PayRollComponent
   ],
   imports: [
     CommonModule,

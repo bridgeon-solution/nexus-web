@@ -31,6 +31,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { ConfirmationModalComponent } from './confirmation-modal/confirmation-modal.component';
 import { MatSelectModule } from '@angular/material/select';
 import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
+import { ViewTeamsComponent } from './view-teams/view-teams.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator'
     LeaveHistoryComponent,
     SkeletonComponent,
     ConfirmationModalComponent,
+    ViewTeamsComponent,
   ],
   imports: [
     CommonModule,
@@ -80,7 +82,8 @@ import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator'
     SendLeaveComponent,
     FounderDashboardComponent,
     LeaveHistoryComponent,
-    SkeletonComponent
+    SkeletonComponent,
+    ViewTeamsComponent
   ],
   providers:[
     // provideNativeDateAdapter

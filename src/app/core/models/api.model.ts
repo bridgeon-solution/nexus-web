@@ -1,3 +1,5 @@
+import { PayRoll } from "./payRoll.model";
+
 interface adminLogin {
   status: string,
   token: string
@@ -61,7 +63,13 @@ interface EmployeePayment {
   department: {
     id: number,
     name: string
-  }
+  },
+  isgenerate: boolean;
+}
+
+interface PayRollApiInterface {
+  pX:PayRoll,
+  findedEmployess: Employee
 }
 
 export {
@@ -70,5 +78,6 @@ export {
   Department,
   LeaveData,
   AllLeave,
-  EmployeePayment
+  EmployeePayment,
+  PayRollApiInterface
 }

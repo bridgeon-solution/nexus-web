@@ -1,0 +1,40 @@
+<div class="h-[550px] w-full bg-gray-200 rounded-xl px-10 py-5">
+    <h1 class="text-5xl font-roboto font-medium text-gray-700">Team</h1>
+
+    <div class="container mx-auto mt-10">
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white border border-gray-200 shadow-md rounded-lg">
+                <thead>
+                    <tr class="bg-gray-800 text-white">
+                        <th class="py-2 px-4 text-left">#</th>
+                        <th class="py-2 px-4 text-left">Team Name</th>
+                        <th class="py-2 px-4 text-left">Team Leader</th>
+                        <!-- <th class="py-2 px-4 text-left">Mebers</th>
+                        <th class="py-2 px-4 text-left">Deduction</th>
+                        <th class="py-2 px-4 text-left">Net Pay</th> -->
+                        <th class="py-2 px-4 text-left"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b" *ngFor="let team of teams,let i= index">
+                        <td class="py-2 px-4"> {{i}} </td>
+                        <td class="py-2 px-4">{{team.name}}</td>
+                        <td class="py-2 px-4">{{team.teamLead}}</td>
+                        <!-- <td class="py-2 px-4">kjklfdlkf</td>
+                        <td class="py-2 px-4">kjklfdlkf</td>
+                        <td class="py-2 px-4">kjklfdlkf</td> -->
+                        <td class="py-2 px-4">
+                            <button
+                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm">
+                                View Team
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- <mat-paginator [length]="totalEmployees" [pageSize]="currentPage" [pageSizeOptions]="[5, 10, 15]"
+                aria-label="Select page" (page)="onPageChange($event)">
+            </mat-paginator> -->
+        </div>
+    </div>
+</div>

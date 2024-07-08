@@ -3,9 +3,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Team, TeamDatas } from 'src/app/core/models/team.model';
+import { Team, TeamResponseData } from 'src/app/core/models/team.model';
 import { TeamService } from 'src/app/core/services/team.service';
 import { AddToTeamComponent } from '../add-to-team/add-to-team.component';
+import { PermissionService } from 'src/app/core/services/permission.service';
 
 @Component({
   selector: 'app-add-team',
@@ -32,11 +33,11 @@ export class AddTeamComponent implements OnInit {
   addToTeamPage: boolean = false;
   manageTeamsPage: boolean = false;
   teams: Team[] = [];
-  constructor(private teamService: TeamService, private snackBar: MatSnackBar, private matDialog: MatDialog) { }
+  constructor(private teamService: TeamService, private permissionService: PermissionService, private snackBar: MatSnackBar, private matDialog: MatDialog) { }
 
   @ViewChild('addTeamForm') values: NgForm
   addTeam() {
-    this.teamService.addTeam(this.values.value).subscribe((res: TeamDatas) => {
+    this.teamService.addTeam(this.values.value).subscribe((res: TeamResponseData) => {
       if (res.status === 'success') {
         this.values.reset()
         this.teams.push(res.data)
@@ -59,7 +60,7 @@ export class AddTeamComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.fetchAllTeams()
+    this.fetchAllTeams();
   }
 
   fetchAllTeams() {
@@ -71,7 +72,7 @@ export class AddTeamComponent implements OnInit {
   }
 
   deleteTeam(teamId: string) {
-    this.teamService.deleteTeam(teamId).subscribe((res: TeamDatas) => {
+    this.teamService.deleteTeam(teamId).subscribe((res: TeamResponseData) => {
       if (res.status === 'success') {
         this.teams = this.teams.filter(team => team._id !== teamId);
         this.snackBar.open('Deleted', 'Close', {
