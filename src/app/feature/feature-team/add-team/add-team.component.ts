@@ -95,5 +95,4 @@ export class AddTeamComponent implements OnInit {
       data: { option: teamId }
     })
   }
-
 }

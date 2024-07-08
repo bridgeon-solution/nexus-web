@@ -45,8 +45,13 @@ export const navBarData = {
             label: 'Projects',
             role: ['Team Leader', 'founder', 'HR', 'Employee'],
             clickable: false
-
-
+        },
+        {
+            routerLink: 'task',
+            icon: '../../../assets/sidenav-icons/to-do-list.png',
+            label: 'Tasks',
+            role: ['Team Leader', 'Employee'],
+            clickable: false
         },
         {
             routerLink: 'department',
@@ -78,14 +83,6 @@ export const navBarData = {
             icon: '../../../assets/sidenav-icons/hr/megaphone.png',
             label: 'Announcements',
             role: ['Team Leader', 'founder', 'HR', 'Employee'],
-            clickable: false
-
-        },
-        {
-            routerLink: 'task',
-            icon: '../../../assets/sidenav-icons/to-do-list.png',
-            label: 'Tasks',
-            role: ['Team Leader', 'Employee'],
             clickable: false
 
         },
