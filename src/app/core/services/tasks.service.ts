@@ -21,4 +21,14 @@ export class TasksService {
   getTasksByAssignee(assigneeId: string, projectId: string): Observable<AllTasksData> {
     return this.http.get<AllTasksData>(`http://localhost:4004/api/v1/tasks/${assigneeId}/${projectId}`)
   }
+
+  addTask(assigneeId: number, projectId: String, title: string, dueDate: Date) {
+    const tasks = {
+      title: title,
+      dueDate: dueDate.toString(),
+      assignedTo: assigneeId,
+      projectId: projectId
+    }
+    return this.http.post(`http://localhost:4004/api/v1/tasks/create`, tasks)
+  }
 }

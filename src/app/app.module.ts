@@ -29,7 +29,7 @@ import { FeatureTasksModule } from './feature/feature-tasks/feature-tasks.module
     FeaturePermissionModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
-    FeaturePayRollModule
+    FeaturePayRollModule,
     FeatureTasksModule,
     MatSnackBarModule
   ],

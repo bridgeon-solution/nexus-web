@@ -1,3 +1,7 @@
+import { Employee } from "./api.model"
+import { ProjectInterface } from "./project.model"
+import { Team } from "./team.model"
+
 export interface TasksData {
   _id?: string,
   title: string,
@@ -17,4 +21,10 @@ export interface TasksDataResponse {
 export interface AllTasksData {
   status: string,
   data: [TasksData]
+}
+
+export interface ProjectTeam {
+  members: [Employee],
+  project: ProjectInterface,
+  team: Team
 }
