@@ -1,11 +1,11 @@
 <div class="main-things flex flex-col justify-start min-h-40 min-w-full rounded-xl bg-white h-full mt-5 pb-5">
-    <div class="bg-gray-200 w-full flex items-center mb-5 p-4">
+    <div class="bg-gray-200 w-full flex items-center mb-5 p-4 shadow-lg">
         <p class="text-5xl text-gray-400">Dashboard</p>
     </div>
-    
-    <div class="flex flex-wrap justify-between w-full">
-        <div class="w-full md:w-[200px] lg:w-[320px] h-36 relative rounded-lg"
-            *ngFor="let item of dashboardDatas" [style.backgroundColor]="founderColor(item.head)">
+
+    <div class="flex justify-between w-full">
+        <div class="w-full md:w-[200px] lg:w-[320px] h-36 relative rounded-lg me-5" *ngFor="let item of dashboardDatas"
+            [style.backgroundColor]="founderColor(item.head)">
             <div class=" mt-2 ms-6">
                 <p class="text-white text-6xl font-bold">{{item.count}}</p>
                 <p class="text-white text-2xl font-bold">{{item.head}}</p>
@@ -29,8 +29,8 @@
         </div>
     </div>
 
-    <div class="w-full flex mt-8 h-full">
-        <div class="border-2 border-gray-300 w-[990px] rounded-s-lg">
+    <div class="w-full flex mt-8 h-full ">
+        <div class="shadow-xl border-2 border-gray-300 rounded-s-lg w-9/12">
             <p class="mt-3 ms-5 text-3xl font-medium text-gray-500">Active Projects</p>
             <table class="w-full rounded-lg shadow-md mt-9">
                 <thead>
@@ -50,16 +50,25 @@
             </table>
         </div>
 
-        <div class="rounded-e-lg flex-1 border-y-2 border-gray-300 border-e-2 h-[300px]">
+        <div class="shadow-xl rounded-e-lg flex-1 border-y-2 border-gray-300 border-e-2 h-[300px]">
             <p class="mt-5 ms-5 text-gray-500">Who's on Leave</p>
-            <p class="mt-5 ms-5 text-gray-500">On Leave：<span class="text-red-800">3</span></p>
-            <div class="mt-5 ms-5">
+            <p class="mt-5 ms-5 text-gray-500">On Leave：<span class="text-red-800">{{allLeaves.length}}</span></p>
+            <div class="mt-5 ms-5" *ngFor="let leave of allLeaves">
                 <div class="flex items-center">
-                    <img src="./../../../assets/rainbow-inside-office-showing-corporate-diversity-inclusiveness-business_1061358-17230.avif"
-                        alt="Image description" class="rounded-full w-14 h-14 me-4">
+                    <img [src]="leave.employee.image" alt="Image description"
+                        class="rounded-full w-14 h-14 me-4 object-cover">
                     <div class="text-gray-700">
-                        <p>Tejas Khanna</p>
-                        <p>Apr 20·Casual Leave</p>
+                        <p>{{leave.employee.fullname}}</p>
+                        <p>{{leave.leaveData.leaveType}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-5 ms-5 animate-pulse" *ngIf="allLeaves.length === 0">
+                <div class="flex items-center">
+                    <div class="bg-gray-300 rounded-full w-14 h-14 me-4"></div>
+                    <div class="text-gray-700">
+                        <div class="mb-3 w-[130px] h-[16px] bg-gray-300"></div>
+                        <div class="w-[80px] h-[16px] bg-gray-300"></div>
                     </div>
                 </div>
             </div>

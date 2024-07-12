@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AllLeave } from 'src/app/core/models/api.model';
 import { LeaveService } from 'src/app/core/services/leave.service';
 
 @Component({
@@ -8,19 +9,41 @@ import { LeaveService } from 'src/app/core/services/leave.service';
 })
 export class FounderDashboardComponent implements OnInit {
   @Input() dashboardDatas;
+  allLeaves: AllLeave[] = [];
 
-  constructor(private leaveService:LeaveService) { }
+  constructor(private leaveService: LeaveService) { }
 
   ngOnInit(): void {
-    // this.fetchLeave()
+    this.fetchLeave();
+    this.filterLeavesForToday()
   }
 
   fetchLeave() {
-    this.leaveService.fetchAllLeaves().subscribe((res)=>{
+    const today: string = new Date().toISOString().split('T')[0];
+    this.leaveService.fetchAllLeaves().subscribe((res: { status: string, data: AllLeave[] }) => {
       console.log(res);
+      
+      this.allLeaves = res.data;
+
+      this.allLeaves = this.allLeaves.filter((x) => {
+        if (x.leaveData.status === "Approved") {
+          const startDate = new Date(x.leaveData.startDate).toISOString().split('T')[0];
+          const endDate = new Date(x.leaveData.endDate).toISOString().split('T')[0];
+          return startDate <= today && endDate >= today;
+        }
+        return ''
+      })
+
+    }, (err) => {
+      console.log(err);
     })
   }
 
+  filterLeavesForToday() {
+    const today: string = new Date().toISOString().split('T')[0];
+    // console.log(this.allLeaves);
+
+  }
 
   founderColor(option: string) {
     switch (option) {
@@ -36,6 +59,7 @@ export class FounderDashboardComponent implements OnInit {
         return 'gray'; // Default color for unknown heads
     }
   }
+
   founderInfoColor(option: string) {
     switch (option) {
       case 'Departments':

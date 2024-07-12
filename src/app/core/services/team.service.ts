@@ -30,4 +30,8 @@ export class TeamService {
     return this.http.get<Object>(`http://localhost:4003/api/v1/teams/`)
   }
 
+  getTeamById(teamId:string): Observable<Object> {
+    return this.http.get<Object>(`http://localhost:4003/api/v1/teams/${teamId}`)
+  }
+
 }

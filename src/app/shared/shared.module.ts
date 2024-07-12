@@ -32,6 +32,7 @@ import { ConfirmationModalComponent } from './confirmation-modal/confirmation-mo
 import { MatSelectModule } from '@angular/material/select';
 import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
 import { ViewTeamsComponent } from './view-teams/view-teams.component';
+import { TeamDetailedViewComponent } from './team-detailed-view/team-detailed-view.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { ViewTeamsComponent } from './view-teams/view-teams.component';
     SkeletonComponent,
     ConfirmationModalComponent,
     ViewTeamsComponent,
+    TeamDetailedViewComponent,
   ],
   imports: [
     CommonModule,

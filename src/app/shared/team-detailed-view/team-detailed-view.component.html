@@ -1,0 +1,35 @@
+<div class="flex items-center h-full flex-col w-full">
+    <div class="sticky top-0 bg-white w-full text-center">
+        <h1 class="text-2xl text-gray-400 font-bold">Members</h1>
+    </div>
+    <div class="w-full flex flex-col justify-center">
+        <div class="w-full py-2 ps-3 pe-11 flex items-center justify-between border-b-2 border-gray-300"
+            *ngFor="let item of teamMeambers">
+            <div class="flex items-center">
+                <img class="mr-3 rounded-full h-[50px] w-[50px] object-cover" [src]="item.image" alt="image">
+                <div>
+                    <p class="text-sm font-roboto font-medium">{{item.fullname}}</p>
+                    <p class="email text-sm">{{item.email}}</p>
+                </div>
+            </div>
+            <div>
+                <small class="text-gray-500 font-semibold">{{item.department.name}}</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="w-full flex flex-col justify-center" *ngIf="teamMeambers.length ===0">
+        <div class="animate-pulse w-full py-2 ps-3 pe-11 flex items-center justify-between border-b-2 border-gray-300">
+            <div class="flex items-center">
+                <div class="mr-3 rounded-full h-[50px] w-[50px] bg-gray-300"></div>
+                <div>
+                    <div class="text-sm font-roboto font-medium w-[40px] mb-2 h-[17px] bg-gray-300"></div>
+                    <div class="email text-sm w-[90px] h-[14px] bg-gray-300"></div>
+                </div>
+            </div>
+            <div>
+                <div class="w-[90px] h-[14px] bg-gray-300"></div>
+            </div>
+        </div>
+    </div>
+</div>

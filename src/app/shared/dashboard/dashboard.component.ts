@@ -1,7 +1,8 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { Department } from 'src/app/core/models/api.model';
+import { Department, Employee } from 'src/app/core/models/api.model';
 import { DepartmentService } from 'src/app/core/services/department.service';
+import { EmployeeService } from 'src/app/core/services/employee.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,6 +20,7 @@ import { DepartmentService } from 'src/app/core/services/department.service';
 
 export class DashboardComponent implements OnInit {
   departmentCount: number = 0;
+  employeeCount: number = 0;
   filteredData: any[] = [];
   data = [
     {
@@ -60,7 +62,7 @@ export class DashboardComponent implements OnInit {
     {
       icon: '../../../assets/icons/businessman_7086777.png',
       head: 'Employees',
-      count: 10,
+      count: this.employeeCount,
       subHead: 'Employees',
       link: 'home/employees',
       role: ['HR']
@@ -146,10 +148,10 @@ export class DashboardComponent implements OnInit {
   currentNumber: number = 0;
   role: string = localStorage.getItem('role');
 
-  constructor(private departmentService: DepartmentService) { }
+  constructor(private departmentService: DepartmentService,private employeeServcie:EmployeeService) { }
 
   ngOnInit(): void {
-    this.animateNumber()
+    // this.animateNumber()
     this.data.forEach((element) => {
       const isRolePresent = element.role.find((x) => { return x === localStorage.getItem('role') });
       if (isRolePresent !== undefined) {
@@ -158,6 +160,7 @@ export class DashboardComponent implements OnInit {
     })
     this.fetchDepartment();
     // this.animateNumber()
+    this.fetchEmployee()
   }
 
   fetchDepartment() {
@@ -165,6 +168,13 @@ export class DashboardComponent implements OnInit {
       this.departmentCount = res.data.length
       let data = this.data.filter((x) => { return x.head === 'Departments' });
       data.map((x) => { return x.count = this.departmentCount })
+    })
+  }
+
+  fetchEmployee() {
+    this.employeeServcie.getAllEmployees().subscribe((res: { status: string, data: [Employee] })=>{
+      console.log(res.data.length);
+      this.employeeCount = res.data.length;
     })
   }
 
