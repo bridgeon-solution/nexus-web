@@ -1,3 +1,4 @@
+import { UnionType } from "typescript"
 import { Employee } from "./api.model"
 import { ProjectInterface } from "./project.model"
 import { Team } from "./team.model"
@@ -7,7 +8,7 @@ export interface TasksData {
   title: string,
   dueDate: Date,
   assignedTo: string,
-  status: 'Todo' | 'In Progress' | 'on Hold' | 'Done',
+  status: string,
   projectId: string,
   createdAt: Date,
   updatedAt: Date
