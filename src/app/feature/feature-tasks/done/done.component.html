@@ -1,3 +1,10 @@
-<div class="w-[200px] h-[400px] bg-red-400 overflow-scroll-x rounded-[28px]">
-  <p>tDone works!</p>
+<div cdkDropList [cdkDropListData]="done" (cdkDropListDropped)="drop($event)"
+  class="w-[200px] h-[400px] flex justify-center bg-yellow-300 overflow-scroll-x rounded-[28px]">
+  <div class="flex flex-col">
+    <h3>Done</h3>
+    <div *ngFor="let task of done" class="h-[100px] w-[190px] rounded-[20px] bg-white mt-[20px] ">
+      <p class="text-[15px] ml-[6px]">{{task.title}}</p>
+      <p class="text-[13px] ml-[6px]">{{task.dueDate}}</p>
+    </div>
+  </div>
 </div>

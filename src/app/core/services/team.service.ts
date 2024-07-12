@@ -30,8 +30,10 @@ export class TeamService {
     return this.http.get<Object>(`http://localhost:4003/api/v1/teams/`)
   }
 
+  fetchTeamByProject(projectId: string) {
+    return this.http.get(`http://localhost:4004/api/v1/projects/team-details/${projectId}`)
+  }
   getTeamById(teamId:string): Observable<Object> {
     return this.http.get<Object>(`http://localhost:4003/api/v1/teams/${teamId}`)
   }
-
 }

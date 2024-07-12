@@ -21,7 +21,6 @@ export class ProjectService {
     projectData.append('description', data.description);
     projectData.append('startDate', startDate);
     projectData.append('endDate', endtDate);
-
     return this.http.post(`http://localhost:4004/api/v1/projects/create/${teamId}`, projectData)
   }
 

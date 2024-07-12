@@ -1,7 +1,5 @@
-<!-- <h1 class="sm:ms-5-ms-10 text-5xl font-roboto">View Tasks</h1> -->
-<!-- <p class="mb-2 font-bold mt-2 text-gray-500">S</p> -->
 <div class="relative">
-  <div class="relative inline-block w-full max-w-sm mt-5">
+  <div class="relative inline-block w-full max-w-sm">
     <button
       class="w-full rounded-md border border-gray-900 shadow-sm px-3 py-4 text-left focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
       aria-haspopup="listbox" aria-expanded="true" aria-labelledby="listbox-label" (click)="toggleDropdown()">
@@ -39,17 +37,82 @@
     </ul>
   </div>
 
-  <div class="absolute left-[400px] top-6">
+  <div class="absolute left-[400px] top-2" *ngIf="selectedProject">
     <button (click)="openAddTaskComponent()"
       class="pb-[10px] pt-[10px] bg-blue-500 hover:bg-blue-600 pl-[20px] pr-[20px] rounded-[10px] text-white">Add
       Task</button>
   </div>
 
+  <div class="flex flex-row space-x-4">
+    <!--The following division for Team Members Route-->
+    <div class="w-[300px] h-[150px] relative mt-[10px] bg-gray-200 bottom rounded-[20px]">
+      <p class="absolute text-[20px] left-[20px] top-[20px]">Participants</p>
+    </div>
+    <!--The Following division for Project Due Date-->
+    <div class="w-[300px] h-[150px] mt-[10px] bg-gray-200 bottom rounded-[20px] relative">
+      <p class="absolute text-[20px] left-[20px] top-[20px]">Due Date</p>
+      <p class="absolute text-[45px] left-[30px] top-[55px] text-red-900">03/03/2016</p>
+    </div>
+    <!--FOR showing remaining days-->
+    <div class="w-[300px] h-[150px] relative mt-[10px] bg-gray-200 bottom rounded-[20px]">
+      <p class="absolute text-[20px] left-[20px] top-[20px]">Remaining Days</p>
+      <p class="absolute text-[45px] left-[30px] top-[55px] text-red-900">06</p>
+
+    </div>
+  </div>
   <!--Following codes are board of different tasks-->
-  <div class="flex w-[1000px] items-center content-center flex-row justify-between mt-[150px]">
-    <app-to-do></app-to-do> <!--For Todo Board-->
-    <app-in-progress></app-in-progress> <!--For InProgress Board-->
-    <app-on-hold></app-on-hold> <!--For OnHold Board-->
-    <app-done></app-done> <!--For Done Board-->
+  <div class="flex w-[1000px] items-center content-center flex-row justify-between">
+    <!--TO-DO Board-->
+    <div class="w-[200px] h-[400px] flex justify-center bg-yellow-300 overflow-scroll-x rounded-[28px]">
+      <h3>Todo</h3>
+      <div class="flex flex-col" (dragover)="onDragOver($event)" (drop)="onDrop($event,'Todo')">
+        <div class="flex flex-col">
+          <div *ngFor="let task of filterTickets('Todo')" draggable="true" (dragstart)="onDragStart(task)"
+            class="h-[100px] w-[190px] rounded-[20px] bg-white mt-[20px] ">
+            <p class="text-[15px] ml-[6px]">{{task.title}}</p>
+            <p class="text-[13px] ml-[6px]">{{task.dueDate}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--In Progress Board-->
+    <div class="w-[200px] h-[400px] flex justify-center bg-yellow-300 overflow-scroll-x rounded-[28px]">
+      <h3>In Progress</h3>
+      <div class="flex flex-col" (dragover)="onDragOver($event)" (drop)="onDrop($event,'In Progress')">
+        <div class="flex flex-col">
+          <div *ngFor="let task of filterTickets('In Progress')" draggable="true" (dragstart)="onDragStart(task)"
+            class="h-[100px] w-[190px] rounded-[20px] bg-white mt-[20px] ">
+            <p class="text-[15px] ml-[6px]">{{task.title}}</p>
+            <p class="text-[13px] ml-[6px]">{{task.dueDate}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--OnHold Board-->
+    <!-- <div class="w-[200px] h-[400px] flex justify-center bg-yellow-300 overflow-scroll-x rounded-[28px]">
+      <h3>On Hold</h3>
+      <div class="flex flex-col">
+        <div class="flex flex-col" cdkDropList [cdkDropListData]="onHold" (cdkDropListDropped)="drop($event,'on Hold')">
+          <div *ngFor="let task of onHold" cdkDrag class="h-[100px] w-[190px] rounded-[20px] bg-white mt-[20px] ">
+            <p class="text-[15px] ml-[6px]">{{task.title}}</p>
+            <p class="text-[13px] ml-[6px]">{{task.dueDate}}</p>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <!--In Progress Board-->
+    <!-- <div class="w-[200px] h-[400px] flex justify-center bg-yellow-300 overflow-scroll-x rounded-[28px]">
+      <h3>Done</h3>
+      <div class="flex flex-col">
+        <div class="flex flex-col" cdkDropList [cdkDropListData]="done" (cdkDropListDropped)="drop($event,'Done')">
+          <div *ngFor="let task of done" cdkDrag class="h-[100px] w-[190px] rounded-[20px] bg-white mt-[20px] ">
+            <p class="text-[15px] ml-[6px]">{{task.title}}</p>
+            <p class="text-[13px] ml-[6px]">{{task.dueDate}}</p>
+          </div>
+        </div>
+      </div>
+    </div> -->
   </div>
 </div>
