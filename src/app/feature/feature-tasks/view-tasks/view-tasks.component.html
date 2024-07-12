@@ -63,56 +63,54 @@
   <!--Following codes are board of different tasks-->
   <div class="flex w-[1000px] items-center content-center flex-row justify-between">
     <!--TO-DO Board-->
-    <div class="w-[200px] h-[400px] flex justify-center bg-yellow-300 overflow-scroll-x rounded-[28px]">
+    <div class="w-[200px] h-[400px] flex justify-center bg-yellow-300 overflow-scroll-x rounded-[28px]"
+      (dragover)="onDragOver($event)" (drop)="onDrop($event,'Todo')">
       <h3>Todo</h3>
-      <div class="flex flex-col" (dragover)="onDragOver($event)" (drop)="onDrop($event,'Todo')">
-        <div class="flex flex-col">
-          <div *ngFor="let task of filterTickets('Todo')" draggable="true" (dragstart)="onDragStart(task)"
-            class="h-[100px] w-[190px] rounded-[20px] bg-white mt-[20px] ">
-            <p class="text-[15px] ml-[6px]">{{task.title}}</p>
-            <p class="text-[13px] ml-[6px]">{{task.dueDate}}</p>
-          </div>
+      <div class="flex flex-col">
+        <div draggable="true" *ngFor="let task of filterTickets('Todo')" (dragstart)="onDragStart(task)"
+          class="h-[100px] w-[190px] rounded-[20px] bg-white mt-[20px] ">
+          <p class="text-[15px] ml-[6px]">{{task.title}}</p>
+          <p class="text-[13px] ml-[6px]">{{task.dueDate}}</p>
         </div>
       </div>
     </div>
 
     <!--In Progress Board-->
-    <div class="w-[200px] h-[400px] flex justify-center bg-yellow-300 overflow-scroll-x rounded-[28px]">
+    <div class="w-[200px] h-[400px] flex justify-center bg-yellow-300 overflow-scroll-x rounded-[28px]"
+      (dragover)="onDragOver($event)" (drop)="onDrop($event,'In Progress')">
       <h3>In Progress</h3>
-      <div class="flex flex-col" (dragover)="onDragOver($event)" (drop)="onDrop($event,'In Progress')">
-        <div class="flex flex-col">
-          <div *ngFor="let task of filterTickets('In Progress')" draggable="true" (dragstart)="onDragStart(task)"
-            class="h-[100px] w-[190px] rounded-[20px] bg-white mt-[20px] ">
-            <p class="text-[15px] ml-[6px]">{{task.title}}</p>
-            <p class="text-[13px] ml-[6px]">{{task.dueDate}}</p>
-          </div>
+      <div class="flex flex-col">
+        <div draggable="true" *ngFor="let task of filterTickets('In Progress')" (dragstart)="onDragStart(task)"
+          class="h-[100px] w-[190px] rounded-[20px] bg-white mt-[20px] ">
+          <p class="text-[15px] ml-[6px]">{{task.title}}</p>
+          <p class="text-[13px] ml-[6px]">{{task.dueDate}}</p>
         </div>
       </div>
     </div>
 
     <!--OnHold Board-->
-    <!-- <div class="w-[200px] h-[400px] flex justify-center bg-yellow-300 overflow-scroll-x rounded-[28px]">
+    <div class="w-[200px] h-[400px] flex justify-center bg-yellow-300 overflow-scroll-x rounded-[28px]"
+      (dragover)="onDragOver($event)" (drop)="onDrop($event,'on Hold')">
       <h3>On Hold</h3>
       <div class="flex flex-col">
-        <div class="flex flex-col" cdkDropList [cdkDropListData]="onHold" (cdkDropListDropped)="drop($event,'on Hold')">
-          <div *ngFor="let task of onHold" cdkDrag class="h-[100px] w-[190px] rounded-[20px] bg-white mt-[20px] ">
-            <p class="text-[15px] ml-[6px]">{{task.title}}</p>
-            <p class="text-[13px] ml-[6px]">{{task.dueDate}}</p>
-          </div>
+        <div draggable="true" *ngFor="let task of filterTickets('on Hold')" (dragstart)="onDragStart(task)"
+          class="h-[100px] w-[190px] rounded-[20px] bg-white mt-[20px] ">
+          <p class="text-[15px] ml-[6px]">{{task.title}}</p>
+          <p class="text-[13px] ml-[6px]">{{task.dueDate}}</p>
         </div>
       </div>
-    </div> -->
+    </div>
     <!--In Progress Board-->
-    <!-- <div class="w-[200px] h-[400px] flex justify-center bg-yellow-300 overflow-scroll-x rounded-[28px]">
+    <div class="w-[200px] h-[400px] flex justify-center bg-yellow-300 overflow-scroll-x rounded-[28px]"
+      (dragover)="onDragOver($event)" (drop)="onDrop($event,'Done')">
       <h3>Done</h3>
       <div class="flex flex-col">
-        <div class="flex flex-col" cdkDropList [cdkDropListData]="done" (cdkDropListDropped)="drop($event,'Done')">
-          <div *ngFor="let task of done" cdkDrag class="h-[100px] w-[190px] rounded-[20px] bg-white mt-[20px] ">
-            <p class="text-[15px] ml-[6px]">{{task.title}}</p>
-            <p class="text-[13px] ml-[6px]">{{task.dueDate}}</p>
-          </div>
+        <div draggable="true" *ngFor="let task of filterTickets('Done')" (dragstart)="onDragStart(task)"
+          class="h-[100px] w-[190px] rounded-[20px] bg-white mt-[20px] ">
+          <p class="text-[15px] ml-[6px]">{{task.title}}</p>
+          <p class="text-[13px] ml-[6px]">{{task.dueDate}}</p>
         </div>
       </div>
-    </div> -->
+    </div>
   </div>
 </div>
