@@ -13,6 +13,7 @@ import { InterceptorService } from './core/services/interceptor.service';
 import { FeaturePermissionModule } from './feature/feature-permission/feature-permission.module';
 import { FeatureProjectModule } from './feature/feature-project/feature-project.module';
 import { FeaturePayRollModule } from './feature/feature-pay-roll/feature-pay-roll.module';
+import { FeatureTasksModule } from './feature/feature-tasks/feature-tasks.module';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { FeaturePayRollModule } from './feature/feature-pay-roll/feature-pay-rol
     BrowserAnimationsModule,
     MatSnackBarModule,
     FeaturePayRollModule
-    
+    FeatureTasksModule,
+    MatSnackBarModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },

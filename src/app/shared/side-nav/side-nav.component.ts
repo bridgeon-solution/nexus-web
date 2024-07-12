@@ -39,7 +39,6 @@ export class SideNavComponent implements OnInit {
         this.filterMenu.push(element);
       }
     })
-
   }
 
 
@@ -62,7 +61,7 @@ export class SideNavComponent implements OnInit {
     this.collapsed = false;
     this.onToggleSideNav.emit({ collapsed: this.collapsed, screenWidth: this.screenWidth })
   }
-  
+
   logout(clickackable: boolean) {
     if (clickackable) {
       localStorage.clear();
