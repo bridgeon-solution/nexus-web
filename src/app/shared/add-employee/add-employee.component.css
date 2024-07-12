@@ -1,0 +1,37 @@
+.loading-text {
+    color: #fff;
+    /* Text color (white) */
+    font-size: 16px;
+    /* Text size */
+    animation: blink 1s steps(4, end) infinite;
+    /* Adjust as needed */
+}
+
+
+@keyframes blink {
+    from {
+        opacity: 1;
+    }
+
+    /* Fully visible */
+    25% {
+        opacity: 0.5;
+    }
+
+    /* Slightly transparent */
+    50% {
+        opacity: 1;
+    }
+
+    /* Fully visible again */
+    75% {
+        opacity: 0.5;
+    }
+
+    /* Slightly transparent */
+    to {
+        opacity: 1;
+    }
+
+    /* Fully visible */
+}

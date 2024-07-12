@@ -1,0 +1,78 @@
+
+<div class="main pb-20" *ngIf="role!== 'founder'">
+    <div *ngIf="role !== 'founder' "
+        class="main-things flex items-center justify-between min-h-40 min-w-full rounded-xl bg-gray-200 mt-5 p-10">
+        <div class="top flex flex-col" *ngFor="let item of filteredData">
+            <div class="employees flex flex-shrink bg-white items-center ps-2 py-10 pe-28 rounded-lg max-w-full h-36">
+                <div class="icon w-14 h-14 me-5">
+                    <img src="{{item.icon}}" alt="">
+                </div>
+                <div class="">
+                    <p class="font-bold text-gray-500">{{item.head}}</p>
+                    <a routerLink="/{{item.link}}" class="text-gray-300">View Details</a>
+                </div>
+            </div>
+
+            <div [style.backgroundColor]="getColor(item.head)"
+                class="text-white min-w-full text-center rounded-lg py-5 px-10 mt-4">
+                <p [@numberCount] class="text-5xl font-medium">{{item.count}}</p>
+                <p>{{item.subHead}}</p>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <div *ngIf="role !== 'founder'" class="w-full h-full border-2 border-gray-200 rounded-xl p-10 bg-white mt-10"
+        id="animated-div">
+        <h2 class="text-gray-500 text-3xl mb-10">Leave Request</h2>
+        <div class="overflow-y-scroll scroll-m-11 custom-scrollbar h-[400px]">
+            <table class="min-w-full leading-normal">
+                <thead>
+                    <tr class="sticky top-0">
+                        <th
+                            class="px-5 py-3 bg-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            Name
+                        </th>
+                        <th
+                            class="px-5 py-3 bg-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            Type
+                        </th>
+                        <th
+                            class="px-5 py-3 bg-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            Days
+                        </th>
+                        <th
+                            class="px-5 py-3 bg-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            Status
+                        </th>
+                        <th
+                            class="px-5 py-3 bg-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="bg-white" *ngFor="let item of leaves">
+                        <td class="px-5 py-5 text-sm text-gray-900">
+                            {{item.name}}
+                        </td>
+                        <td class="px-5 py-5 text-sm text-gray-900">
+                            {{item.type}}
+                        </td>
+                        <td class="px-5 py-5 text-sm text-gray-900">
+                            {{item.days}}
+                        </td>
+                        <td class="px-5 py-5 text-sm text-gray-900">
+                            {{item.status}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- founder -->
+<div *ngIf="role === 'founder'" class="w-full h-full">
+    <app-founder-dashboard [dashboardDatas]="filteredData"></app-founder-dashboard>
+</div>

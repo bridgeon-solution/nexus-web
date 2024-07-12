@@ -1,0 +1,118 @@
+<div class="relative">
+  <div class="relative inline-block w-full max-w-sm">
+    <button
+      class="w-full rounded-md border border-gray-900 shadow-sm px-3 py-4 text-left focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+      aria-haspopup="listbox" aria-expanded="true" aria-labelledby="listbox-label" (click)="toggleDropdown()">
+      <span class="block truncate text-gray-700">{{ selectedOption }}</span>
+      <span class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+        <svg width="50px" height="50px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#545454">
+          <g id="SVGRepo_bgCarrier" stroke-width="0" />
+          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+          <g id="SVGRepo_iconCarrier">
+            <rect x="0" fill="none" width="24" height="24" />
+            <g>
+              <path d="M7 10l5 5 5-5" />
+            </g>
+          </g>
+        </svg>
+      </span>
+    </button>
+    <ul
+      class="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
+      tabindex="-1" role="listbox" aria-labelledby="listbox-label" aria-activedescendant="listbox-option-3"
+      *ngIf="isDropdownOpen">
+      <li *ngFor="let project of allProjects"
+        class="text-gray-700 cursor-default select-none relative py-2 pl-3 pr-9 hover:bg-gray-100" id="listbox-option-0"
+        role="option" (click)="selectOption(project.name,project._id)">
+        <span class="block truncate">{{ project.name }}</span>
+        <span *ngIf="project.name === selectedOption"
+          class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-900">
+          <svg class="mt-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 90" width="50px" height="50px"
+            baseProfile="basic">
+            <polygon fill="#44b356" points="15,40.011 2,17.496 12,11.718 20,25.578 43,12.298 48,20.964" />
+            <polygon fill="#61ff7b" points="44,23.272 39,14.608 16,27.887 8,14.03 2,17.494 15,40.015" />
+          </svg>
+        </span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="absolute left-[400px] top-2" *ngIf="selectedProject">
+    <button (click)="openAddTaskComponent()"
+      class="pb-[10px] pt-[10px] bg-blue-500 hover:bg-blue-600 pl-[20px] pr-[20px] rounded-[10px] text-white">Add
+      Task</button>
+  </div>
+
+  <div class="flex flex-row space-x-4">
+    <!--The following division for Team Members Route-->
+    <div class="w-[300px] h-[150px] relative mt-[10px] bg-gray-200 bottom rounded-[20px]">
+      <p class="absolute text-[20px] left-[20px] top-[20px]">Participants</p>
+    </div>
+    <!--The Following division for Project Due Date-->
+    <div class="w-[300px] h-[150px] mt-[10px] bg-gray-200 bottom rounded-[20px] relative">
+      <p class="absolute text-[20px] left-[20px] top-[20px]">Due Date</p>
+      <p class="absolute text-[45px] left-[30px] top-[55px] text-red-900">03/03/2016</p>
+    </div>
+    <!--FOR showing remaining days-->
+    <div class="w-[300px] h-[150px] relative mt-[10px] bg-gray-200 bottom rounded-[20px]">
+      <p class="absolute text-[20px] left-[20px] top-[20px]">Remaining Days</p>
+      <p class="absolute text-[45px] left-[30px] top-[55px] text-red-900">06</p>
+
+    </div>
+  </div>
+  <!--Following codes are board of different tasks-->
+  <div class="flex w-[1000px] items-center content-center flex-row justify-between">
+    <!--TO-DO Board-->
+    <div class="w-[200px] h-[400px] flex justify-center bg-yellow-300 overflow-scroll-x rounded-[28px]">
+      <h3>Todo</h3>
+      <div class="flex flex-col" (dragover)="onDragOver($event)" (drop)="onDrop($event,'Todo')">
+        <div class="flex flex-col">
+          <div *ngFor="let task of filterTickets('Todo')" draggable="true" (dragstart)="onDragStart(task)"
+            class="h-[100px] w-[190px] rounded-[20px] bg-white mt-[20px] ">
+            <p class="text-[15px] ml-[6px]">{{task.title}}</p>
+            <p class="text-[13px] ml-[6px]">{{task.dueDate}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--In Progress Board-->
+    <div class="w-[200px] h-[400px] flex justify-center bg-yellow-300 overflow-scroll-x rounded-[28px]">
+      <h3>In Progress</h3>
+      <div class="flex flex-col" (dragover)="onDragOver($event)" (drop)="onDrop($event,'In Progress')">
+        <div class="flex flex-col">
+          <div *ngFor="let task of filterTickets('In Progress')" draggable="true" (dragstart)="onDragStart(task)"
+            class="h-[100px] w-[190px] rounded-[20px] bg-white mt-[20px] ">
+            <p class="text-[15px] ml-[6px]">{{task.title}}</p>
+            <p class="text-[13px] ml-[6px]">{{task.dueDate}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--OnHold Board-->
+    <!-- <div class="w-[200px] h-[400px] flex justify-center bg-yellow-300 overflow-scroll-x rounded-[28px]">
+      <h3>On Hold</h3>
+      <div class="flex flex-col">
+        <div class="flex flex-col" cdkDropList [cdkDropListData]="onHold" (cdkDropListDropped)="drop($event,'on Hold')">
+          <div *ngFor="let task of onHold" cdkDrag class="h-[100px] w-[190px] rounded-[20px] bg-white mt-[20px] ">
+            <p class="text-[15px] ml-[6px]">{{task.title}}</p>
+            <p class="text-[13px] ml-[6px]">{{task.dueDate}}</p>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <!--In Progress Board-->
+    <!-- <div class="w-[200px] h-[400px] flex justify-center bg-yellow-300 overflow-scroll-x rounded-[28px]">
+      <h3>Done</h3>
+      <div class="flex flex-col">
+        <div class="flex flex-col" cdkDropList [cdkDropListData]="done" (cdkDropListDropped)="drop($event,'Done')">
+          <div *ngFor="let task of done" cdkDrag class="h-[100px] w-[190px] rounded-[20px] bg-white mt-[20px] ">
+            <p class="text-[15px] ml-[6px]">{{task.title}}</p>
+            <p class="text-[13px] ml-[6px]">{{task.dueDate}}</p>
+          </div>
+        </div>
+      </div>
+    </div> -->
+  </div>
+</div>

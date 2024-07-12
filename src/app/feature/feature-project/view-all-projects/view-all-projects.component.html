@@ -1,0 +1,31 @@
+<div class="flex items-center justify-center rounded-lg w-full bg-gray-200 px-4">
+    <div class="w-full flex xs:flex-col sm:flex-col md:flex-row h-full flex-wrap px-5 py-5">
+        <div *ngFor="let item of allProjects" role="button" (click)="viewProject(item._id)"
+            class="h-[300px] xs:bg-green-500 xs:mt-5 md:me-3 rounded-2xl md:bg-white sm:mt-5 sm:bg-blue-500 w-4/12 bg-white hover:cursor-pointer transform transition-transform duration-500 hover:scale-105">
+            <div class="pt-5 px-10 pb-4 flex flex-col items-start">
+                <h1 class="text-xl font-light">{{item.name}}</h1>
+                <div class="h-[40px] overflow-hidden">
+                    <p class="mt-3 text-lg font-medium text-gray-400">{{item.description}}</p>
+                </div>
+                <p class="mt-3 font-normal text-gray-400">{{item.tasks.length}} Tasks</p>
+                <p class="mt-3 text-blue-600">{{item.status}}</p>
+            </div>
+            <div class="w-full h-[2px] bg-gray-200"></div>
+            <div class="ps-10 pt-3 pe-11">
+                <div class="flex w-full items-center justify-between">
+                    <p class="text-lg">Progress</p>
+                    <p class="text-lg text-gray-400">{{item.progress}}%</p>
+                </div>
+                <div class="mt-5">
+                    <mat-card-content>
+                        <section class="example-section">
+                            <mat-progress-bar class="example-margin" [mode]="mode" [value]="item.progress"
+                                [bufferValue]="bufferValue">
+                            </mat-progress-bar>
+                        </section>
+                    </mat-card-content>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

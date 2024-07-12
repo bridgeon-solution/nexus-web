@@ -1,0 +1,70 @@
+<div class="main bg-gray-200 px-3 py-4 rounded-lg">
+    <h1 class="text-4xl font-light">Employee Leave Form</h1>
+    <div class="mt-6">
+        <form action="" class="flex flex-col items-center" #leaveform="ngForm">
+
+            <div class="w-full">
+                <mat-form-field class="example-form-field w-full">
+                    <mat-label>Start date</mat-label>
+                    <input matInput [matDatepicker]="datepicker" name="startDate" required [(ngModel)]="startDate"
+                        (dateChange)="calculateDateDifference($event)" />
+                    <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+                    <mat-datepicker #datepicker>
+                        <mat-datepicker-actions>
+                            <button mat-button matDatepickerCancel>Cancel</button>
+                            <button mat-raised-button matDatepickerApply color="primary">Apply</button>
+                        </mat-datepicker-actions>
+                    </mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <div class="w-full">
+                <mat-form-field class="example-form-field w-full">
+                    <mat-label>End date</mat-label>
+                    <input matInput [matDatepicker]="datepickers" name="endDate" required [(ngModel)]="endDate"
+                        (dateChange)="calculateDateDifference($event)" />
+                    <mat-datepicker-toggle matIconSuffix [for]="datepickers"></mat-datepicker-toggle>
+                    <mat-datepicker #datepickers>
+                        <mat-datepicker-actions>
+                            <button mat-button matDatepickerCancel>Cancel</button>
+                            <button mat-raised-button matDatepickerApply>Apply</button>
+                        </mat-datepicker-actions>
+                    </mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <div class="w-full flex justify-center flex-col">
+                <label for="end" class="text-sm blockmb-1 font-normal">Total days:</label>
+                <input [(ngModel)]="days" type="text" id="end" name="days" required ngModel readonly
+                    class="w-[90px] cursor-pointer rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500">
+            </div>
+
+            <div class="w-full">
+                <label for="type" class="text-sm block mt-4 mb-0 font-normal">Your Leave Type:</label>
+                <mat-form-field class="w-full">
+                    <mat-label>Select Leave Type</mat-label>
+                    <mat-select [(ngModel)]="selectedLeaveType" name="leaveType" [disabled]="disableSelect.value">
+                        <mat-option value="Casual Leave">Casual Leave (CL)</mat-option>
+                        <mat-option value="Sick Leave">Sick Leave (SL)</mat-option>
+                        <mat-option value="Annual Leave">Annual Leave (AL)</mat-option>
+                        <mat-option value="Unpaid Leave">Unpaid Leave (UL)</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="w-full">
+                <label for="condition" class="text-sm block mb-2 font-normal">Describe Your Conditions:</label>
+                <textarea id="condition"
+                    class="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                    name="reason" required ngModel rows="4"></textarea>
+            </div>
+
+            <button type="submit" (click)="leaveSubmit()" [ngClass]="{'aubmit-btn':leaveform.invalid}"
+                class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                [disabled]="leaveform.invalid">
+                Submit
+            </button>
+
+        </form>
+    </div>
+</div>

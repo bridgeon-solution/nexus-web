@@ -1,0 +1,15 @@
+/* input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+} */
+
+/* Focus state for a more prominent outline */
+input:focus {
+    outline: 2px solid #377dff;
+}
+
+.aubmit-btn {
+    opacity: 0.7;
+}
+form {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}

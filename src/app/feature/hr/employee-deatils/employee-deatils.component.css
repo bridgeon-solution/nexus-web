@@ -1,0 +1,33 @@
+.lines {
+    background-color: blue;
+    position: relative;
+    border-radius: 10px;
+    /* Initial state off-screen to the left */
+    /* transform: translateX(100%); */
+    /* Apply animation */
+    /* animation: slide-in 0.2s ease-out forwards; */
+}
+
+
+h1 {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+@keyframes slide-in {
+    0% {
+        transform: translateX(-50%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@media (min-width: 600px) {
+    .menu {
+        background-color: aqua;
+    }
+}
+

@@ -1,0 +1,61 @@
+<div class="min-h-[600px] px-7 py-7 text-center bg-white shadow-md rounded-lg">
+  <h1 class="font-semibold text-gray-700 text-3xl mt-10">Add Task</h1>
+  <!--For input field to enter the task name-->
+  <form action="" #taskValues="ngForm" (ngSubmit)="onSubmit()">
+    <div class="mt-6">
+      <input type="text"
+        class="w-full sm:min-w-[200px] md:min-w-[300px] lg:min-w-[400px] xl:min-w-[550px] rounded-md border border-gray-300 pl-5 py-4 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+        placeholder="Enter Task Name ..." ngModel name="task">
+    </div>
+    <div class="w-full mt-4">
+      <mat-form-field class="example-form-field w-full">
+        <mat-label>end date</mat-label>
+        <input matInput [matDatepicker]="enddatepicker" name="startDate" required [(ngModel)]="endDate" />
+        <mat-datepicker-toggle matIconSuffix [for]="enddatepicker"></mat-datepicker-toggle>
+        <mat-datepicker #enddatepicker>
+          <mat-datepicker-actions>
+            <button mat-button matDatepickerCancel>Cancel</button>
+            <button mat-raised-button matDatepickerApply color="primary">Apply</button>
+          </mat-datepicker-actions>
+        </mat-datepicker>
+      </mat-form-field>
+    </div>
+    <!--Show all Team Members-->
+    <div class="w-full mt-3">
+      <div class="relative inline-block w-full max-w-sm">
+        <button type="button"
+          class="w-full rounded-md border border-gray-300 shadow-sm px-3 py-4 text-left focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm hover:bg-gray-100 transition duration-150"
+          aria-haspopup="listbox" aria-expanded="true" aria-labelledby="listbox-label" (click)="toggleDropdown($event)">
+          <span class="block truncate text-gray-700">{{ selectedOption }}</span>
+          <span class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+            <svg width="20px" height="20px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#545454">
+              <rect x="0" fill="none" width="24" height="24"></rect>
+              <path d="M7 10l5 5 5-5"></path>
+            </svg>
+          </span>
+        </button>
+        <ul
+          class="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
+          tabindex="-1" role="listbox" aria-labelledby="listbox-label" aria-activedescendant="listbox-option-3"
+          *ngIf="isDropDown">
+          <li *ngFor="let member of teamMembers"
+            class="text-gray-700 cursor-default select-none relative py-2 pl-3 pr-9 hover:bg-gray-100"
+            id="listbox-option-0" role="option" (click)="selectOption(member.fullname, member.id)">
+            <span class="block truncate">{{ member.fullname }}</span>
+            <span *ngIf="member.fullname === selectedOption"
+              class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-900">
+              <svg class="mt-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 90" width="20px" height="20px"
+                baseProfile="basic">
+                <polygon fill="#44b356" points="15,40.011 2,17.496 12,11.718 20,25.578 43,12.298 48,20.964"></polygon>
+                <polygon fill="#61ff7b" points="44,23.272 39,14.608 16,27.887 8,14.03 2,17.494 15,40.015"></polygon>
+              </svg>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="mt-[10px]">
+      <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Submit</button>
+    </div>
+  </form>
+</div>

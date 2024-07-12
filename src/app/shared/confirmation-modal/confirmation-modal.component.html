@@ -1,0 +1,10 @@
+<div class="flex flex-col items-center bg-gray-100">
+    <h1 mat-dialog-title>Confirmation</h1>
+    <div mat-dialog-content>
+        <p>Are you sure you want to {{data.leaveStatus}} this leave request?</p>
+    </div>
+    <div mat-dialog-actions>
+        <button (click)="onCancel()" mat-raised-button class="me-1" color="warn">Cancel</button>
+        <button (click)="onConfirm()" mat-raised-button class="me-1" color="primary">Confirm</button>
+    </div>
+</div>
