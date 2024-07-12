@@ -28,6 +28,7 @@ export class PermissionComponent implements OnInit {
 
   fetchAllPermission() {
     this.permissionService.getPermissionByEmpId(this.employeeId).subscribe((res: AllPermissionEmp) => {
+      console.log(res);
       this.allPermissions = res.data;
     })
   }

@@ -98,6 +98,7 @@
     background-color: #565656;
     border-radius: 0.625rem;
 }
+
 .sidenav--nav-link:hover {
     color: #ebebeb;
 }
@@ -134,4 +135,3 @@
 .logout {
     margin-top: 5rem;
 }
-

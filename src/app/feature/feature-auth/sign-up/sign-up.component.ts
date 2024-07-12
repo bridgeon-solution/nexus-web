@@ -69,4 +69,8 @@ export class SignUpComponent implements OnInit {
     })
   }
 
+  loginWithGoogle() {
+    this.authSrvc.loginWithGoogle()
+  }
+
 }

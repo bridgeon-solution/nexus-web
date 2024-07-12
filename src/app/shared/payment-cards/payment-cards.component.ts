@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { PaymentService } from 'src/app/core/services/payment.service';
 
 @Component({
@@ -8,14 +9,14 @@ import { PaymentService } from 'src/app/core/services/payment.service';
 })
 export class PaymentCardsComponent {
 
-  constructor(private paymentSrvc: PaymentService) { }
+  constructor(private paymentSrvc: PaymentService, private snackBar: MatSnackBar) { }
 
   payment(amount: string) {
     this.paymentSrvc.founderPayment(amount).subscribe((res: { message: string, data: string }) => {
       window.location.href = res.data;
     }, (err) => {
       console.log(err);
-      alert('Payment failed')
+      this.snackBar.open("Payment Failed", "Clos", { duration: 3000 })
     })
   }
 }
