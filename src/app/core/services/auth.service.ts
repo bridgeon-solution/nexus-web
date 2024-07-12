@@ -31,4 +31,11 @@ export class AuthService {
     // return this.http.post("http://localhost:4001/api/v1/employees/login", loginDatas)
   }
 
+  loginWithGoogle() {
+    window.location.href = 'http://localhost:4000/api/v1/users/auth/google';
+  }
+
+  logOut() {
+    
+  }
 }

@@ -17,4 +17,8 @@ export class TeamMembersService {
   deleteFromTeam(employeeId: number, teamId: string) {
     return this.http.delete(`http://localhost:4003/api/v1/team-members/${teamId}/${employeeId}`)
   }
+
+  getTeamMeambers(teamId: string): Observable<object> {
+    return this.http.get(`http://localhost:4003/api/v1/team-members/${teamId}/`)
+  }
 }

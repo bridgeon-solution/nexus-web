@@ -13,9 +13,8 @@
       <div *ngIf="teamManagePage" class="lines w-[50px] h-[2px] bg-blue-600"></div>
     </div>
   </div>
-  <button routerLink="../addteam" *ngIf="hasPermission('Manage Teams')"
-    class="bg-blue-600 hover:bg-blue-700 font-semibold pl-[20px] pr-[20px] pt-[10px] pb-[10px] rounded-md absolute right-4 bottom-0 text-white">Add
-    Team</button>
+  <button routerLink="../addteam" 
+    class="bg-blue-600 hover:bg-blue-700 font-semibold pl-[20px] pr-[20px] pt-[10px] pb-[10px] rounded-md absolute right-4 bottom-0 text-white">Manage Team</button>
 </div>
-
+<!-- *ngIf="hasPermission('Manage Teams')" -->
 <app-view-teams></app-view-teams>

@@ -1,5 +1,5 @@
 <div class="min-w-[670px] px-7 py-7 text-center">
-  <h1 class="font-normal text-gray-500 text-3xl mt-10">Add Members To Your Team!</h1>
+  <h1 *ngIf="selectedTeam" class="font-normal text-gray-500 text-3xl mt-10">Add Members To {{selectedTeam.name}}</h1>
   <table class="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-gray-900 mt-[75px]">
     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-pink-200 dark:text-gray-900">
       <tr>
@@ -35,12 +35,13 @@
           {{employee.role}}
         </td>
         <td class=" w-[200px]">
+          <!-- *ngIf="selectedEmployees.includes(employee.id)" -->
           <div class="flex items-center justify-center">
-            <button *ngIf="!selectedEmployees.includes(employee.id)" (click)="addToTeam(employee.id)"
+            <button *ngIf="!isEmployeeInTeam(employee.id)" (click)="addToTeam(employee.id)"
               class="mr-4 buttons bg-blue-500 text-white py-2 px-10 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 hover:bg-blue-600">
               Add
             </button>
-            <button *ngIf="selectedEmployees.includes(employee.id)" (click)="deleteFromTeam(employee.id)"
+            <button *ngIf="isEmployeeInTeam(employee.id)" (click)="deleteFromTeam(employee.id)"
               class="mr-4 buttons bg-red-500 text-white py-2 px-10 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600 hover:bg-red-600">
               Remove
             </button>
