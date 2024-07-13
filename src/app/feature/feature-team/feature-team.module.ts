@@ -6,6 +6,7 @@ import { AddTeamComponent } from './add-team/add-team.component';
 import { AddToTeamComponent } from './add-to-team/add-to-team.component';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ViewChatComponent } from './view-chat/view-chat.component';
 
 
 @NgModule({
@@ -13,12 +14,14 @@ import { SharedModule } from 'src/app/shared/shared.module';
     ViewTeamComponent,
     AddTeamComponent,
     AddToTeamComponent,
+    ViewChatComponent,
   ],
   imports: [
     CommonModule,
     FeatureTeamRoutingModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+
   ]
 })
 export class FeatureTeamModule { }

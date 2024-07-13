@@ -6,7 +6,7 @@ import { VideoCallComponent } from './video-call/video-call.component';
 
 @NgModule({
   declarations: [
-    VideoCallComponent
+    VideoCallComponent,
   ],
   imports: [
     CommonModule
