@@ -19,13 +19,16 @@ export class ViewTasksComponent implements OnInit {
   onDragStart(item: TasksData) {
     this.currentItem = item
   }
+  memebersImages: string[] = [];
   currentItem: TasksData
   isDropdownOpen: boolean = false;
-  allProjects: ProjectInterface[] = []
-  projectId: string
-  allTasks: TasksData[] = []
-  selectedProject: ProjectTeam
-  selectedProjectId: string
+  allProjects: ProjectInterface[] = [];
+  projectId: string;
+  projectDueDate: Date;
+  remainingDays: number;
+  allTasks: TasksData[] = [];
+  selectedProject: ProjectTeam;
+  selectedProjectId: string;
   selectedOption: string = 'Select Project Here ...';
   constructor(private taskService: TasksService, private projectService: ProjectService, private matDialog: MatDialog, private teamService: TeamService) { }
   ngOnInit(): void {
@@ -52,7 +55,7 @@ export class ViewTasksComponent implements OnInit {
   // fetch project by teamlead (if the role is team-Lead)
   fetchProjectsByTeamLead(teamleadId: string) {
     this.projectService.fetchProjectByTeamLead(teamleadId).subscribe((res: { status: string, data: [ProjectInterface] }) => {
-      this.allProjects = res.data
+      this.allProjects = res.data;
     }, (error) => {
       console.log(error)
     })
@@ -73,7 +76,8 @@ export class ViewTasksComponent implements OnInit {
   //fetch team by ProjectId to display the team members assigned to this project
   fetchTeamMembers(projectId: string) {
     this.teamService.fetchTeamByProject(projectId).subscribe((res: { status: string, data: ProjectTeam }) => {
-      this.selectedProject = res.data
+      this.selectedProject = res.data;
+      this.memebersImages = res.data.members.map((x)=>{return x.image});
     })
   }
 
@@ -91,7 +95,15 @@ export class ViewTasksComponent implements OnInit {
     const currentUserId: string = localStorage.getItem('id')
     if (role === 'Team Leader') {
       this.fetchTeamMembers(projectId)
-      this.fetchTasksByProject(projectId)
+      this.fetchTasksByProject(projectId);
+      this.allProjects.map((x) => { return this.projectDueDate = x.endDate });
+      this.allProjects.map((x) => {
+        const startDate: number = new Date(x.startDate).getTime();
+        const endDate: number = new Date(x.endDate).getTime();
+        const diff: number = endDate - startDate;
+        const diffInDays = Math.ceil(diff / (1000 * 60 * 60 * 24)); // Convert milliseconds to days
+        this.remainingDays = diffInDays;
+      })
     }
   }
 
