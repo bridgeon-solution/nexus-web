@@ -7,16 +7,24 @@ import { PermissionService } from 'src/app/core/services/permission.service';
   templateUrl: './view-team.component.html',
   styleUrls: ['./view-team.component.css']
 })
-export class ViewTeamComponent implements OnInit{
+export class ViewTeamComponent implements OnInit {
   constructor(private router: Router, private permissionService: PermissionService) { }
   teamViewPage: boolean = true;
-  teamManagePage: any;
+  showCommunication: boolean = false
   changePage(pageName: string) {
+    if (pageName === 'view teams') {
+      this.showCommunication = false
+      this.teamViewPage = true
+    }
 
+    if (pageName === 'communication') {
+      this.showCommunication = true
+      this.teamViewPage = false
+    }
   }
 
   ngOnInit(): void {
-      this.permissionSetting()
+    this.permissionSetting()
   }
 
   goToAddTeam() {
@@ -31,6 +39,6 @@ export class ViewTeamComponent implements OnInit{
   }
 
   hasPermission(permissionName: string) {
-      return this.permissionService.hasPermission(permissionName)
+    return this.permissionService.hasPermission(permissionName)
   }
 }

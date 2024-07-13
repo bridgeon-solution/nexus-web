@@ -1,20 +1,18 @@
 <div class="sm:ms-5 relative -ms-10">
   <div class="options flex items-center mb-5 mt-10 max-w-[220px] justify-between">
     <div class="flex flex-col items-center">
-      <p role="button" (click)="changePage('apply leave')">View Teams</p>
+      <p role="button" (click)="changePage('view teams')">View Teams</p>
       <div *ngIf="teamViewPage" class="lines w-[60px] h-[2px] bg-blue-600"></div>
     </div>
     <div class="flex flex-col items-center">
-      <p role="button" (click)="changePage('leave history')">Chat</p>
-      <div *ngIf="teamManagePage" class="lines w-[50px] h-[2px] bg-blue-600"></div>
-    </div>
-    <div class="flex flex-col items-center">
-      <p role="button" (click)="changePage('leave history')">VideoCall</p>
-      <div *ngIf="teamManagePage" class="lines w-[50px] h-[2px] bg-blue-600"></div>
+      <p role="button" (click)="changePage('communication')">Communication</p>
+      <div *ngIf="showCommunication" class="lines w-[50px] h-[2px] bg-blue-600"></div>
     </div>
   </div>
-  <button routerLink="../addteam" 
-    class="bg-blue-600 hover:bg-blue-700 font-semibold pl-[20px] pr-[20px] pt-[10px] pb-[10px] rounded-md absolute right-4 bottom-0 text-white">Manage Team</button>
+  <button routerLink="../addteam"
+    class="bg-blue-600 hover:bg-blue-700 font-semibold pl-[20px] pr-[20px] pt-[10px] pb-[10px] rounded-md absolute right-4 bottom-0 text-white">Manage
+    Team</button>
 </div>
 <!-- *ngIf="hasPermission('Manage Teams')" -->
-<app-view-teams></app-view-teams>
+<app-view-teams *ngIf="teamViewPage"></app-view-teams>
+<app-view-chat *ngIf="showCommunication"></app-view-chat>
