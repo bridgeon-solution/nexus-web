@@ -1,0 +1,145 @@
+<main>
+    <div class="main">
+        <div class="img flex-1 flex items-center justify-center h-full">
+            <div class="img w-96 h-96">
+                <img class="w-full h-full" src="../../../assets/1000_F_303743223_Edbhriyx1ZqXaKvOTxsG08i7m8MhXrqb.jpg"
+                    alt="img">
+            </div>
+        </div>
+        <div class="rounded-s-none rounded-e-lg flex-1 h-full flex items-start flex-col pt-20">
+            <div class="top ms-7">
+                <h1 class="text-violet-500 text-6xl font-bold">NEXUS</h1>
+                <!-- <button (click)="loginWithGoogle()"
+                    class="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline">
+                    <div class="bg-white p-2 rounded-full">
+                        <svg class="w-4" viewBox="0 0 533.5 544.3">
+                            <path
+                                d="M533.5 278.4c0-18.5-1.5-37.1-4.7-55.3H272.1v104.8h147c-6.1 33.8-25.7 63.7-54.4 82.7v68h87.7c51.5-47.4 81.1-117.4 81.1-200.2z"
+                                fill="#4285f4" />
+                            <path
+                                d="M272.1 544.3c73.4 0 135.3-24.1 180.4-65.7l-87.7-68c-24.4 16.6-55.9 26-92.6 26-71 0-131.2-47.9-152.8-112.3H28.9v70.1c46.2 91.9 140.3 149.9 243.2 149.9z"
+                                fill="#34a853" />
+                            <path
+                                d="M119.3 324.3c-11.4-33.8-11.4-70.4 0-104.2V150H28.9c-38.6 76.9-38.6 167.5 0 244.4l90.4-70.1z"
+                                fill="#fbbc04" />
+                            <path
+                                d="M272.1 107.7c38.8-.6 76.3 14 104.4 40.8l77.7-77.7C405 24.6 339.7-.8 272.1 0 169.2 0 75.1 58 28.9 150l90.4 70.1c21.5-64.5 81.8-112.4 152.8-112.4z"
+                                fill="#ea4335" />
+                        </svg>
+                    </div>
+                    <span class="ml-4">
+                        SignIn with Google
+                    </span>
+                </button> -->
+            </div>
+            <div class="inputs w-10/12 ms-7 h-80 mt-2">
+                <form class="flex flex-col justify-center items-center" action="" #signUpForm="ngForm">
+                    <!-- Username -->
+                    <div class="relative w-full">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <!-- Updated SVG -->
+                            <svg class="h-7 w-7 mb-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 340"
+                                id="user">
+                                <rect width="256" height="256" fill="none"></rect>
+                                <circle cx="128" cy="96" r="64" fill="none" stroke="#000" stroke-miterlimit="10"
+                                    stroke-width="16"></circle>
+                                <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="16" d="M30.989,215.99064a112.03731,112.03731,0,0,1,194.02311.002">
+                                </path>
+                            </svg>
+                        </div>
+                        <input type="text" placeholder="Username" name="fullname" required ngModel #username="ngModel"
+                            class="pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 focus:ring-blue-500">
+                        <div *ngIf="!username.untouched && !username.valid">
+                            <small class="text-red-800">*Name is required</small>
+                        </div>
+                    </div>
+
+                    <!-- email -->
+                    <div class="relative w-full">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <!-- Updated SVG -->
+                            <svg class="h-5 w-5 mb-3 text-gray-400" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 64 64" id="email">
+                                <path fill="#222"
+                                    d="M53.42 53.32H10.58a8.51 8.51 0 0 1-8.5-8.5V19.18a8.51 8.51 0 0 1 8.5-8.5h42.84a8.51 8.51 0 0 1 8.5 8.5v25.64a8.51 8.51 0 0 1-8.5 8.5ZM10.58 13.68a5.5 5.5 0 0 0-5.5 5.5v25.64a5.5 5.5 0 0 0 5.5 5.5h42.84a5.5 5.5 0 0 0 5.5-5.5V19.18a5.5 5.5 0 0 0-5.5-5.5Z">
+                                </path>
+                                <path fill="#222"
+                                    d="M32 38.08a8.51 8.51 0 0 1-5.13-1.71L3.52 18.71a1.5 1.5 0 1 1 1.81-2.39L28.68 34a5.55 5.55 0 0 0 6.64 0l23.35-17.68a1.5 1.5 0 1 1 1.81 2.39L37.13 36.37A8.51 8.51 0 0 1 32 38.08Z">
+                                </path>
+                                <path fill="#222"
+                                    d="M4.17 49.14a1.5 1.5 0 0 1-1-2.62l18.4-16.41a1.5 1.5 0 0 1 2 2.24L5.17 48.76a1.46 1.46 0 0 1-1 .38zm55.66 0a1.46 1.46 0 0 1-1-.38l-18.4-16.41a1.5 1.5 0 1 1 2-2.24l18.39 16.41a1.5 1.5 0 0 1-1 2.62z">
+                                </path>
+                            </svg>
+                        </div>
+                        <input type="text" placeholder="Email" required name="email" ngModel #email="ngModel"
+                            class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 focus:ring-blue-500">
+                        <div *ngIf="!email.untouched && !email.valid">
+                            <small class="text-red-800">*Email is required</small>
+                        </div>
+                    </div>
+                    <!-- company name -->
+                    <div class="relative w-full">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <!-- Updated SVG -->
+                            <svg class="h-5 w-5 mb-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22"
+                                id="company">
+                                <path fill="#2b3344"
+                                    d="M21.5,21H20V7.5A.49.49,0,0,0,19.66,7L16,5.47V21H15V3.5a.5.5,0,0,0-.5-.5h-9a.5.5,0,0,0-.5.5V21H3.5a.5.5,0,0,0,0,1h18a.5.5,0,0,0,0-1Zm-4-12h1a.5.5,0,0,1,.5.5.51.51,0,0,1-.5.5h-1a.51.51,0,0,1-.5-.5A.5.5,0,0,1,17.5,9Zm0,3h1a.5.5,0,0,1,0,1h-1a.5.5,0,0,1,0-1Zm0,3h1a.51.51,0,0,1,.5.5.5.5,0,0,1-.5.5h-1a.5.5,0,0,1-.5-.5A.51.51,0,0,1,17.5,15Zm0,3h1a.5.5,0,0,1,0,1h-1a.5.5,0,0,1,0-1ZM11,6h1a.5.5,0,1,1,0,1H11a.5.5,0,0,1,0-1Zm0,3h1a.5.5,0,1,1,0,1H11a.5.5,0,0,1,0-1Zm0,3h1a.5.5,0,1,1,0,1H11a.5.5,0,0,1,0-1Zm0,3h1a.5.5,0,1,1,0,1H11a.5.5,0,0,1,0-1ZM7.94,6H9A.5.5,0,0,1,9,7h-1a.5.5,0,0,1,0-1Zm0,3H9a.5.5,0,0,1,0,1h-1a.5.5,0,0,1,0-1Zm0,3H9a.5.5,0,0,1,0,1h-1a.5.5,0,0,1,0-1Zm0,3H9a.5.5,0,0,1,0,1h-1a.5.5,0,0,1,0-1Zm2.56,6V19h-1v2h-1V18.47A.5.5,0,0,1,9,18h2a.5.5,0,0,1,.5.5V21Z">
+                                </path>
+                            </svg>
+                        </div>
+                        <input type="text" placeholder="Company name" required name="companyname" ngModel
+                            #company="ngModel"
+                            class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 focus:ring-blue-500">
+                        <div *ngIf="!company.untouched && !company.valid">
+                            <small class="text-red-800">*Companyname is required</small>
+                        </div>
+                    </div>
+                    <!-- password -->
+                    <div class="relative w-full">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <!-- Updated SVG -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 50 50"
+                                id="lock">
+                                <path fill="#1C1C1C"
+                                    d="M27 12h-2V9c0-4.971-4.029-9-9-9S7 4.029 7 9v3H5a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h22a2 2 0 0 0 2-2V14a2 2 0 0 0-2-2zM8 8.882A7.882 7.882 0 0 1 15.882 1h.235A7.882 7.882 0 0 1 24 8.882V12H8V8.882zM28 29a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V15a2 2 0 0 1 2-2h20a2 2 0 0 1 2 2v14z">
+                                </path>
+                            </svg>
+                        </div>
+                        <input type="password" placeholder="Password" required name="password" ngModel
+                            class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 focus:ring-blue-500">
+                    </div>
+                    <!-- Profile pic -->
+                    <div
+                        class="relative w-full bg-white rounded-lg border border-gray-300 px-3 py-2 hover:border-blue-500 focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500">
+                        <input type="file" id="fileInput" class="w-full p-0 cursor-pointer opacity-0 absolute inset-0"
+                            required name="image" accept=".jpg, .jpeg, .png" (change)="selectFile($event)" ngModel>
+                        <label for="fileInput" class="flex items-center justify-between text-gray-500 font-medium">
+                            <span>Select file</span>
+                            <button type="button" class="text-blue-500 hover:text-blue-700 focus:outline-none">
+                                Browse
+                            </button>
+                        </label>
+                    </div>
+
+                    <div>
+
+                        <button [disabled]="signUpForm.invalid" type="submit" (click)="signUp()"
+                            class="signupBtn items-center bg-gradient-to-r from-indigo-500 mt-3 to-purple-500 text-white font-bold py-3 px-8 rounded-full shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            <p class="p-0" [ngClass]="{'signup-btn':signUpForm.invalid}" *ngIf="notLoading">Sign Up</p>
+                            <div *ngIf="isLoading" class="loading-container">
+                                <div class="spinner"></div>
+                            </div>
+                        </button>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <a routerLink="/login" class="text-blue-500 hover:text-blue-700 font-medium">Already have an
+                            account? Login</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>

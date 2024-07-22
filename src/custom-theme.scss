@@ -1,0 +1,15 @@
+// Ensure @use rules are at the top
+@use '@angular/material' as mat;
+
+// Other SCSS code
+$primary: mat.define-palette(mat.$indigo-palette);
+$accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$theme: mat.define-light-theme((
+  color: (
+    primary: $primary,
+    accent: $accent,
+  )
+));
+
+@include mat.core();
+@include mat.all-component-themes($theme);

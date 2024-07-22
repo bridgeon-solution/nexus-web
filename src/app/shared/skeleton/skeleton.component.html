@@ -1,0 +1,79 @@
+<table class="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-gray-900">
+    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-pink-200 dark:text-gray-900">
+        <tr>
+            <th scope="col" class="px-6 py-3">
+                Name
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Department
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Leave TYpe
+            </th>
+            <th scope="col" class="px-6 py-3">
+                From
+            </th>
+            <th scope="col" class="px-6 py-3">
+                To
+            </th>
+            <!-- <th scope="col" class="px-6 py-3" *ngIf="!employeeLeaveOption">
+                Balance
+            </th> -->
+            <th scope="col" class="px-6 py-3">
+                Days
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Description
+            </th>
+            <!-- <th scope="col" class="px-6 py-3" *ngIf="employeeLeaveOption">
+                Action
+            </th> -->
+            <!-- <th scope="col" class="px-6 py-3" *ngIf="!employeeLeaveOption">
+                Status
+            </th> -->
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="bg-white border-b dark:border-gray-200 animate-pulse">
+            <th scope="row"
+                class="flex items-center px-3 py-4 font-medium text-gray-600 whitespace-nowrap dark:text-gray-700">
+                <div class="mr-3 rounded-full bg-gray-200 h-[50px] w-[50px]"></div>
+                <div class="flex flex-col text-left">
+                    <div class="w-24 bg-gray-200 h-4 rounded"></div>
+                </div>
+            </th>
+            <td class="px-6 py-4">
+                <div class="w-24 bg-gray-200 h-4 rounded"></div>
+            </td>
+            <td class="px-6 py-4">
+                <div class="w-24 bg-gray-200 h-4 rounded"></div>
+            </td>
+            <td class="px-6 py-4 font-semibold">
+                <div class="w-20 bg-gray-200 h-4 rounded"></div>
+            </td>
+            <td class="px-6 py-4 font-semibold">
+                <div class="w-20 bg-gray-200 h-4 rounded"></div>
+            </td>
+            <td class="px-6 py-4 max-w-36 font-bold">
+                <div class="w-10 bg-gray-200 h-4 rounded"></div>
+            </td>
+            <!-- <td class="px-6 py-4 max-w-36" *ngIf="!employeeLeaveOption">
+                                <div class="w-10 bg-gray-200 h-4 rounded"></div>
+                            </td> -->
+            <td class="px-6 py-4 max-w-36">
+                <div class="w-32 bg-gray-200 h-4 rounded"></div>
+            </td>
+            <td class="px-6 py-4 max-w-36" *ngIf="false">
+                <div class="btns flex items-center justify-around">
+                    <div class="w-20 bg-gray-200 h-8 rounded me-2"></div>
+                    <div class="w-20 bg-gray-200 h-8 rounded"></div>
+                </div>
+            </td>
+            <!-- <td class="px-6 py-4 max-w-36" *ngIf="!employeeLeaveOption">
+                                <div class="btns flex items-center justify-around">
+                                    <div class="w-24 bg-gray-200 h-6 rounded"></div>
+                                </div>
+                            </td> -->
+        </tr>
+    </tbody>
+</table>

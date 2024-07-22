@@ -1,0 +1,18 @@
+<div class="main ms-5">
+    <div class="options flex items-center mt-12 max-w-[250px] justify-between">
+        <div class="flex flex-col items-center">
+            <p role="button" (click)="selectProjectOption()">View Projects</p>
+            <div class="w-[60px] h-[2px] bg-blue-600" *ngIf="projectOption"></div>
+        </div>
+        <div class="flex flex-col items-center">
+            <p role="button" (click)="selectProjectOption()">Add Projects</p>
+            <div class="w-[40px] h-[2px] bg-blue-600" *ngIf="!projectOption"></div>
+        </div>
+    </div>
+    <div class="mt-3">
+        <app-add-project *ngIf="!projectOption"></app-add-project>
+    </div>
+    <div class="mt-3 h-full">
+        <app-view-all-projects *ngIf="projectOption"></app-view-all-projects>
+    </div>
+</div>
